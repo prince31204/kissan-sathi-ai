@@ -1,0 +1,42 @@
+{
+  "total_r2_score": 0.9978,
+  "total_mae_kg": 155.03,
+  "eco_accuracy": 89.53,
+  "crops": [
+    "Cotton",
+    "Maize",
+    "Mustard",
+    "Potato",
+    "Pulses",
+    "Rice",
+    "Sugarcane",
+    "Wheat"
+  ],
+  "residue_options": [
+    "Burned (Stubble Burning)",
+    "Incorporated into Soil",
+    "Mulched / Happy Seeder (Zero Till)",
+    "Removed from Field"
+  ],
+  "irrigation_options": [
+    "Canal (Gravity)",
+    "Diesel Engine Pump",
+    "Electric Tube Well",
+    "Solar Pump"
+  ],
+  "eco_ratings": [
+    "Grade A (Eco-Friendly)",
+    "Grade B (Moderate)",
+    "Grade C (High Emission)"
+  ],
+  "features": [
+    "Crop_Enc",
+    "FieldSize_Acres",
+    "Diesel_Liters",
+    "Tractor_Hours",
+    "Urea_Fertilizer_kg",
+    "Residue_Enc",
+    "Irrigation_Enc"
+  ],
+  "training_samples": 15000
+}

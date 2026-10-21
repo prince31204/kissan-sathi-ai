@@ -1,0 +1,50 @@
+# Node
+node_modules/
+.expo/
+npm-debug.log
+yarn-error.log
+
+# Build files
+dist/
+build/
+*.ipa
+*.apk
+*.aab
+
+# Python / Backend
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+venv/
+env/
+.env
+.env.*
+!.env.example
+
+# AI & Data
+ai/datasets/raw/*
+!ai/datasets/raw/.gitkeep
+ai/datasets/processed/*
+!ai/datasets/processed/.gitkeep
+ai/models/crop_disease/*
+!ai/models/crop_disease/.gitkeep
+ai/models/crop_stress/*
+!ai/models/crop_stress/.gitkeep
+ai/models/irrigation/*
+!ai/models/irrigation/.gitkeep
+*.h5
+*.hdf5
+*.pkl
+*.pt
+*.pth
+*.onnx
+*.joblib
+ml_backend/models/*.joblib
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp

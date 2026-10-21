@@ -1,0 +1,40 @@
+{
+  "waste_r2_score": 0.9996,
+  "waste_mae_tonnes": 0.16,
+  "burning_r2_score": 0.9996,
+  "burning_mae_kg": 263.9,
+  "wealth_r2_score": 0.9997,
+  "crops": [
+    "Cotton",
+    "Groundnut",
+    "Maize",
+    "Mustard",
+    "Rice (Paddy)",
+    "Sugarcane",
+    "Wheat"
+  ],
+  "seasons": [
+    "Kharif (Monsoon)",
+    "Rabi (Winter)",
+    "Zaid / Summer"
+  ],
+  "states": [
+    "Bihar",
+    "Gujarat",
+    "Haryana",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Punjab",
+    "Rajasthan",
+    "Uttar Pradesh",
+    "Uttarakhand"
+  ],
+  "features": [
+    "Crop_Enc",
+    "Season_Enc",
+    "State_Enc",
+    "FieldSize_Acres",
+    "GrainYield_Quintals_Acre"
+  ],
+  "training_samples": 18000
+}

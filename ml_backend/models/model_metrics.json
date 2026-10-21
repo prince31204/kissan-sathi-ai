@@ -1,0 +1,50 @@
+{
+  "classifier_accuracy": 99.83,
+  "water_r2_score": 0.9944,
+  "duration_r2_score": 0.987,
+  "features": [
+    "Crop_Enc",
+    "Soil_Enc",
+    "SoilMoisture_pct",
+    "Temperature_C",
+    "Humidity_pct",
+    "Rainfall_mm",
+    "ET0_mm",
+    "DaysSinceLastIrrigation",
+    "FieldSize_Acres",
+    "Pump_HP"
+  ],
+  "crops": [
+    "Maize",
+    "Mustard",
+    "Potato",
+    "Pulses",
+    "Rice",
+    "Sugarcane",
+    "Tomato",
+    "Wheat"
+  ],
+  "soils": [
+    "Clay",
+    "Clay Loam",
+    "Loam",
+    "Sandy",
+    "Sandy Loam"
+  ],
+  "districts": [
+    "HARDWAR",
+    "NAINITAL",
+    "ALMORA",
+    "PITHORAGARH",
+    "CHAMOLI",
+    "DEHRADUN",
+    "GARHWAL",
+    "UDHAM SINGH NAGAR",
+    "BAGESHWAR",
+    "RUDRAPRAYAG",
+    "UTTARKASHI",
+    "TEHRI GARHWAL",
+    "CHAMPAWAT"
+  ],
+  "training_samples": 25792
+}
