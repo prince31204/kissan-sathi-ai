@@ -37,10 +37,12 @@ ai/models/irrigation/*
 *.hdf5
 *.pkl
 *.pt
-*.pth
 *.onnx
-*.joblib
-ml_backend/models/*.joblib
+
+# Allow ml_backend models to be tracked for cloud deployment
+!ml_backend/models/*.joblib
+!ml_backend/models/*.pth
+!ml_backend/models/*.json
 
 # IDE and OS
 .vscode/
