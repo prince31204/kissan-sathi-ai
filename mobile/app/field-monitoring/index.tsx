@@ -19,7 +19,7 @@ export default function FieldMonitoringScreen() {
         <View style={{ width: 24 }} />
       </View>
 
-      <ScrollView contentContainerStyle={styles.scroll}>
+      <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         {MockFields.map(field => (
           <Card key={field.id} style={styles.card}>
             <View style={styles.cardHeader}>
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: Theme.Spacing.md, borderBottomWidth: 1, borderBottomColor: Theme.Colors.border },
   backBtn: { padding: Theme.Spacing.xs },
   headerTitle: { ...Theme.Typography.h3 },
-  scroll: { padding: Theme.Spacing.lg },
+  scroll: { padding: Theme.Spacing.lg, paddingBottom: 85, width: '100%' },
   
   card: { marginBottom: Theme.Spacing.lg },
   cardHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: Theme.Spacing.sm },

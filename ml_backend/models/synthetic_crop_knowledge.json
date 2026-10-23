@@ -1,0 +1,1392 @@
+{
+  "Wheat": {
+    "crop": "Wheat",
+    "seasons": [
+      "Rabi"
+    ],
+    "temp_range": [
+      12.4,
+      25.6
+    ],
+    "temp_mean": 19.8,
+    "rainfall_range": [
+      0.1,
+      8.5
+    ],
+    "soil_moisture_range": [
+      25.7,
+      37.9
+    ],
+    "varieties": [
+      {
+        "variety": "HD 2967",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 20.2,
+        "temp_min": 15.1,
+        "temp_max": 24.5,
+        "rainfall_mean": 2.9,
+        "rainfall_min": 0.3,
+        "rainfall_max": 7.4,
+        "soil_moisture_mean": 31.9,
+        "soil_moisture_min": 29.1,
+        "soil_moisture_max": 35.2
+      },
+      {
+        "variety": "DBW 187",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 14.8,
+        "temp_min": 12.4,
+        "temp_max": 19.6,
+        "rainfall_mean": 2.1,
+        "rainfall_min": 2.0,
+        "rainfall_max": 2.2,
+        "soil_moisture_mean": 33.7,
+        "soil_moisture_min": 32.6,
+        "soil_moisture_max": 34.7
+      },
+      {
+        "variety": "PBW 343",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 23.5,
+        "temp_min": 21.8,
+        "temp_max": 25.4,
+        "rainfall_mean": 2.3,
+        "rainfall_min": 0.1,
+        "rainfall_max": 3.4,
+        "soil_moisture_mean": 30.3,
+        "soil_moisture_min": 26.4,
+        "soil_moisture_max": 37.1
+      },
+      {
+        "variety": "UP 2572",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 20.8,
+        "temp_min": 13.4,
+        "temp_max": 25.6,
+        "rainfall_mean": 6.5,
+        "rainfall_min": 3.8,
+        "rainfall_max": 8.5,
+        "soil_moisture_mean": 33.5,
+        "soil_moisture_min": 33.0,
+        "soil_moisture_max": 34.1
+      },
+      {
+        "variety": "HD 3086",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 19.6,
+        "temp_min": 15.2,
+        "temp_max": 23.6,
+        "rainfall_mean": 5.4,
+        "rainfall_min": 2.9,
+        "rainfall_max": 7.0,
+        "soil_moisture_mean": 29.9,
+        "soil_moisture_min": 25.7,
+        "soil_moisture_max": 37.9
+      }
+    ],
+    "total_records": 15
+  },
+  "Rice": {
+    "crop": "Rice",
+    "seasons": [
+      "Kharif"
+    ],
+    "temp_range": [
+      26.9,
+      33.9
+    ],
+    "temp_mean": 29.4,
+    "rainfall_range": [
+      6.1,
+      37.0
+    ],
+    "soil_moisture_range": [
+      45.9,
+      65.0
+    ],
+    "varieties": [
+      {
+        "variety": "Pusa Basmati 1121",
+        "seasons": [
+          "Kharif"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 28.2,
+        "temp_min": 26.9,
+        "temp_max": 30.7,
+        "rainfall_mean": 13.5,
+        "rainfall_min": 8.5,
+        "rainfall_max": 17.8,
+        "soil_moisture_mean": 55.6,
+        "soil_moisture_min": 50.6,
+        "soil_moisture_max": 63.7
+      },
+      {
+        "variety": "PR 126",
+        "seasons": [
+          "Kharif"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 32.1,
+        "temp_min": 30.8,
+        "temp_max": 33.9,
+        "rainfall_mean": 21.5,
+        "rainfall_min": 10.7,
+        "rainfall_max": 27.4,
+        "soil_moisture_mean": 52.4,
+        "soil_moisture_min": 48.4,
+        "soil_moisture_max": 56.1
+      },
+      {
+        "variety": "Pant Dhan 12",
+        "seasons": [
+          "Kharif"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 28.6,
+        "temp_min": 27.1,
+        "temp_max": 31.2,
+        "rainfall_mean": 17.7,
+        "rainfall_min": 6.1,
+        "rainfall_max": 34.5,
+        "soil_moisture_mean": 58.6,
+        "soil_moisture_min": 51.3,
+        "soil_moisture_max": 63.9
+      },
+      {
+        "variety": "Swarna",
+        "seasons": [
+          "Kharif"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 29.6,
+        "temp_min": 27.4,
+        "temp_max": 32.9,
+        "rainfall_mean": 22.2,
+        "rainfall_min": 13.6,
+        "rainfall_max": 37.0,
+        "soil_moisture_mean": 56.2,
+        "soil_moisture_min": 54.2,
+        "soil_moisture_max": 58.1
+      },
+      {
+        "variety": "MTU 1010",
+        "seasons": [
+          "Kharif"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 28.5,
+        "temp_min": 27.4,
+        "temp_max": 29.6,
+        "rainfall_mean": 15.5,
+        "rainfall_min": 8.2,
+        "rainfall_max": 25.5,
+        "soil_moisture_mean": 58.0,
+        "soil_moisture_min": 45.9,
+        "soil_moisture_max": 65.0
+      }
+    ],
+    "total_records": 15
+  },
+  "Maize": {
+    "crop": "Maize",
+    "seasons": [
+      "Kharif"
+    ],
+    "temp_range": [
+      23.1,
+      32.0
+    ],
+    "temp_mean": 28.1,
+    "rainfall_range": [
+      2.0,
+      23.9
+    ],
+    "soil_moisture_range": [
+      33.1,
+      49.4
+    ],
+    "varieties": [
+      {
+        "variety": "HQPM-1",
+        "seasons": [
+          "Kharif"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 27.1,
+        "temp_min": 23.1,
+        "temp_max": 32.0,
+        "rainfall_mean": 11.4,
+        "rainfall_min": 3.5,
+        "rainfall_max": 16.4,
+        "soil_moisture_mean": 44.3,
+        "soil_moisture_min": 37.6,
+        "soil_moisture_max": 49.4
+      },
+      {
+        "variety": "Pant Sankar Makka 1",
+        "seasons": [
+          "Kharif"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 29.3,
+        "temp_min": 28.4,
+        "temp_max": 30.6,
+        "rainfall_mean": 7.1,
+        "rainfall_min": 2.3,
+        "rainfall_max": 14.4,
+        "soil_moisture_mean": 39.5,
+        "soil_moisture_min": 35.3,
+        "soil_moisture_max": 44.4
+      },
+      {
+        "variety": "DHM 117",
+        "seasons": [
+          "Kharif"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 27.4,
+        "temp_min": 24.6,
+        "temp_max": 31.1,
+        "rainfall_mean": 19.8,
+        "rainfall_min": 13.5,
+        "rainfall_max": 23.9,
+        "soil_moisture_mean": 39.0,
+        "soil_moisture_min": 33.6,
+        "soil_moisture_max": 47.5
+      },
+      {
+        "variety": "Ganga 5",
+        "seasons": [
+          "Kharif"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 28.4,
+        "temp_min": 27.3,
+        "temp_max": 29.6,
+        "rainfall_mean": 10.8,
+        "rainfall_min": 2.0,
+        "rainfall_max": 16.0,
+        "soil_moisture_mean": 38.4,
+        "soil_moisture_min": 33.1,
+        "soil_moisture_max": 45.6
+      }
+    ],
+    "total_records": 12
+  },
+  "Onion": {
+    "crop": "Onion",
+    "seasons": [
+      "Rabi"
+    ],
+    "temp_range": [
+      14.3,
+      27.9
+    ],
+    "temp_mean": 21.9,
+    "rainfall_range": [
+      0.6,
+      7.6
+    ],
+    "soil_moisture_range": [
+      28.7,
+      38.5
+    ],
+    "varieties": [
+      {
+        "variety": "N-53",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 22.1,
+        "temp_min": 14.3,
+        "temp_max": 26.3,
+        "rainfall_mean": 5.8,
+        "rainfall_min": 2.5,
+        "rainfall_max": 7.6,
+        "soil_moisture_mean": 32.1,
+        "soil_moisture_min": 28.7,
+        "soil_moisture_max": 38.5
+      },
+      {
+        "variety": "Agrifound Dark Red",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 22.4,
+        "temp_min": 20.8,
+        "temp_max": 24.7,
+        "rainfall_mean": 1.2,
+        "rainfall_min": 0.6,
+        "rainfall_max": 2.1,
+        "soil_moisture_mean": 36.4,
+        "soil_moisture_min": 33.7,
+        "soil_moisture_max": 38.5
+      },
+      {
+        "variety": "Pusa Red",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 24.0,
+        "temp_min": 19.9,
+        "temp_max": 27.9,
+        "rainfall_mean": 2.8,
+        "rainfall_min": 1.6,
+        "rainfall_max": 5.2,
+        "soil_moisture_mean": 33.2,
+        "soil_moisture_min": 31.7,
+        "soil_moisture_max": 34.5
+      },
+      {
+        "variety": "Agrifound Light Red",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 19.0,
+        "temp_min": 17.1,
+        "temp_max": 21.2,
+        "rainfall_mean": 2.1,
+        "rainfall_min": 0.6,
+        "rainfall_max": 4.7,
+        "soil_moisture_mean": 32.4,
+        "soil_moisture_min": 30.7,
+        "soil_moisture_max": 35.6
+      }
+    ],
+    "total_records": 12
+  },
+  "Tomato": {
+    "crop": "Tomato",
+    "seasons": [
+      "Season varies"
+    ],
+    "temp_range": [
+      18.9,
+      28.3
+    ],
+    "temp_mean": 23.6,
+    "rainfall_range": [
+      2.0,
+      13.8
+    ],
+    "soil_moisture_range": [
+      32.7,
+      44.8
+    ],
+    "varieties": [
+      {
+        "variety": "Pusa Ruby",
+        "seasons": [
+          "Season varies"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 20.1,
+        "temp_min": 18.9,
+        "temp_max": 20.7,
+        "rainfall_mean": 6.4,
+        "rainfall_min": 2.0,
+        "rainfall_max": 13.6,
+        "soil_moisture_mean": 42.7,
+        "soil_moisture_min": 40.7,
+        "soil_moisture_max": 44.2
+      },
+      {
+        "variety": "Arka Rakshak",
+        "seasons": [
+          "Season varies"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 25.3,
+        "temp_min": 23.2,
+        "temp_max": 27.7,
+        "rainfall_mean": 5.5,
+        "rainfall_min": 2.9,
+        "rainfall_max": 7.1,
+        "soil_moisture_mean": 37.9,
+        "soil_moisture_min": 33.3,
+        "soil_moisture_max": 42.2
+      },
+      {
+        "variety": "Pant Bahar",
+        "seasons": [
+          "Season varies"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 24.7,
+        "temp_min": 19.2,
+        "temp_max": 28.3,
+        "rainfall_mean": 6.6,
+        "rainfall_min": 3.7,
+        "rainfall_max": 10.1,
+        "soil_moisture_mean": 38.6,
+        "soil_moisture_min": 34.5,
+        "soil_moisture_max": 44.8
+      },
+      {
+        "variety": "Arka Vikas",
+        "seasons": [
+          "Season varies"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 24.2,
+        "temp_min": 21.0,
+        "temp_max": 28.3,
+        "rainfall_mean": 9.5,
+        "rainfall_min": 6.3,
+        "rainfall_max": 13.8,
+        "soil_moisture_mean": 35.4,
+        "soil_moisture_min": 32.7,
+        "soil_moisture_max": 37.8
+      }
+    ],
+    "total_records": 12
+  },
+  "Potato": {
+    "crop": "Potato",
+    "seasons": [
+      "Rabi"
+    ],
+    "temp_range": [
+      12.7,
+      24.0
+    ],
+    "temp_mean": 17.1,
+    "rainfall_range": [
+      1.0,
+      7.7
+    ],
+    "soil_moisture_range": [
+      30.7,
+      41.9
+    ],
+    "varieties": [
+      {
+        "variety": "Kufri Jyoti",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 21.6,
+        "temp_min": 17.8,
+        "temp_max": 24.0,
+        "rainfall_mean": 5.1,
+        "rainfall_min": 1.7,
+        "rainfall_max": 6.8,
+        "soil_moisture_mean": 36.1,
+        "soil_moisture_min": 32.0,
+        "soil_moisture_max": 41.6
+      },
+      {
+        "variety": "Kufri Bahar",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 15.0,
+        "temp_min": 12.7,
+        "temp_max": 17.1,
+        "rainfall_mean": 5.7,
+        "rainfall_min": 3.0,
+        "rainfall_max": 7.7,
+        "soil_moisture_mean": 39.7,
+        "soil_moisture_min": 35.5,
+        "soil_moisture_max": 41.9
+      },
+      {
+        "variety": "Kufri Giriraj",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 17.6,
+        "temp_min": 15.6,
+        "temp_max": 18.7,
+        "rainfall_mean": 6.5,
+        "rainfall_min": 5.7,
+        "rainfall_max": 7.7,
+        "soil_moisture_mean": 33.2,
+        "soil_moisture_min": 30.7,
+        "soil_moisture_max": 37.0
+      },
+      {
+        "variety": "Kufri Pukhraj",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 15.7,
+        "temp_min": 13.9,
+        "temp_max": 19.0,
+        "rainfall_mean": 5.5,
+        "rainfall_min": 4.0,
+        "rainfall_max": 7.7,
+        "soil_moisture_mean": 36.4,
+        "soil_moisture_min": 31.0,
+        "soil_moisture_max": 40.2
+      },
+      {
+        "variety": "Kufri Chipsona-1",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 15.6,
+        "temp_min": 14.8,
+        "temp_max": 17.0,
+        "rainfall_mean": 3.5,
+        "rainfall_min": 1.0,
+        "rainfall_max": 4.8,
+        "soil_moisture_mean": 38.1,
+        "soil_moisture_min": 36.3,
+        "soil_moisture_max": 40.7
+      }
+    ],
+    "total_records": 15
+  },
+  "Mustard": {
+    "crop": "Mustard",
+    "seasons": [
+      "Rabi"
+    ],
+    "temp_range": [
+      11.1,
+      24.9
+    ],
+    "temp_mean": 19.2,
+    "rainfall_range": [
+      0.4,
+      5.6
+    ],
+    "soil_moisture_range": [
+      22.1,
+      35.0
+    ],
+    "varieties": [
+      {
+        "variety": "Pusa Bold",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 17.4,
+        "temp_min": 13.6,
+        "temp_max": 24.0,
+        "rainfall_mean": 1.8,
+        "rainfall_min": 1.2,
+        "rainfall_max": 2.4,
+        "soil_moisture_mean": 31.3,
+        "soil_moisture_min": 30.7,
+        "soil_moisture_max": 31.8
+      },
+      {
+        "variety": "Pusa Mustard 27",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 16.7,
+        "temp_min": 11.1,
+        "temp_max": 24.9,
+        "rainfall_mean": 2.9,
+        "rainfall_min": 0.4,
+        "rainfall_max": 5.6,
+        "soil_moisture_mean": 31.1,
+        "soil_moisture_min": 24.8,
+        "soil_moisture_max": 35.0
+      },
+      {
+        "variety": "Varuna",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 23.5,
+        "temp_min": 22.5,
+        "temp_max": 24.8,
+        "rainfall_mean": 3.4,
+        "rainfall_min": 2.2,
+        "rainfall_max": 4.2,
+        "soil_moisture_mean": 25.4,
+        "soil_moisture_min": 22.1,
+        "soil_moisture_max": 30.0
+      },
+      {
+        "variety": "RH 749",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 19.3,
+        "temp_min": 11.6,
+        "temp_max": 24.1,
+        "rainfall_mean": 2.0,
+        "rainfall_min": 0.8,
+        "rainfall_max": 3.3,
+        "soil_moisture_mean": 26.5,
+        "soil_moisture_min": 23.5,
+        "soil_moisture_max": 30.6
+      }
+    ],
+    "total_records": 12
+  },
+  "Chickpea (Gram)": {
+    "crop": "Chickpea (Gram)",
+    "seasons": [
+      "Rabi"
+    ],
+    "temp_range": [
+      12.1,
+      25.6
+    ],
+    "temp_mean": 20.7,
+    "rainfall_range": [
+      0.5,
+      5.4
+    ],
+    "soil_moisture_range": [
+      20.0,
+      30.6
+    ],
+    "varieties": [
+      {
+        "variety": "Pusa 256",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 22.7,
+        "temp_min": 21.1,
+        "temp_max": 25.6,
+        "rainfall_mean": 3.7,
+        "rainfall_min": 1.6,
+        "rainfall_max": 5.1,
+        "soil_moisture_mean": 23.1,
+        "soil_moisture_min": 21.1,
+        "soil_moisture_max": 25.9
+      },
+      {
+        "variety": "Pant G 186",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 21.7,
+        "temp_min": 18.4,
+        "temp_max": 23.6,
+        "rainfall_mean": 2.9,
+        "rainfall_min": 1.7,
+        "rainfall_max": 3.8,
+        "soil_moisture_mean": 22.7,
+        "soil_moisture_min": 20.0,
+        "soil_moisture_max": 25.1
+      },
+      {
+        "variety": "JG 11",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 19.5,
+        "temp_min": 12.1,
+        "temp_max": 25.6,
+        "rainfall_mean": 1.6,
+        "rainfall_min": 0.5,
+        "rainfall_max": 3.3,
+        "soil_moisture_mean": 27.4,
+        "soil_moisture_min": 21.5,
+        "soil_moisture_max": 30.6
+      },
+      {
+        "variety": "Pusa 372",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 19.1,
+        "temp_min": 15.7,
+        "temp_max": 24.9,
+        "rainfall_mean": 3.8,
+        "rainfall_min": 0.6,
+        "rainfall_max": 5.4,
+        "soil_moisture_mean": 27.2,
+        "soil_moisture_min": 22.5,
+        "soil_moisture_max": 29.6
+      }
+    ],
+    "total_records": 12
+  },
+  "Lentil": {
+    "crop": "Lentil",
+    "seasons": [
+      "Rabi"
+    ],
+    "temp_range": [
+      10.4,
+      24.6
+    ],
+    "temp_mean": 17.4,
+    "rainfall_range": [
+      1.6,
+      5.6
+    ],
+    "soil_moisture_range": [
+      22.7,
+      30.6
+    ],
+    "varieties": [
+      {
+        "variety": "Pant L 639",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 20.1,
+        "temp_min": 12.3,
+        "temp_max": 24.6,
+        "rainfall_mean": 4.3,
+        "rainfall_min": 2.4,
+        "rainfall_max": 5.6,
+        "soil_moisture_mean": 29.5,
+        "soil_moisture_min": 27.4,
+        "soil_moisture_max": 30.6
+      },
+      {
+        "variety": "Pant L 4",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 18.9,
+        "temp_min": 10.4,
+        "temp_max": 24.0,
+        "rainfall_mean": 3.6,
+        "rainfall_min": 1.6,
+        "rainfall_max": 4.8,
+        "soil_moisture_mean": 27.9,
+        "soil_moisture_min": 24.0,
+        "soil_moisture_max": 30.4
+      },
+      {
+        "variety": "VL Masoor 126",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 13.2,
+        "temp_min": 11.6,
+        "temp_max": 14.6,
+        "rainfall_mean": 5.0,
+        "rainfall_min": 4.8,
+        "rainfall_max": 5.2,
+        "soil_moisture_mean": 26.2,
+        "soil_moisture_min": 22.7,
+        "soil_moisture_max": 30.3
+      }
+    ],
+    "total_records": 9
+  },
+  "Pea": {
+    "crop": "Pea",
+    "seasons": [
+      "Rabi"
+    ],
+    "temp_range": [
+      10.3,
+      21.6
+    ],
+    "temp_mean": 16.5,
+    "rainfall_range": [
+      0.9,
+      7.7
+    ],
+    "soil_moisture_range": [
+      28.0,
+      39.8
+    ],
+    "varieties": [
+      {
+        "variety": "Pant Matar 42",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 16.1,
+        "temp_min": 10.3,
+        "temp_max": 20.4,
+        "rainfall_mean": 4.1,
+        "rainfall_min": 1.5,
+        "rainfall_max": 7.7,
+        "soil_moisture_mean": 34.3,
+        "soil_moisture_min": 31.3,
+        "soil_moisture_max": 39.8
+      },
+      {
+        "variety": "VL Matar 42",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 17.1,
+        "temp_min": 13.2,
+        "temp_max": 21.6,
+        "rainfall_mean": 3.3,
+        "rainfall_min": 0.9,
+        "rainfall_max": 7.5,
+        "soil_moisture_mean": 34.1,
+        "soil_moisture_min": 29.4,
+        "soil_moisture_max": 39.6
+      },
+      {
+        "variety": "Azad P-1",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 16.0,
+        "temp_min": 13.1,
+        "temp_max": 18.7,
+        "rainfall_mean": 3.8,
+        "rainfall_min": 2.5,
+        "rainfall_max": 5.7,
+        "soil_moisture_mean": 32.7,
+        "soil_moisture_min": 28.0,
+        "soil_moisture_max": 35.3
+      },
+      {
+        "variety": "Arkel",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 16.9,
+        "temp_min": 10.8,
+        "temp_max": 21.1,
+        "rainfall_mean": 5.0,
+        "rainfall_min": 4.3,
+        "rainfall_max": 5.4,
+        "soil_moisture_mean": 33.7,
+        "soil_moisture_min": 32.0,
+        "soil_moisture_max": 36.6
+      }
+    ],
+    "total_records": 12
+  },
+  "Finger Millet (Mandua)": {
+    "crop": "Finger Millet (Mandua)",
+    "seasons": [
+      "Kharif"
+    ],
+    "temp_range": [
+      23.0,
+      29.0
+    ],
+    "temp_mean": 24.8,
+    "rainfall_range": [
+      5.0,
+      28.5
+    ],
+    "soil_moisture_range": [
+      26.9,
+      35.8
+    ],
+    "varieties": [
+      {
+        "variety": "VL Mandua 347",
+        "seasons": [
+          "Kharif"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 23.4,
+        "temp_min": 23.0,
+        "temp_max": 24.0,
+        "rainfall_mean": 17.1,
+        "rainfall_min": 12.4,
+        "rainfall_max": 26.2,
+        "soil_moisture_mean": 31.3,
+        "soil_moisture_min": 26.9,
+        "soil_moisture_max": 35.8
+      },
+      {
+        "variety": "PRM 1",
+        "seasons": [
+          "Kharif"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 26.2,
+        "temp_min": 24.2,
+        "temp_max": 29.0,
+        "rainfall_mean": 18.0,
+        "rainfall_min": 5.0,
+        "rainfall_max": 28.5,
+        "soil_moisture_mean": 31.3,
+        "soil_moisture_min": 29.3,
+        "soil_moisture_max": 35.2
+      }
+    ],
+    "total_records": 6
+  },
+  "Soybean": {
+    "crop": "Soybean",
+    "seasons": [
+      "Kharif"
+    ],
+    "temp_range": [
+      25.4,
+      30.0
+    ],
+    "temp_mean": 27.6,
+    "rainfall_range": [
+      5.7,
+      32.0
+    ],
+    "soil_moisture_range": [
+      36.1,
+      47.3
+    ],
+    "varieties": [
+      {
+        "variety": "Pant Soybean 1347",
+        "seasons": [
+          "Kharif"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 27.6,
+        "temp_min": 27.4,
+        "temp_max": 27.8,
+        "rainfall_mean": 24.2,
+        "rainfall_min": 18.3,
+        "rainfall_max": 32.0,
+        "soil_moisture_mean": 43.3,
+        "soil_moisture_min": 38.2,
+        "soil_moisture_max": 46.9
+      },
+      {
+        "variety": "JS 335",
+        "seasons": [
+          "Kharif"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 28.2,
+        "temp_min": 25.4,
+        "temp_max": 30.0,
+        "rainfall_mean": 15.9,
+        "rainfall_min": 7.5,
+        "rainfall_max": 25.2,
+        "soil_moisture_mean": 42.8,
+        "soil_moisture_min": 38.4,
+        "soil_moisture_max": 47.3
+      },
+      {
+        "variety": "Pant Soybean 1092",
+        "seasons": [
+          "Kharif"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 26.9,
+        "temp_min": 25.6,
+        "temp_max": 27.8,
+        "rainfall_mean": 20.0,
+        "rainfall_min": 5.7,
+        "rainfall_max": 30.5,
+        "soil_moisture_mean": 37.6,
+        "soil_moisture_min": 36.1,
+        "soil_moisture_max": 38.7
+      }
+    ],
+    "total_records": 9
+  },
+  "Cauliflower": {
+    "crop": "Cauliflower",
+    "seasons": [
+      "Rabi"
+    ],
+    "temp_range": [
+      12.6,
+      21.2
+    ],
+    "temp_mean": 17.6,
+    "rainfall_range": [
+      0.0,
+      7.7
+    ],
+    "soil_moisture_range": [
+      35.2,
+      43.0
+    ],
+    "varieties": [
+      {
+        "variety": "Pusa Snowball K-1",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 20.5,
+        "temp_min": 19.9,
+        "temp_max": 21.2,
+        "rainfall_mean": 1.6,
+        "rainfall_min": 0.0,
+        "rainfall_max": 4.0,
+        "soil_moisture_mean": 38.2,
+        "soil_moisture_min": 35.2,
+        "soil_moisture_max": 41.8
+      },
+      {
+        "variety": "Pusa Shubhra",
+        "seasons": [
+          "Rabi"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 14.7,
+        "temp_min": 12.6,
+        "temp_max": 17.5,
+        "rainfall_mean": 5.4,
+        "rainfall_min": 2.0,
+        "rainfall_max": 7.7,
+        "soil_moisture_mean": 40.8,
+        "soil_moisture_min": 38.7,
+        "soil_moisture_max": 43.0
+      }
+    ],
+    "total_records": 6
+  },
+  "Capsicum": {
+    "crop": "Capsicum",
+    "seasons": [
+      "Season varies"
+    ],
+    "temp_range": [
+      21.1,
+      29.9
+    ],
+    "temp_mean": 26.6,
+    "rainfall_range": [
+      3.0,
+      10.0
+    ],
+    "soil_moisture_range": [
+      38.2,
+      44.4
+    ],
+    "varieties": [
+      {
+        "variety": "California Wonder",
+        "seasons": [
+          "Season varies"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 27.6,
+        "temp_min": 24.1,
+        "temp_max": 29.9,
+        "rainfall_mean": 8.2,
+        "rainfall_min": 7.1,
+        "rainfall_max": 10.0,
+        "soil_moisture_mean": 41.6,
+        "soil_moisture_min": 39.1,
+        "soil_moisture_max": 44.4
+      },
+      {
+        "variety": "VL Shimla Mirch 2",
+        "seasons": [
+          "Season varies"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 25.7,
+        "temp_min": 21.1,
+        "temp_max": 28.8,
+        "rainfall_mean": 6.1,
+        "rainfall_min": 3.0,
+        "rainfall_max": 8.9,
+        "soil_moisture_mean": 39.5,
+        "soil_moisture_min": 38.2,
+        "soil_moisture_max": 40.3
+      }
+    ],
+    "total_records": 6
+  },
+  "Sugarcane": {
+    "crop": "Sugarcane",
+    "seasons": [
+      "Annual"
+    ],
+    "temp_range": [
+      23.7,
+      30.5
+    ],
+    "temp_mean": 26.7,
+    "rainfall_range": [
+      6.9,
+      32.1
+    ],
+    "soil_moisture_range": [
+      38.5,
+      46.8
+    ],
+    "varieties": [
+      {
+        "variety": "Co 0238",
+        "seasons": [
+          "Annual"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 24.8,
+        "temp_min": 23.7,
+        "temp_max": 25.3,
+        "rainfall_mean": 11.3,
+        "rainfall_min": 7.3,
+        "rainfall_max": 14.6,
+        "soil_moisture_mean": 43.6,
+        "soil_moisture_min": 39.9,
+        "soil_moisture_max": 46.8
+      },
+      {
+        "variety": "CoPant 97222",
+        "seasons": [
+          "Annual"
+        ],
+        "stages": [
+          "Vegetative",
+          "Flowering",
+          "Maturity"
+        ],
+        "temp_mean": 28.7,
+        "temp_min": 27.0,
+        "temp_max": 30.5,
+        "rainfall_mean": 18.8,
+        "rainfall_min": 6.9,
+        "rainfall_max": 32.1,
+        "soil_moisture_mean": 41.8,
+        "soil_moisture_min": 38.5,
+        "soil_moisture_max": 44.9
+      }
+    ],
+    "total_records": 6
+  }
+}

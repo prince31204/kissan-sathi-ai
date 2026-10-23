@@ -70,7 +70,7 @@ export default function MandiPrices() {
     <SafeAreaView style={styles.container}>
       {/* Header Bar matching Mockup Screen 6 */}
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backBtn} onPress={() => router.back()}>
+        <TouchableOpacity style={styles.backBtn} onPress={() => (router.canGoBack() ? router.back() : router.replace('/(tabs)'))}>
           <MaterialCommunityIcons name="chevron-left" size={28} color="#111827" />
         </TouchableOpacity>
         <Text style={styles.pageTitle}>Market Prices</Text>
@@ -249,7 +249,8 @@ const styles = StyleSheet.create({
   },
   scroll: {
     paddingHorizontal: 20,
-    paddingBottom: 30,
+    paddingBottom: 85,
+    width: '100%',
   },
   locationCard: {
     flexDirection: 'row',

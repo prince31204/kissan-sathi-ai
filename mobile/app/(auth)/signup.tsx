@@ -198,6 +198,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingHorizontal: 24,
     paddingBottom: 32,
+    maxWidth: 460,
+    width: '100%',
+    alignSelf: 'center',
   },
   topBar: {
     paddingVertical: 12,

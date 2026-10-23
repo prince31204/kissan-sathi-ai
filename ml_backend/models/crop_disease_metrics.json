@@ -1,0 +1,42 @@
+{
+  "model_type": "MobileNetV3-Small PyTorch",
+  "epochs": 4,
+  "best_test_accuracy": 56.72,
+  "training_samples": 2318,
+  "test_samples": 238,
+  "total_training_time_sec": 489.8,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 2.5159,
+      "train_acc": 26.1,
+      "test_loss": 2.1308,
+      "test_acc": 34.03,
+      "duration_sec": 116.6
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.6206,
+      "train_acc": 49.53,
+      "test_loss": 1.8844,
+      "test_acc": 44.54,
+      "duration_sec": 114.9
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.1612,
+      "train_acc": 61.13,
+      "test_loss": 1.3782,
+      "test_acc": 56.72,
+      "duration_sec": 120.2
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.9156,
+      "train_acc": 69.28,
+      "test_loss": 1.4786,
+      "test_acc": 53.78,
+      "duration_sec": 137.4
+    }
+  ]
+}

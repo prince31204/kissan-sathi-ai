@@ -56,14 +56,14 @@ const INITIAL_SCHEMES = [
   },
   {
     _id: 'default_4',
-    title: 'Soil Health Card Scheme',
-    category: 'State',
-    subtitle: 'Healthy soil, better yield',
-    benefit: 'Custom nutrient recommendations for your land',
-    icon: 'sprout',
-    iconColor: '#D97706',
-    iconBg: '#FEF3C7',
-    url: 'https://soilhealth.dac.gov.in/',
+    title: 'PM Krishi Sinchayee Yojana (PMKSY)',
+    category: 'Central',
+    subtitle: 'Har Khet Ko Pani & Per Drop More Crop',
+    benefit: 'Up to 55% subsidy for modern drip & sprinkler irrigation systems',
+    icon: 'water-pump',
+    iconColor: '#0284C7',
+    iconBg: '#E0F2FE',
+    url: 'https://pmksy.gov.in/',
   },
 ];
 
@@ -452,7 +452,8 @@ const styles = StyleSheet.create({
 
   scroll: {
     paddingHorizontal: 20,
-    paddingBottom: 30,
+    paddingBottom: 95,
+    width: '100%',
   },
 
   // Filter Pills

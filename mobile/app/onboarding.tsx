@@ -136,6 +136,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 24,
+    maxWidth: 520,
+    width: '100%',
+    alignSelf: 'center',
   },
   logoSection: {
     alignItems: 'center',
@@ -235,6 +238,9 @@ const styles = StyleSheet.create({
   footer: {
     paddingHorizontal: 24,
     paddingBottom: 24,
+    maxWidth: 520,
+    width: '100%',
+    alignSelf: 'center',
   },
   mainBtn: {
     height: 52,

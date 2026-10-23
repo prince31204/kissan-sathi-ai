@@ -1,0 +1,714 @@
+{
+  "Wheat": {
+    "crop_name": "Wheat",
+    "districts": [
+      "Udham Singh Nagar",
+      "Haridwar",
+      "Dehradun"
+    ],
+    "example_pincodes": [
+      "263153",
+      "249401",
+      "248001"
+    ],
+    "example_pincodes_raw": "263153 (Rudrapur), 249401 (Haridwar), 248001 (Dehradun)",
+    "suggested_varieties": [
+      "VL Gehun 907",
+      "VL 892",
+      "VL 953",
+      "UP 2628",
+      "UP 2684",
+      "HD 2967"
+    ],
+    "suggested_varieties_raw": "VL Gehun 907, VL 892, VL 953, UP 2628, UP 2684, HD 2967",
+    "agronomy": {
+      "hindi_name": "गेहूं",
+      "category": "Cereal",
+      "primary_season": "Rabi",
+      "sowing_window": "October 25 - November 25",
+      "harvest_window": "April - May",
+      "soil_suitability": [
+        "Alluvial Soil",
+        "Sandy Loam",
+        "Clay Loam"
+      ],
+      "npk_ratio": "100:50:50 kg/ha (Plains), 80:40:40 kg/ha (Hills)",
+      "optimal_temp_c": "15°C - 24°C",
+      "water_requirement": "4-5 irrigations (CRI, Tillering, Flowering, Grain filling)",
+      "care_tips": [
+        "VL Gehun 907 and VL 892 are specially bred by ICAR-VPKAS Almora for rainfed/irrigated Uttarakhand hills.",
+        "UP 2628 and HD 2967 give highest yields in Udham Singh Nagar and Haridwar plains.",
+        "First irrigation at Crown Root Initiation (CRI) 21-25 days after sowing is mandatory for high tillering."
+      ],
+      "fertilizer_guide": [
+        "Basal: 50% Nitrogen + Full Phosphorus (DAP) + Full Potash (MOP) at final ploughing.",
+        "Top dress: 25% Nitrogen after first irrigation, balance 25% at boot stage."
+      ],
+      "disease_management": [
+        "Yellow Rust (Stripe Rust): Spray Propiconazole (Tilt 25 EC) @ 1 ml/L upon first yellow stripe sighting.",
+        "Loose Smut / Karnal Bunt: Treat seeds with Carbendazim 50 WP @ 2.5 g/kg seed before sowing."
+      ],
+      "icar_gbpuat_note": "ICAR-VPKAS Almora & GBPUAT Pantnagar certified high-yielding wheat varieties for Uttarakhand."
+    }
+  },
+  "Paddy / Basmati Rice": {
+    "crop_name": "Paddy / Basmati Rice",
+    "districts": [
+      "Udham Singh Nagar",
+      "Haridwar",
+      "Dehradun"
+    ],
+    "example_pincodes": [
+      "263148",
+      "249408",
+      "248142"
+    ],
+    "example_pincodes_raw": "263148 (Kashipur), 249408 (Laksar), 248142 (Vikasanagar)",
+    "suggested_varieties": [
+      "Pant Dhan 26",
+      "VL Dhan 156",
+      "VL Dhan 158",
+      "Pant Sugandh Dhan 16",
+      "Pant Sugandh Dhan 17"
+    ],
+    "suggested_varieties_raw": "Pant Dhan 26, VL Dhan 156, VL Dhan 158, Pant Sugandh Dhan 16, Pant Sugandh Dhan 17",
+    "agronomy": {
+      "hindi_name": "धान / बासमती चावल",
+      "category": "Cereal",
+      "primary_season": "Kharif",
+      "sowing_window": "May 25 - June 20 (Nursery), June 20 - July 15 (Transplant)",
+      "harvest_window": "October - November",
+      "soil_suitability": [
+        "Alluvial Soil",
+        "Clay Loam"
+      ],
+      "npk_ratio": "120:60:40 kg/ha (Hybrids), 90:40:30 kg/ha (Basmati)",
+      "optimal_temp_c": "22°C - 34°C",
+      "water_requirement": "Standing water 2-5 cm during tillering to panicle initiation",
+      "care_tips": [
+        "Pant Sugandh Dhan 16/17 are premium aromatic Basmati selections from GB Pant University (Pantnagar) ideal for Udham Singh Nagar & Haridwar.",
+        "VL Dhan 156 and VL Dhan 158 are cold-tolerant varieties specifically developed for mid-altitude valleys (600-1200m).",
+        "Maintain 20x15 cm hill spacing with 2 seedlings per hill."
+      ],
+      "fertilizer_guide": [
+        "Basal: Apply 1/3 N + entire P + entire K + 25 kg Zinc Sulphate/ha at puddling.",
+        "Top dressing: 1/3 N at active tillering (3 weeks), 1/3 N at panicle emergence."
+      ],
+      "disease_management": [
+        "Bacterial Leaf Blight: Spray Streptocycline @ 0.1 g/L with Copper Oxychloride @ 2.5 g/L.",
+        "Blast (Pyricularia): Spray Tricyclazole 75 WP @ 0.6 g/L water.",
+        "Brown Planthopper: Maintain alternate wetting and drying; spray Pymetrozine 50 WG @ 0.6 g/L."
+      ],
+      "icar_gbpuat_note": "Direct recommendation from Pantnagar Rice Research Station & ICAR-VPKAS Almora."
+    }
+  },
+  "Sugarcane": {
+    "crop_name": "Sugarcane",
+    "districts": [
+      "Udham Singh Nagar",
+      "Haridwar",
+      "Dehradun"
+    ],
+    "example_pincodes": [
+      "252308",
+      "247663",
+      "263139"
+    ],
+    "example_pincodes_raw": "252308 (Kichha), 247663 (Roorkee), 263139 (Bazpur)",
+    "suggested_varieties": [
+      "Co Pant 94211",
+      "Co Pant 84211"
+    ],
+    "suggested_varieties_raw": "Co Pant 94211, Co Pant 84211",
+    "agronomy": {
+      "hindi_name": "गन्ना",
+      "category": "Cash Crop",
+      "primary_season": "Whole Year",
+      "sowing_window": "February - March (Spring), October (Autumn)",
+      "harvest_window": "November - March (10-12 months)",
+      "soil_suitability": [
+        "Alluvial Soil",
+        "Clay Loam"
+      ],
+      "npk_ratio": "150:60:60 kg/ha",
+      "optimal_temp_c": "25°C - 38°C",
+      "water_requirement": "High; regular irrigation every 10-15 days during summer till monsoon sets in",
+      "care_tips": [
+        "Co Pant 94211 & Co Pant 84211 are early maturing, high-sugar varieties developed by GBPUAT Pantnagar with excellent frost tolerance.",
+        "Use two-budded setts treated with Carbendazim 0.1% to prevent Red Rot.",
+        "Trench planting at 90-120 cm row distance improves sucrose content and makes mechanical earthing-up easier."
+      ],
+      "fertilizer_guide": [
+        "Basal: 1/3 N + Full P & K in furrows before sett placement.",
+        "Top dress: 1/3 N at 45 days (tillering), remaining 1/3 N at 90 days before monsoon."
+      ],
+      "disease_management": [
+        "Red Rot: Strictly use healthy seed canes of resistant varieties Co Pant 94211/84211; soak setts in hot water or Bavistin.",
+        "Top Borer / Shoot Borer: Apply Cartap Hydrochloride 4G @ 25 kg/ha in root zone."
+      ],
+      "icar_gbpuat_note": "Co Pant varieties are the lifeline of sugar mills in US Nagar, Haridwar, and Doiwala Dehradun."
+    }
+  },
+  "Finger Millet (Mandua)": {
+    "crop_name": "Finger Millet (Mandua)",
+    "districts": [
+      "Almora",
+      "Pauri Garhwal",
+      "Tehri",
+      "Chamoli"
+    ],
+    "example_pincodes": [
+      "263601",
+      "246001",
+      "249001"
+    ],
+    "example_pincodes_raw": "263601 (Almora), 246001 (Pauri), 249001 (Tehri)",
+    "suggested_varieties": [
+      "VL Mandua 376",
+      "VL Mandua 382",
+      "VL Mandua 402",
+      "VLM 352"
+    ],
+    "suggested_varieties_raw": "VL Mandua 376, VL Mandua 382, VL Mandua 402, VLM 352",
+    "agronomy": {
+      "hindi_name": "मंडुआ / कोदा",
+      "category": "Nutri-Cereal / Hill Millet",
+      "primary_season": "Kharif",
+      "sowing_window": "June 1 - July 10 (onset of monsoon)",
+      "harvest_window": "October - November",
+      "soil_suitability": [
+        "Brown Hill Soil",
+        "Sandy Loam",
+        "Mountain / Gravelly Soil"
+      ],
+      "npk_ratio": "40:20:20 kg/ha (Rainfed hills)",
+      "optimal_temp_c": "18°C - 30°C",
+      "water_requirement": "Low; drought-hardy rainfed crop requiring 350-500 mm rainfall",
+      "care_tips": [
+        "VL Mandua 376, 382, 402 and VLM 352 bred by VPKAS Almora yield 25-30% higher than traditional landraces.",
+        "Rich in dietary calcium (344 mg/100g) and iron; high market demand under Uttarakhand Millets Mission.",
+        "Direct line sowing or transplanting 20-day seedlings gives 30% higher grain yield than broadcasting."
+      ],
+      "fertilizer_guide": [
+        "Apply 5-8 tonnes well-decomposed FYM/compost per hectare.",
+        "Chemical basal dose: 20 kg N + 20 kg P2O5 + 20 kg K2O at sowing; top dress 20 kg N after 30 days."
+      ],
+      "disease_management": [
+        "Blast (Magnaporthe grisea): Seed treatment with Pseudomonas fluorescens @ 10 g/kg or Carbendazim @ 2 g/kg.",
+        "Foliar spray of Kitazin 48 EC @ 1 ml/L if neck blast appears at flowering."
+      ],
+      "icar_gbpuat_note": "ICAR-VPKAS Almora spearheads national breeding for finger millet; VLM varieties are national benchmarks."
+    }
+  },
+  "Barnyard Millet (Jhangora)": {
+    "crop_name": "Barnyard Millet (Jhangora)",
+    "districts": [
+      "Uttarkashi",
+      "Chamoli",
+      "Rudraprayag"
+    ],
+    "example_pincodes": [
+      "249193",
+      "246401",
+      "246475"
+    ],
+    "example_pincodes_raw": "249193 (Uttarkashi), 246401 (Gopeshwar), 246475 (Rudraprayag)",
+    "suggested_varieties": [
+      "VL Madira 172",
+      "VL Madira 207",
+      "VL Madira 254"
+    ],
+    "suggested_varieties_raw": "VL Madira 172, VL Madira 207, VL Madira 254",
+    "agronomy": {
+      "hindi_name": "झंगोरा",
+      "category": "Nutri-Cereal / Fast Millet",
+      "primary_season": "Kharif",
+      "sowing_window": "May 15 - June 25",
+      "harvest_window": "August - September (Fast 85-95 days maturity)",
+      "soil_suitability": [
+        "Brown Hill Soil",
+        "Mountain / Gravelly Soil"
+      ],
+      "npk_ratio": "40:20:0 kg/ha",
+      "optimal_temp_c": "15°C - 28°C",
+      "water_requirement": "Extremely low; highly drought-resilient and flood-resilient",
+      "care_tips": [
+        "VL Madira 172, VL Madira 207 and 254 are benchmark varieties developed by VPKAS Almora for high altitudes (1000-2200m).",
+        "Matures in just 85-95 days, providing the earliest food grain buffer in high hill terraced farms.",
+        "Can withstand severe water stress and marginal, shallow stony soils."
+      ],
+      "fertilizer_guide": [
+        "Add 4-5 tonnes FYM/compost. In fertilized plots apply 20 kg N and 20 kg P2O5 at sowing.",
+        "One weeding 25-30 days after emergence."
+      ],
+      "disease_management": [
+        "Head smut: Seed treatment with Thiram or Carbendazim @ 2 g/kg seed.",
+        "Shoot fly: Sow with the onset of pre-monsoon showers to avoid peak insect activity."
+      ],
+      "icar_gbpuat_note": "Key hill nutrition crop documented in ICAR Uttarakhand State Summary."
+    }
+  },
+  "Maize": {
+    "crop_name": "Maize",
+    "districts": [
+      "Dehradun",
+      "Nainital",
+      "Udham Singh Nagar"
+    ],
+    "example_pincodes": [
+      "248158",
+      "263001"
+    ],
+    "example_pincodes_raw": "248158 (Kalsi), 263001 (Nainital)",
+    "suggested_varieties": [
+      "Pant Sankar Makka-1",
+      "Gaurav",
+      "Surya"
+    ],
+    "suggested_varieties_raw": "Pant Sankar Makka-1, Gaurav, Surya",
+    "agronomy": {
+      "hindi_name": "मक्का",
+      "category": "Cereal",
+      "primary_season": "Kharif",
+      "sowing_window": "May 15 - June 20 (Rainfed), February - March (Spring)",
+      "harvest_window": "September - October",
+      "soil_suitability": [
+        "Sandy Loam",
+        "Brown Hill Soil",
+        "Alluvial Soil"
+      ],
+      "npk_ratio": "120:60:40 kg/ha",
+      "optimal_temp_c": "20°C - 32°C",
+      "water_requirement": "Critical at knee-high, tasseling, and silking stages; waterlogging is detrimental",
+      "care_tips": [
+        "Pant Sankar Makka-1, Gaurav and Surya are high-yield cultivars from Pantnagar for Doon Valley, Kalsi, and Nainital foothills.",
+        "Provide good drainage in terrace fields as maize roots rot in waterlogged soils.",
+        "Earthing up at 30 days prevents lodging during strong mountain wind storms."
+      ],
+      "fertilizer_guide": [
+        "Basal: 1/3 N + Full P + Full K at sowing time.",
+        "Top dress: 1/3 N at knee-high stage (30-35 DAS), 1/3 N at silking."
+      ],
+      "disease_management": [
+        "Fall Armyworm (Spodoptera frugiperda): Spray Chlorantraniliprole 18.5 SC @ 0.4 ml/L or Emamectin Benzoate 5 SG @ 0.4 g/L in leaf whorls.",
+        "Turcicum Leaf Blight: Spray Mancozeb 75 WP @ 2.5 g/L."
+      ],
+      "icar_gbpuat_note": "Pant Sankar Makka-1 developed by GBPUAT Pantnagar."
+    }
+  },
+  "Potato": {
+    "crop_name": "Potato",
+    "districts": [
+      "Nainital",
+      "Almora",
+      "Dehradun",
+      "Uttarkashi"
+    ],
+    "example_pincodes": [
+      "263132",
+      "249141"
+    ],
+    "example_pincodes_raw": "263132 (Bhowali), 249141 (Barkot)",
+    "suggested_varieties": [
+      "Kufri Khyati",
+      "Kufri Pushkar"
+    ],
+    "suggested_varieties_raw": "Kufri Khyati, Kufri Pushkar",
+    "agronomy": {
+      "hindi_name": "आलू",
+      "category": "Tuber / Vegetable",
+      "primary_season": "Rabi",
+      "sowing_window": "October 10 - November 10 (Plains), March - April (Hills/Summer)",
+      "harvest_window": "January - February (Plains), July - August (Hills)",
+      "soil_suitability": [
+        "Sandy Loam",
+        "Brown Hill Soil"
+      ],
+      "npk_ratio": "150:80:100 kg/ha",
+      "optimal_temp_c": "15°C - 22°C (tuberization optimum 18°C-20°C)",
+      "water_requirement": "Moderate; frequent light irrigations every 7-10 days",
+      "care_tips": [
+        "Kufri Khyati and Kufri Pushkar are early/medium-maturing, late-blight-tolerant varieties ideal for Nainital (Bhowali), Almora, Dehradun and Barkot.",
+        "Use certified seed tubers of 35-45 mm size with 2-3 active sprouts.",
+        "Perform ridge earthing up twice: first when plants are 15-20 cm high, second 2 weeks later."
+      ],
+      "fertilizer_guide": [
+        "Basal: Apply 20 tonnes FYM/ha + 50% N + 100% P2O5 + 100% K2O in furrow ridges.",
+        "Top dress: Remaining 50% N at first earthing-up (30-35 DAS)."
+      ],
+      "disease_management": [
+        "Late Blight (Phytophthora infestans): Preventive spray with Mancozeb 75 WP @ 2.5 g/L; curative spray with Cymoxanil + Mancozeb (Curzate) @ 3 g/L.",
+        "Potato Aphids: Spray Imidacloprid 17.8 SL @ 0.3 ml/L."
+      ],
+      "icar_gbpuat_note": "ICAR-CPRI Kufri & GBPUAT Pantnagar certified potato package."
+    }
+  },
+  "Rajma (Kidney Beans)": {
+    "crop_name": "Rajma (Kidney Beans)",
+    "districts": [
+      "Uttarkashi (Harsil)",
+      "Pithoragarh (Munsyari)"
+    ],
+    "example_pincodes": [
+      "249135",
+      "262554"
+    ],
+    "example_pincodes_raw": "249135 (Harsil), 262554 (Munsyari)",
+    "suggested_varieties": [
+      "Arun",
+      "HUR 301",
+      "HUR 203"
+    ],
+    "suggested_varieties_raw": "Arun, HUR 301, HUR 203",
+    "agronomy": {
+      "hindi_name": "राजमा",
+      "category": "Pulse / Cash Hill Crop",
+      "primary_season": "Kharif",
+      "sowing_window": "May 15 - June 20 (High Hills: Harsil, Munsyari)",
+      "harvest_window": "September - October",
+      "soil_suitability": [
+        "Sandy Loam",
+        "Mountain / Gravelly Soil",
+        "Brown Hill Soil"
+      ],
+      "npk_ratio": "90:60:40 kg/ha",
+      "optimal_temp_c": "14°C - 24°C (high hill cool temperate climate)",
+      "water_requirement": "Rainfed in high hills; moisture sensitive at flowering and pod filling",
+      "care_tips": [
+        "Harsil (Uttarkashi) and Munsyari (Pithoragarh) are world-famous GI-candidate terroirs for premium organic Rajma.",
+        "Arun, HUR 301, HUR 203 are certified high-protein, bush/semi-trailing cultivars.",
+        "Unlike other pulses, Rajma lacks native Rhizobium nodules in plains, but high hill soils have native symbionts; seed inoculation with Rhizobium phaseoli improves yield by 20%."
+      ],
+      "fertilizer_guide": [
+        "Incorporate 10 tonnes well-rotted FYM/compost per hectare.",
+        "Apply 40 kg N + 60 kg P2O5 + 40 kg K2O basal, and 40 kg N top dressed at 30 days."
+      ],
+      "disease_management": [
+        "Anthracnose: Treat seeds with Carbendazim @ 2 g/kg; spray Carbendazim @ 1 g/L if pod lesions appear.",
+        "Bean Rust: Spray Hexaconazole 5 EC @ 1 ml/L."
+      ],
+      "icar_gbpuat_note": "Celebrated Uttarakhand hill specialty documented in ICAR & State Agriculture Roadmap."
+    }
+  },
+  "Black Soybean (Bhatt)": {
+    "crop_name": "Black Soybean (Bhatt)",
+    "districts": [
+      "Almora",
+      "Bageshwar",
+      "Pithoragarh"
+    ],
+    "example_pincodes": [
+      "263642",
+      "263642"
+    ],
+    "example_pincodes_raw": "263642 (Ranikhet), 263642 (Bageshwar)",
+    "suggested_varieties": [
+      "VL Bhat 201",
+      "VL Bhat 202"
+    ],
+    "suggested_varieties_raw": "VL Bhat 201, VL Bhat 202",
+    "agronomy": {
+      "hindi_name": "भट्ट / काला सोयाबीन",
+      "category": "Pulse / Oilseed / Traditional Hill Crop",
+      "primary_season": "Kharif",
+      "sowing_window": "June 1 - June 30",
+      "harvest_window": "October - November",
+      "soil_suitability": [
+        "Brown Hill Soil",
+        "Sandy Loam"
+      ],
+      "npk_ratio": "20:60:40 kg/ha",
+      "optimal_temp_c": "18°C - 28°C",
+      "water_requirement": "Rainfed; requires well-drained slope soil",
+      "care_tips": [
+        "VL Bhat 201 and VL Bhat 202 are released by ICAR-VPKAS Almora with high protein (42%) and antioxidant anthocyanin coat.",
+        "Recommended for Almora, Bageshwar, Pithoragarh and Ranikhet terraces.",
+        "Inoculate seeds with Bradyrhizobium japonicum culture before sowing."
+      ],
+      "fertilizer_guide": [
+        "Basal: 20 kg N + 60 kg P2O5 + 40 kg K2O per hectare.",
+        "Apply 20 kg Sulphur per hectare for higher oil and protein content."
+      ],
+      "disease_management": [
+        "Yellow Mosaic Virus (YMV): Transmitted by whitefly; spray Dimethoate 30 EC @ 1.5 ml/L.",
+        "Pod blight / Anthracnose: Seed treatment with Trichoderma viride @ 5 g/kg."
+      ],
+      "icar_gbpuat_note": "ICAR-National Soybean Research Institute (NSRI) & VPKAS certified varieties."
+    }
+  },
+  "Mustard": {
+    "crop_name": "Mustard",
+    "districts": [
+      "Udham Singh Nagar",
+      "Haridwar"
+    ],
+    "example_pincodes": [
+      "262403",
+      "249404"
+    ],
+    "example_pincodes_raw": "262403 (Sitarganj), 249404 (Gurukul Kangri)",
+    "suggested_varieties": [
+      "GSC-6 (canola sarson; check local suitability before selection)"
+    ],
+    "suggested_varieties_raw": "GSC-6 (canola sarson; check local suitability before selection)",
+    "agronomy": {
+      "hindi_name": "सरसों / तोरिया",
+      "category": "Oilseed",
+      "primary_season": "Rabi",
+      "sowing_window": "October 1 - October 25",
+      "harvest_window": "February - March",
+      "soil_suitability": [
+        "Alluvial Soil",
+        "Sandy Loam"
+      ],
+      "npk_ratio": "80:40:40 kg/ha + 20 kg Sulphur",
+      "optimal_temp_c": "12°C - 25°C",
+      "water_requirement": "Low to medium; 2-3 irrigations (rosette stage and siliqua development)",
+      "care_tips": [
+        "GSC-6 (canola sarson) offers premium low-erucic acid oil suitable for Udham Singh Nagar (Sitarganj) and Haridwar.",
+        "Ensure proper spacing of 30x10 cm by thinning 15-20 days after germination.",
+        "Sulphur application is essential for maximizing oil recovery (>40%)."
+      ],
+      "fertilizer_guide": [
+        "Basal: 50% N + 100% P + 100% K + 20 kg elemental Sulphur or Gypsum @ 200 kg/ha.",
+        "Top dress: 50% N after first irrigation (30-35 DAS)."
+      ],
+      "disease_management": [
+        "Mustard Aphid (Lipaphis erysimi): Spray Imidacloprid 17.8 SL @ 0.3 ml/L or Thiamethoxam 25 WG @ 0.25 g/L.",
+        "White Rust (Albugo candida): Spray Mancozeb 75 WP @ 2.5 g/L."
+      ],
+      "icar_gbpuat_note": "ICAR-DRMR & GBPUAT recommended oilseed package."
+    }
+  },
+  "Green Peas": {
+    "crop_name": "Green Peas",
+    "districts": [
+      "Dehradun (Chakrata)",
+      "Nainital",
+      "Tehri"
+    ],
+    "example_pincodes": [
+      "248123",
+      "263135"
+    ],
+    "example_pincodes_raw": "248123 (Chakrata), 263135 (Ramgarh)",
+    "suggested_varieties": [
+      "Vivek Matar 13",
+      "Vivek Matar 15"
+    ],
+    "suggested_varieties_raw": "Vivek Matar 13, Vivek Matar 15",
+    "agronomy": {
+      "hindi_name": "मटर",
+      "category": "Pulse / Cash Vegetable",
+      "primary_season": "Rabi",
+      "sowing_window": "October - November (Plains), May - June (Off-season high hills)",
+      "harvest_window": "December - February (Plains), August - September (Off-season hills)",
+      "soil_suitability": [
+        "Sandy Loam",
+        "Brown Hill Soil"
+      ],
+      "npk_ratio": "30:60:40 kg/ha",
+      "optimal_temp_c": "10°C - 20°C (cool weather crop)",
+      "water_requirement": "Sensitive to waterlogging; 2-3 light irrigations at flowering and pod filling",
+      "care_tips": [
+        "Vivek Matar 13 and Vivek Matar 15 bred by ICAR-VPKAS Almora provide early sweet pods with resistance to powdery mildew.",
+        "Chakrata (Dehradun), Ramgarh (Nainital) and Tehri produce premium off-season peas that fetch 3x market prices in Delhi-NCR during monsoon.",
+        "Treat seeds with Rhizobium leguminosarum culture."
+      ],
+      "fertilizer_guide": [
+        "Apply 10-15 tonnes FYM/ha.",
+        "Basal chemical dose: Full dose of 30 kg N + 60 kg P2O5 + 40 kg K2O drilled before sowing."
+      ],
+      "disease_management": [
+        "Powdery Mildew (Erysiphe pisi): Spray Wettable Sulphur @ 3 g/L or Hexaconazole @ 1 ml/L.",
+        "Pod Borer: Spray Neem oil 1500 ppm @ 3 ml/L or spinosad 45 SC @ 0.3 ml/L."
+      ],
+      "icar_gbpuat_note": "ICAR-VPKAS Almora developed Vivek Matar series."
+    }
+  },
+  "Horse Gram (Gahat)": {
+    "crop_name": "Horse Gram (Gahat)",
+    "districts": [
+      "Almora",
+      "Pauri",
+      "Tehri"
+    ],
+    "example_pincodes": [
+      "263620",
+      "246174"
+    ],
+    "example_pincodes_raw": "263620 (Dwarahat), 246174 (Srinagar Garhwal)",
+    "suggested_varieties": [
+      "VL Gahat 8",
+      "VL Gahat 15"
+    ],
+    "suggested_varieties_raw": "VL Gahat 8, VL Gahat 15",
+    "agronomy": {
+      "hindi_name": "गहत / कुलथ",
+      "category": "Pulse / Medicinal Hill Crop",
+      "primary_season": "Kharif",
+      "sowing_window": "June 15 - July 15",
+      "harvest_window": "October - November",
+      "soil_suitability": [
+        "Brown Hill Soil",
+        "Mountain / Gravelly Soil"
+      ],
+      "npk_ratio": "20:40:20 kg/ha",
+      "optimal_temp_c": "18°C - 30°C",
+      "water_requirement": "Minimal; extraordinary drought tolerance",
+      "care_tips": [
+        "VL Gahat 8 and VL Gahat 15 are improved selections from ICAR-VPKAS Almora for terraced rainfed hill farming.",
+        "Traditional medicinal pulse celebrated for dissolving kidney stones and combating winter mountain chill.",
+        "Grown as intercrop with Finger Millet (Mandua) in traditional Baranaja multi-cropping system."
+      ],
+      "fertilizer_guide": [
+        "Requires very little synthetic fertilizer; 4-5 tonnes FYM is sufficient.",
+        "If soils are depleted, apply 20 kg N and 40 kg P2O5 per ha as basal."
+      ],
+      "disease_management": [
+        "Cercospora Leaf Spot: Spray Mancozeb 75 WP @ 2 g/L.",
+        "Pod Borer: Spray NSKE 5% or neem seed extract."
+      ],
+      "icar_gbpuat_note": "Flagship ICAR Uttarakhand hill crop variety."
+    }
+  },
+  "Apple": {
+    "crop_name": "Apple",
+    "districts": [
+      "Uttarkashi",
+      "Nainital",
+      "Chamoli"
+    ],
+    "example_pincodes": [
+      "249151",
+      "263137"
+    ],
+    "example_pincodes_raw": "249151 (Mori), 263137 (Mukteshwar)",
+    "suggested_varieties": [
+      "Royal Delicious",
+      "Red Delicious",
+      "Golden Delicious (cultivar choice depends on altitude and chill requirement)"
+    ],
+    "suggested_varieties_raw": "Royal Delicious, Red Delicious, Golden Delicious (cultivar choice depends on altitude and chill requirement)",
+    "agronomy": {
+      "hindi_name": "सेब",
+      "category": "Horticulture / Fruit",
+      "primary_season": "Whole Year",
+      "sowing_window": "December - February (Dormant sapling plantation)",
+      "harvest_window": "July - October (depending on elevation)",
+      "soil_suitability": [
+        "Brown Hill Soil",
+        "Mountain / Gravelly Soil"
+      ],
+      "npk_ratio": "700:350:700 g per tree/year (bearing orchard)",
+      "optimal_temp_c": "10°C - 24°C (requires 800 - 1200 chill hours <7°C)",
+      "water_requirement": "Crucial at fruit set, cell expansion (May-June pre-monsoon drought)",
+      "care_tips": [
+        "Royal Delicious, Red Delicious, and Golden Delicious thrive in high-altitude orchards (1800-2600m) in Harsil (Uttarkashi), Mukteshwar (Nainital), and Chamoli.",
+        "Ensure 15-20% pollinator cultivars (Golden Delicious / Crab Apple) inter-planted in the orchard.",
+        "Regular winter pruning (January) maintains sun exposure and spur vitality."
+      ],
+      "fertilizer_guide": [
+        "Apply 40-50 kg FYM per mature tree in December during basin opening.",
+        "Apply half N with full P and K in February-March before bud break; remaining half N in May."
+      ],
+      "disease_management": [
+        "Apple Scab (Venturia inaequalis): Protective spray of Mancozeb @ 3 g/L at green tip; Difenoconazole @ 0.5 ml/L at pink bud.",
+        "San Jose Scale / Mites: Spray Horticultural Mineral Oil (HMO) @ 2% during dormant winter."
+      ],
+      "icar_gbpuat_note": "VCSG UUHF Bharsar & ICAR CITH guidelines for Uttarakhand temperate fruit belt."
+    }
+  },
+  "Ginger": {
+    "crop_name": "Ginger",
+    "districts": [
+      "Dehradun",
+      "Tehri"
+    ],
+    "example_pincodes": [
+      "248197",
+      "249175"
+    ],
+    "example_pincodes_raw": "248197 (Sahaspur), 249175 (Narendra Nagar)",
+    "suggested_varieties": [
+      "Himagiri",
+      "Suprabha",
+      "Suruchi (confirm local recommendation and planting-material availability)"
+    ],
+    "suggested_varieties_raw": "Himagiri, Suprabha, Suruchi (confirm local recommendation and planting-material availability)",
+    "agronomy": {
+      "hindi_name": "अदरक",
+      "category": "Spice / Cash Crop",
+      "primary_season": "Kharif",
+      "sowing_window": "April 15 - May 30",
+      "harvest_window": "December - February (8-9 months)",
+      "soil_suitability": [
+        "Sandy Loam",
+        "Brown Hill Soil"
+      ],
+      "npk_ratio": "100:50:50 kg/ha",
+      "optimal_temp_c": "20°C - 30°C (warm humid valley climate)",
+      "water_requirement": "High; requires mulching with green forest leaves to preserve moisture and suppress weeds",
+      "care_tips": [
+        "Himagiri, Suprabha and Suruchi are certified high-oleoresin, low-fiber varieties suited for Sahaspur (Dehradun) and Narendra Nagar (Tehri).",
+        "Plant seed rhizomes (25-30 g) with at least 1-2 good buds at 30x20 cm spacing on raised beds.",
+        "Heavy mulching (oak/pine leaves or green twigs) immediately after planting is essential for germination and weed control."
+      ],
+      "fertilizer_guide": [
+        "Apply 25-30 tonnes FYM/ha.",
+        "Basal: 1/3 N + Full P & K; Top dress 1/3 N at 45 days, 1/3 N at 90 days with earthing-up."
+      ],
+      "disease_management": [
+        "Rhizome Rot / Soft Rot (Pythium): Dip seed rhizomes in Metalaxyl-Mancozeb (Ridomil MZ) @ 2.5 g/L for 30 mins before planting.",
+        "Drench nursery beds if yellowing appears in monsoon."
+      ],
+      "icar_gbpuat_note": "ICAR-IISR & GBPUAT Pantnagar certified ginger production package."
+    }
+  },
+  "Litchi": {
+    "crop_name": "Litchi",
+    "districts": [
+      "Dehradun",
+      "Nainital (Ramnagar)"
+    ],
+    "example_pincodes": [
+      "248007",
+      "244715"
+    ],
+    "example_pincodes_raw": "248007 (Premnagar), 244715 (Ramnagar)",
+    "suggested_varieties": [
+      "Dehradun",
+      "Shahi",
+      "China"
+    ],
+    "suggested_varieties_raw": "Dehradun, Shahi, China",
+    "agronomy": {
+      "hindi_name": "लीची",
+      "category": "Horticulture / Fruit",
+      "primary_season": "Whole Year",
+      "sowing_window": "July - September (Air layered sapling plantation)",
+      "harvest_window": "May 25 - June 20",
+      "soil_suitability": [
+        "Alluvial Soil",
+        "Sandy Loam"
+      ],
+      "npk_ratio": "600:300:600 g per tree/year (mature orchard)",
+      "optimal_temp_c": "22°C - 35°C (frost-free sub-tropical valley)",
+      "water_requirement": "Very critical during fruit development (April-May) to prevent fruit cracking",
+      "care_tips": [
+        "Dehradun, Shahi, and China are world-renowned varieties grown in Doon Valley (Premnagar) and Ramnagar (Nainital).",
+        "Spray 1% Potassium Nitrate or 0.4% Borax in April to prevent fruit cracking during hot winds.",
+        "Bagging of fruit clusters with non-woven bags protects from fruit borer and bats."
+      ],
+      "fertilizer_guide": [
+        "Apply 40 kg FYM per tree in September.",
+        "NPK applied in two splits: half in September after monsoon, half in February-March after fruit set."
+      ],
+      "disease_management": [
+        "Litchi Mite (Aceria litchii): Prune affected shoots in July; spray Propargite 57 EC @ 2 ml/L.",
+        "Fruit Borer: Spray Emamectin Benzoate 5 SG @ 0.4 g/L 30 days before harvest."
+      ],
+      "icar_gbpuat_note": "GBPUAT Pantnagar & Dehradun Valley Horticulture Research Center."
+    }
+  }
+}

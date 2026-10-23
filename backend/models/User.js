@@ -14,6 +14,8 @@ const userSchema = mongoose.Schema(
     village: { type: String },
     district: { type: String },
     state: { type: String },
+    phone: { type: String },
+    avatar: { type: String },
     password: {
       type: String,
       required: true,

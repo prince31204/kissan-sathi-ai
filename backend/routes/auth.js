@@ -65,10 +65,20 @@ router.post('/login', async (req, res) => {
       const access_token = jwt.sign(payload, process.env.JWT_SECRET || '09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7', {
         expiresIn: '30d',
       });
-      return res.json({ access_token, token_type: 'bearer', name: 'Super Admin', role: 'admin' });
+      return res.json({
+        access_token,
+        token_type: 'bearer',
+        name: 'Super Admin',
+        email: adminEmail,
+        phone: '+91 99999 00000',
+        village: 'Dehradun HQ',
+        district: 'Dehradun',
+        state: 'Uttarakhand',
+        role: 'admin',
+      });
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: { $regex: new RegExp(`^${email}$`, 'i') } });
     if (!user) {
       console.log("User not found for email:", email);
       return res.status(400).json({ detail: 'Account does not exist. Please create an account first.' });
@@ -85,10 +95,114 @@ router.post('/login', async (req, res) => {
       expiresIn: '30d',
     });
 
-    res.json({ access_token, token_type: 'bearer', name: user.fullName, role: 'user' });
+    res.json({
+      access_token,
+      token_type: 'bearer',
+      name: user.fullName,
+      email: user.email,
+      phone: user.phone || user.email,
+      village: user.village || 'Rampur',
+      district: user.district || 'Dehradun',
+      state: user.state || 'Uttarakhand',
+      avatar: user.avatar || '',
+      role: 'user',
+      user: {
+        id: user._id,
+        fullName: user.fullName,
+        email: user.email,
+        phone: user.phone || '',
+        village: user.village || 'Rampur',
+        district: user.district || 'Dehradun',
+        state: user.state || 'Uttarakhand',
+        avatar: user.avatar || '',
+      },
+    });
   } catch (error) {
     console.error('Login Error:', error.message);
     res.status(500).json({ detail: 'Internal Server Error: ' + error.message });
+  }
+});
+
+// @route   PUT /api/v1/auth/profile
+// @desc    Update user profile
+router.put('/profile', auth, async (req, res) => {
+  try {
+    const { fullName, village, district, state, phone, avatar } = req.body;
+    let user = await User.findOne({ email: { $regex: new RegExp(`^${req.user}$`, 'i') } });
+    if (!user) {
+      return res.status(404).json({ detail: 'User not found' });
+    }
+
+    if (fullName) user.fullName = fullName;
+    if (village !== undefined) user.village = village;
+    if (district !== undefined) user.district = district;
+    if (state !== undefined) user.state = state;
+    if (phone !== undefined) user.phone = phone;
+    if (avatar !== undefined) user.avatar = avatar;
+
+    await user.save();
+
+    res.json({
+      message: 'Profile updated successfully',
+      name: user.fullName,
+      email: user.email,
+      phone: user.phone || user.email,
+      village: user.village || 'Rampur',
+      district: user.district || 'Dehradun',
+      state: user.state || 'Uttarakhand',
+      avatar: user.avatar || avatar || '',
+    });
+  } catch (error) {
+    console.error('Update Profile Error:', error.message);
+    res.status(500).json({ detail: 'Server error: ' + error.message });
+  }
+});
+
+// @route   POST /api/v1/auth/profile/update-by-email
+// @desc    Update user profile by email (offline/fallback sync with upsert)
+router.post('/profile/update-by-email', async (req, res) => {
+  try {
+    const { email, fullName, village, district, state, phone, avatar } = req.body;
+    if (!email) return res.status(400).json({ detail: 'Email is required' });
+
+    let user = await User.findOne({ email: { $regex: new RegExp(`^${email.trim()}$`, 'i') } });
+    if (!user) {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash('123456', salt);
+      user = new User({
+        fullName: fullName || 'Farmer',
+        email: email.trim().toLowerCase(),
+        village: village || 'Rampur',
+        district: district || 'Dehradun',
+        state: state || 'Uttarakhand',
+        phone: phone || '',
+        avatar: avatar || '',
+        password: hashedPassword,
+      });
+    } else {
+      if (fullName) user.fullName = fullName;
+      if (village !== undefined) user.village = village;
+      if (district !== undefined) user.district = district;
+      if (state !== undefined) user.state = state;
+      if (phone !== undefined) user.phone = phone;
+      if (avatar !== undefined) user.avatar = avatar;
+    }
+
+    await user.save();
+
+    res.json({
+      message: 'Profile updated successfully',
+      name: user.fullName,
+      email: user.email,
+      phone: user.phone || user.email,
+      village: user.village || 'Rampur',
+      district: user.district || 'Dehradun',
+      state: user.state || 'Uttarakhand',
+      avatar: user.avatar || avatar || '',
+    });
+  } catch (error) {
+    console.error('Update Profile Error:', error.message);
+    res.status(500).json({ detail: 'Server error: ' + error.message });
   }
 });
 

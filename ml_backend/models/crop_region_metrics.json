@@ -1,0 +1,891 @@
+{
+  "features": [
+    "State",
+    "Season",
+    "Soil Type",
+    "Temperature",
+    "pH",
+    "Fertilizer Usage",
+    "Pesticide Usage",
+    "Rainfall"
+  ],
+  "top1_accuracy": 45.21,
+  "top2_accuracy": 65.67,
+  "top3_accuracy": 78.98,
+  "top4_accuracy": 88.56,
+  "crops": [
+    "Banana",
+    "Cotton(lint)",
+    "Groundnut",
+    "Onion",
+    "Potato",
+    "Ragi",
+    "Rice",
+    "Sugarcane",
+    "Wheat"
+  ],
+  "states": [
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "Delhi",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jammu and Kashmir",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Puducherry",
+    "Punjab",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal"
+  ],
+  "seasons": [
+    "Autumn",
+    "Kharif",
+    "Rabi",
+    "Summer",
+    "Whole Year",
+    "Winter"
+  ],
+  "soil_types": [
+    "Alluvial Soil",
+    "Black Soil",
+    "Laterile Soil",
+    "Red/Yellow Soil"
+  ],
+  "temperature_categories": [
+    "High",
+    "Low",
+    "Medium"
+  ],
+  "feature_importances": {
+    "State": 0.203,
+    "Season": 0.2201,
+    "Soil Type": 0.1214,
+    "Temperature": 0.0637,
+    "pH": 0.061,
+    "Fertilizer Usage": 0.0632,
+    "Pesticide Usage": 0.0365,
+    "Rainfall": 0.2311
+  },
+  "region_season_mapping": {
+    "Assam": {
+      "Kharif": {
+        "Cotton(lint)": 23,
+        "Sugarcane": 1
+      },
+      "Rabi": {
+        "Wheat": 23
+      },
+      "Summer": {
+        "Rice": 23
+      },
+      "Autumn": {
+        "Rice": 23
+      },
+      "Winter": {
+        "Rice": 23
+      },
+      "Whole Year": {
+        "Onion": 23,
+        "Potato": 23,
+        "Sugarcane": 22,
+        "Banana": 21
+      }
+    },
+    "Karnataka": {
+      "Kharif": {
+        "Groundnut": 23,
+        "Ragi": 23,
+        "Rice": 23,
+        "Cotton(lint)": 17,
+        "Onion": 15,
+        "Potato": 15
+      },
+      "Rabi": {
+        "Ragi": 23,
+        "Rice": 23,
+        "Wheat": 23,
+        "Groundnut": 22,
+        "Onion": 15,
+        "Potato": 15,
+        "Cotton(lint)": 10
+      },
+      "Summer": {
+        "Ragi": 23,
+        "Rice": 23,
+        "Onion": 15,
+        "Potato": 15,
+        "Groundnut": 8,
+        "Cotton(lint)": 4
+      },
+      "Autumn": {},
+      "Winter": {},
+      "Whole Year": {
+        "Sugarcane": 21,
+        "Banana": 12,
+        "Potato": 8,
+        "Onion": 7,
+        "Cotton(lint)": 5
+      }
+    },
+    "Meghalaya": {
+      "Kharif": {
+        "Cotton(lint)": 22,
+        "Banana": 12,
+        "Rice": 7
+      },
+      "Rabi": {
+        "Wheat": 22,
+        "Rice": 13,
+        "Onion": 6,
+        "Cotton(lint)": 1,
+        "Potato": 1
+      },
+      "Summer": {
+        "Potato": 6,
+        "Rice": 5
+      },
+      "Autumn": {
+        "Rice": 16
+      },
+      "Winter": {
+        "Rice": 16,
+        "Potato": 6
+      },
+      "Whole Year": {
+        "Sugarcane": 23,
+        "Potato": 15,
+        "Banana": 9
+      }
+    },
+    "West Bengal": {
+      "Kharif": {
+        "Cotton(lint)": 23,
+        "Ragi": 10,
+        "Groundnut": 7
+      },
+      "Rabi": {
+        "Wheat": 23,
+        "Groundnut": 18,
+        "Potato": 11,
+        "Ragi": 2
+      },
+      "Summer": {
+        "Rice": 23,
+        "Groundnut": 18,
+        "Potato": 13
+      },
+      "Autumn": {
+        "Rice": 23,
+        "Ragi": 12,
+        "Groundnut": 11
+      },
+      "Winter": {
+        "Rice": 23,
+        "Potato": 2
+      },
+      "Whole Year": {
+        "Sugarcane": 23,
+        "Potato": 10,
+        "Groundnut": 5
+      }
+    },
+    "Puducherry": {
+      "Kharif": {
+        "Ragi": 21,
+        "Rice": 20,
+        "Groundnut": 18,
+        "Sugarcane": 15,
+        "Banana": 14,
+        "Cotton(lint)": 12,
+        "Onion": 6
+      },
+      "Rabi": {
+        "Groundnut": 15,
+        "Rice": 15,
+        "Ragi": 9,
+        "Onion": 5
+      },
+      "Summer": {
+        "Rice": 17,
+        "Groundnut": 13,
+        "Ragi": 12,
+        "Cotton(lint)": 10,
+        "Onion": 9
+      },
+      "Autumn": {
+        "Rice": 2
+      },
+      "Winter": {
+        "Rice": 2
+      },
+      "Whole Year": {
+        "Banana": 7,
+        "Onion": 7,
+        "Sugarcane": 7
+      }
+    },
+    "Goa": {
+      "Kharif": {
+        "Groundnut": 23,
+        "Rice": 23,
+        "Ragi": 17
+      },
+      "Rabi": {
+        "Groundnut": 19,
+        "Rice": 19
+      },
+      "Summer": {},
+      "Autumn": {},
+      "Winter": {},
+      "Whole Year": {
+        "Sugarcane": 22,
+        "Banana": 13,
+        "Ragi": 1
+      }
+    },
+    "Kerala": {
+      "Kharif": {
+        "Cotton(lint)": 13,
+        "Groundnut": 12,
+        "Ragi": 12
+      },
+      "Rabi": {},
+      "Summer": {
+        "Rice": 22
+      },
+      "Autumn": {
+        "Rice": 22
+      },
+      "Winter": {
+        "Rice": 22
+      },
+      "Whole Year": {
+        "Banana": 22,
+        "Sugarcane": 22,
+        "Potato": 9,
+        "Groundnut": 8,
+        "Ragi": 8,
+        "Onion": 7,
+        "Wheat": 7,
+        "Cotton(lint)": 4
+      }
+    },
+    "Andhra Pradesh": {
+      "Kharif": {
+        "Cotton(lint)": 23,
+        "Groundnut": 23,
+        "Ragi": 23,
+        "Rice": 23,
+        "Onion": 20,
+        "Potato": 8,
+        "Sugarcane": 3,
+        "Wheat": 1
+      },
+      "Rabi": {
+        "Groundnut": 23,
+        "Ragi": 23,
+        "Rice": 23,
+        "Wheat": 23,
+        "Onion": 20,
+        "Potato": 8,
+        "Cotton(lint)": 7
+      },
+      "Summer": {},
+      "Autumn": {},
+      "Winter": {},
+      "Whole Year": {
+        "Sugarcane": 20,
+        "Banana": 18,
+        "Potato": 11,
+        "Onion": 1
+      }
+    },
+    "Tamil Nadu": {
+      "Kharif": {
+        "Rice": 19,
+        "Cotton(lint)": 18,
+        "Groundnut": 18,
+        "Ragi": 18,
+        "Onion": 7,
+        "Potato": 7
+      },
+      "Rabi": {
+        "Cotton(lint)": 8,
+        "Groundnut": 8,
+        "Ragi": 8,
+        "Onion": 7,
+        "Potato": 7
+      },
+      "Summer": {
+        "Rice": 3
+      },
+      "Autumn": {
+        "Rice": 3
+      },
+      "Winter": {
+        "Rice": 3
+      },
+      "Whole Year": {
+        "Sugarcane": 22,
+        "Banana": 19,
+        "Onion": 12,
+        "Potato": 12,
+        "Cotton(lint)": 4,
+        "Groundnut": 4,
+        "Ragi": 4
+      }
+    },
+    "Odisha": {
+      "Kharif": {
+        "Groundnut": 5,
+        "Ragi": 5,
+        "Cotton(lint)": 3,
+        "Rice": 3
+      },
+      "Rabi": {
+        "Wheat": 6,
+        "Groundnut": 1,
+        "Ragi": 1,
+        "Onion": 1
+      },
+      "Summer": {
+        "Rice": 19,
+        "Groundnut": 18,
+        "Ragi": 18,
+        "Wheat": 17
+      },
+      "Autumn": {
+        "Rice": 19,
+        "Groundnut": 18,
+        "Ragi": 18
+      },
+      "Winter": {
+        "Sugarcane": 19,
+        "Rice": 19,
+        "Groundnut": 18,
+        "Ragi": 18,
+        "Potato": 17
+      },
+      "Whole Year": {
+        "Potato": 6,
+        "Onion": 6,
+        "Sugarcane": 4
+      }
+    },
+    "Bihar": {
+      "Kharif": {
+        "Ragi": 22,
+        "Groundnut": 21,
+        "Rice": 4,
+        "Cotton(lint)": 2,
+        "Potato": 1
+      },
+      "Rabi": {
+        "Wheat": 23,
+        "Potato": 5,
+        "Onion": 4
+      },
+      "Summer": {
+        "Rice": 23
+      },
+      "Autumn": {
+        "Rice": 21
+      },
+      "Winter": {
+        "Rice": 20,
+        "Potato": 4
+      },
+      "Whole Year": {
+        "Sugarcane": 21,
+        "Onion": 11,
+        "Banana": 10,
+        "Potato": 10,
+        "Ragi": 1
+      }
+    },
+    "Gujarat": {
+      "Kharif": {
+        "Groundnut": 23,
+        "Cotton(lint)": 22,
+        "Ragi": 22,
+        "Rice": 22
+      },
+      "Rabi": {
+        "Wheat": 23,
+        "Onion": 11
+      },
+      "Summer": {
+        "Groundnut": 23,
+        "Rice": 20,
+        "Onion": 9
+      },
+      "Autumn": {},
+      "Winter": {},
+      "Whole Year": {
+        "Potato": 23,
+        "Sugarcane": 23,
+        "Banana": 22,
+        "Onion": 12,
+        "Cotton(lint)": 1,
+        "Ragi": 1,
+        "Rice": 1
+      }
+    },
+    "Madhya Pradesh": {
+      "Kharif": {
+        "Cotton(lint)": 22,
+        "Groundnut": 22,
+        "Rice": 21,
+        "Ragi": 13
+      },
+      "Rabi": {
+        "Wheat": 22
+      },
+      "Summer": {
+        "Groundnut": 2,
+        "Rice": 2
+      },
+      "Autumn": {},
+      "Winter": {},
+      "Whole Year": {
+        "Sugarcane": 22,
+        "Onion": 20,
+        "Potato": 19,
+        "Banana": 16,
+        "Cotton(lint)": 1,
+        "Groundnut": 1,
+        "Ragi": 1,
+        "Rice": 1,
+        "Wheat": 1
+      }
+    },
+    "Maharashtra": {
+      "Kharif": {
+        "Ragi": 23,
+        "Rice": 23,
+        "Cotton(lint)": 22,
+        "Groundnut": 22,
+        "Sugarcane": 2
+      },
+      "Rabi": {
+        "Wheat": 23
+      },
+      "Summer": {
+        "Rice": 23,
+        "Groundnut": 22
+      },
+      "Autumn": {},
+      "Winter": {},
+      "Whole Year": {
+        "Sugarcane": 21,
+        "Cotton(lint)": 1,
+        "Banana": 1,
+        "Onion": 1
+      }
+    },
+    "Mizoram": {
+      "Kharif": {
+        "Cotton(lint)": 22,
+        "Rice": 21,
+        "Potato": 15,
+        "Groundnut": 4
+      },
+      "Rabi": {
+        "Rice": 15,
+        "Potato": 10,
+        "Onion": 7,
+        "Wheat": 4
+      },
+      "Summer": {},
+      "Autumn": {
+        "Rice": 10
+      },
+      "Winter": {},
+      "Whole Year": {
+        "Sugarcane": 22,
+        "Potato": 6,
+        "Rice": 2
+      }
+    },
+    "Punjab": {
+      "Kharif": {
+        "Groundnut": 23,
+        "Rice": 23,
+        "Cotton(lint)": 22
+      },
+      "Rabi": {
+        "Wheat": 23
+      },
+      "Summer": {},
+      "Autumn": {},
+      "Winter": {},
+      "Whole Year": {
+        "Sugarcane": 19,
+        "Cotton(lint)": 1
+      }
+    },
+    "Uttar Pradesh": {
+      "Kharif": {
+        "Rice": 23,
+        "Groundnut": 22,
+        "Cotton(lint)": 21,
+        "Sugarcane": 17,
+        "Onion": 1,
+        "Ragi": 1
+      },
+      "Rabi": {
+        "Wheat": 23,
+        "Onion": 16,
+        "Potato": 16,
+        "Ragi": 3
+      },
+      "Summer": {
+        "Rice": 21,
+        "Onion": 14,
+        "Banana": 11
+      },
+      "Autumn": {},
+      "Winter": {},
+      "Whole Year": {
+        "Potato": 7,
+        "Sugarcane": 7,
+        "Onion": 5,
+        "Banana": 3
+      }
+    },
+    "Haryana": {
+      "Kharif": {
+        "Rice": 23,
+        "Cotton(lint)": 22,
+        "Groundnut": 22
+      },
+      "Rabi": {
+        "Wheat": 23
+      },
+      "Summer": {},
+      "Autumn": {},
+      "Winter": {},
+      "Whole Year": {
+        "Sugarcane": 23,
+        "Onion": 22,
+        "Potato": 22,
+        "Banana": 2,
+        "Cotton(lint)": 1
+      }
+    },
+    "Himachal Pradesh": {
+      "Kharif": {
+        "Rice": 22,
+        "Groundnut": 20,
+        "Cotton(lint)": 15,
+        "Ragi": 15,
+        "Potato": 14,
+        "Sugarcane": 2
+      },
+      "Rabi": {
+        "Wheat": 22,
+        "Potato": 13,
+        "Onion": 13
+      },
+      "Summer": {},
+      "Autumn": {},
+      "Winter": {},
+      "Whole Year": {
+        "Sugarcane": 17,
+        "Potato": 7,
+        "Onion": 2,
+        "Cotton(lint)": 1
+      }
+    },
+    "Tripura": {
+      "Kharif": {
+        "Cotton(lint)": 22,
+        "Rice": 22,
+        "Groundnut": 17
+      },
+      "Rabi": {
+        "Wheat": 22,
+        "Groundnut": 17
+      },
+      "Summer": {
+        "Rice": 5
+      },
+      "Autumn": {
+        "Rice": 4
+      },
+      "Winter": {
+        "Rice": 4
+      },
+      "Whole Year": {
+        "Sugarcane": 22,
+        "Potato": 5
+      }
+    },
+    "Nagaland": {
+      "Kharif": {
+        "Rice": 23,
+        "Groundnut": 21,
+        "Cotton(lint)": 19,
+        "Sugarcane": 12,
+        "Ragi": 11,
+        "Potato": 5
+      },
+      "Rabi": {
+        "Wheat": 21,
+        "Rice": 18,
+        "Potato": 12,
+        "Sugarcane": 3,
+        "Groundnut": 1
+      },
+      "Summer": {},
+      "Autumn": {},
+      "Winter": {},
+      "Whole Year": {
+        "Sugarcane": 8,
+        "Potato": 6
+      }
+    },
+    "Chhattisgarh": {
+      "Kharif": {
+        "Groundnut": 20,
+        "Rice": 20,
+        "Ragi": 19,
+        "Cotton(lint)": 12,
+        "Potato": 12,
+        "Sugarcane": 1
+      },
+      "Rabi": {
+        "Wheat": 20,
+        "Potato": 12,
+        "Onion": 1
+      },
+      "Summer": {
+        "Onion": 1
+      },
+      "Autumn": {},
+      "Winter": {},
+      "Whole Year": {
+        "Onion": 20,
+        "Sugarcane": 20,
+        "Potato": 8,
+        "Cotton(lint)": 8
+      }
+    },
+    "Uttarakhand": {
+      "Kharif": {
+        "Groundnut": 21,
+        "Ragi": 21,
+        "Rice": 21,
+        "Potato": 18
+      },
+      "Rabi": {
+        "Wheat": 21,
+        "Potato": 18,
+        "Rice": 6,
+        "Onion": 1
+      },
+      "Summer": {
+        "Rice": 15,
+        "Onion": 1
+      },
+      "Autumn": {},
+      "Winter": {},
+      "Whole Year": {
+        "Onion": 21,
+        "Sugarcane": 21,
+        "Potato": 3
+      }
+    },
+    "Jharkhand": {
+      "Kharif": {
+        "Groundnut": 3,
+        "Ragi": 3,
+        "Rice": 3
+      },
+      "Rabi": {
+        "Wheat": 18,
+        "Potato": 15,
+        "Onion": 13
+      },
+      "Summer": {},
+      "Autumn": {
+        "Ragi": 14,
+        "Rice": 14
+      },
+      "Winter": {
+        "Potato": 14,
+        "Rice": 14,
+        "Wheat": 1
+      },
+      "Whole Year": {
+        "Sugarcane": 11,
+        "Onion": 1
+      }
+    },
+    "Delhi": {
+      "Kharif": {
+        "Rice": 22,
+        "Cotton(lint)": 5
+      },
+      "Rabi": {
+        "Wheat": 22
+      },
+      "Summer": {},
+      "Autumn": {},
+      "Winter": {},
+      "Whole Year": {
+        "Potato": 16,
+        "Sugarcane": 16
+      }
+    },
+    "Manipur": {
+      "Kharif": {
+        "Rice": 21,
+        "Groundnut": 11,
+        "Cotton(lint)": 5,
+        "Onion": 1
+      },
+      "Rabi": {
+        "Wheat": 11,
+        "Banana": 1,
+        "Cotton(lint)": 1,
+        "Onion": 1,
+        "Potato": 1,
+        "Sugarcane": 1
+      },
+      "Summer": {
+        "Banana": 2,
+        "Onion": 2,
+        "Sugarcane": 2,
+        "Potato": 1
+      },
+      "Autumn": {
+        "Banana": 1,
+        "Cotton(lint)": 1,
+        "Onion": 1,
+        "Potato": 1,
+        "Rice": 1,
+        "Sugarcane": 1
+      },
+      "Winter": {
+        "Banana": 1,
+        "Cotton(lint)": 1,
+        "Onion": 1,
+        "Potato": 1,
+        "Rice": 1,
+        "Sugarcane": 1
+      },
+      "Whole Year": {
+        "Banana": 21,
+        "Sugarcane": 20,
+        "Potato": 18,
+        "Onion": 9
+      }
+    },
+    "Jammu and Kashmir": {
+      "Kharif": {
+        "Rice": 20,
+        "Potato": 13,
+        "Cotton(lint)": 12,
+        "Onion": 12,
+        "Groundnut": 11,
+        "Sugarcane": 10,
+        "Ragi": 3,
+        "Wheat": 2
+      },
+      "Rabi": {
+        "Wheat": 20,
+        "Onion": 13,
+        "Potato": 13,
+        "Ragi": 2
+      },
+      "Summer": {},
+      "Autumn": {},
+      "Winter": {},
+      "Whole Year": {
+        "Sugarcane": 6,
+        "Onion": 4,
+        "Potato": 3
+      }
+    },
+    "Telangana": {
+      "Kharif": {
+        "Cotton(lint)": 7,
+        "Groundnut": 7,
+        "Onion": 7,
+        "Ragi": 7,
+        "Rice": 7,
+        "Sugarcane": 7,
+        "Banana": 6,
+        "Potato": 5,
+        "Wheat": 2
+      },
+      "Rabi": {
+        "Groundnut": 7,
+        "Onion": 7,
+        "Ragi": 7,
+        "Rice": 7,
+        "Wheat": 7,
+        "Potato": 6
+      },
+      "Summer": {},
+      "Autumn": {},
+      "Winter": {},
+      "Whole Year": {
+        "Banana": 1,
+        "Potato": 1
+      }
+    },
+    "Arunachal Pradesh": {
+      "Kharif": {
+        "Rice": 23,
+        "Groundnut": 4
+      },
+      "Rabi": {
+        "Wheat": 23,
+        "Groundnut": 2,
+        "Sugarcane": 1
+      },
+      "Summer": {},
+      "Autumn": {},
+      "Winter": {},
+      "Whole Year": {
+        "Potato": 22,
+        "Sugarcane": 22
+      }
+    },
+    "Sikkim": {
+      "Kharif": {
+        "Rice": 23
+      },
+      "Rabi": {
+        "Wheat": 23
+      },
+      "Summer": {},
+      "Autumn": {},
+      "Winter": {},
+      "Whole Year": {
+        "Potato": 2
+      }
+    }
+  }
+}

@@ -1,34 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   SafeAreaView,
   ScrollView,
+  Image,
   TouchableOpacity,
   Dimensions,
   Platform,
+  useWindowDimensions,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import * as Location from 'expo-location';
 import { Theme } from '../../constants/Theme';
 import { Card } from '../../components/Card';
 import { SectionHeader } from '../../components/SectionHeader';
 import { StatusBadge } from '../../components/StatusBadge';
-import { MockUser, MockWeather, MockFields, MockIrrigationPlans } from '../../services/mockData';
+import { MockUser, MockWeather, MockFields } from '../../services/mockData';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Button } from '../../components/Button';
 import { useLanguage } from '../../context/LanguageContext';
 import { LanguageSwitchButton } from '../../components/LanguageSwitchButton';
 
-const { width } = Dimensions.get('window');
-const GRID_ITEM_WIDTH = (width - 40 - 24) / 3; // 3 columns with padding & gap
+import { getUnifiedWeather } from '../../services/weatherService';
 
 export default function HomeDashboard() {
   const { t, language } = useLanguage();
   const [userName, setUserName] = useState(MockUser.name);
   const [userLocation, setUserLocation] = useState(`${MockUser.village}, ${MockUser.district}`);
+  const [userAvatar, setUserAvatar] = useState<string>('');
   const [mandiPrices, setMandiPrices] = useState<any[]>([]);
   const [loadingPrices, setLoadingPrices] = useState(true);
   const [liveWeather, setLiveWeather] = useState({
@@ -36,74 +38,93 @@ export default function HomeDashboard() {
     condition: MockWeather.current.condition,
     humidity: MockWeather.current.humidity,
     isLive: false,
+    source: 'OpenWeatherMap',
   });
   const [latestIrrigation, setLatestIrrigation] = useState<any>(null);
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const storedName = await AsyncStorage.getItem('userName');
-        if (storedName) setUserName(storedName);
+  const loadData = async () => {
+    try {
+      const storedName = await AsyncStorage.getItem('userName');
+      if (storedName) setUserName(storedName);
 
-        const storedHistory = await AsyncStorage.getItem('@irrigation_history');
-        if (storedHistory) {
-          const list = JSON.parse(storedHistory);
-          if (list && list.length > 0) {
-            setLatestIrrigation(list[0]);
-          }
-        }
-      } catch (e) {
-        console.error('Failed to load user name or irrigation history', e);
+      const storedProfile = await AsyncStorage.getItem('userProfile');
+      let avatar = '';
+      if (storedProfile) {
+        const p = JSON.parse(storedProfile);
+        if (p.name) setUserName(p.name);
+        if (p.village && p.district) setUserLocation(`${p.village}, ${p.district}`);
+        if (p.avatar) avatar = p.avatar;
       }
-    };
+      const cachedAvatar = await AsyncStorage.getItem('@user_avatar');
+      if (cachedAvatar) avatar = cachedAvatar;
+      if (avatar) setUserAvatar(avatar);
+
+      const storedHistory = await AsyncStorage.getItem('@irrigation_history');
+      if (storedHistory) {
+        const list = JSON.parse(storedHistory);
+        if (list && list.length > 0) {
+          setLatestIrrigation(list[0]);
+        }
+      }
+    } catch (e) {
+      console.error('Failed to load user name or irrigation history', e);
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      loadData();
+    }, [])
+  );
+
+  useEffect(() => {
     loadData();
 
-    // Fetch Live Dynamic Weather
+    // Fetch Live Dynamic Weather using OpenWeatherMap API Key
     const fetchLiveWeather = async () => {
       try {
-        const { status } = await Location.requestForegroundPermissionsAsync();
         let lat = 30.3165;
         let lon = 78.0322;
-        if (status === 'granted') {
-          const loc = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
-          lat = loc.coords.latitude;
-          lon = loc.coords.longitude;
+        try {
+          const { status } = await Location.requestForegroundPermissionsAsync();
+          if (status === 'granted') {
+            const loc = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
+            lat = loc.coords.latitude;
+            lon = loc.coords.longitude;
 
-          try {
-            const geoRes = await fetch(
-              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`,
-              { headers: { 'User-Agent': 'KisanSaathi/1.0' } }
-            );
-            if (geoRes.ok) {
-              const geoData = await geoRes.json();
-              const city =
-                geoData.address?.city ||
-                geoData.address?.town ||
-                geoData.address?.village ||
-                geoData.address?.county;
-              const state = geoData.address?.state;
-              if (city) setUserLocation(`${city}, ${state || 'Uttarakhand'}`);
-            }
-          } catch (e) {}
+            try {
+              const geoRes = await fetch(
+                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`,
+                { headers: { 'User-Agent': 'KisanSaathi/1.0' } }
+              );
+              if (geoRes.ok) {
+                const geoData = await geoRes.json();
+                const city =
+                  geoData.address?.city ||
+                  geoData.address?.town ||
+                  geoData.address?.village ||
+                  geoData.address?.county;
+                const state = geoData.address?.state;
+                if (city) setUserLocation(`${city}, ${state || 'Uttarakhand'}`);
+              }
+            } catch (e) { }
+          }
+        } catch (locErr) {
+          console.warn('Dashboard location warning:', locErr);
         }
 
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code&timezone=auto`;
-        const res = await fetch(url);
-        if (res.ok) {
-          const data = await res.json();
-          const code = data.current?.weather_code ?? 0;
-          let cond = 'Clear Sky';
-          if ([1, 2, 3].includes(code)) cond = 'Partly Cloudy';
-          else if ([45, 48].includes(code)) cond = 'Foggy';
-          else if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) cond = 'Rainy';
-          else if ([95, 96, 99].includes(code)) cond = 'Thunderstorm';
-
+        const weatherData = await getUnifiedWeather(lat, lon);
+        if (weatherData) {
           setLiveWeather({
-            temp: Math.round(data.current?.temperature_2m ?? 24),
-            humidity: Math.round(data.current?.relative_humidity_2m ?? 65),
-            condition: cond,
-            isLive: true,
+            temp: weatherData.temperature,
+            humidity: weatherData.humidity,
+            condition: weatherData.condition,
+            isLive: weatherData.isLive,
+            source: weatherData.source,
           });
+          if (weatherData.cityName && weatherData.cityName !== 'Uttarakhand' && (!userLocation || userLocation.includes('Uttarakhand'))) {
+            setUserLocation(`${weatherData.cityName}, Uttarakhand`);
+          }
         }
       } catch (err) {
         console.warn('Live weather fetch error on dashboard:', err);
@@ -161,20 +182,20 @@ export default function HomeDashboard() {
       route: '/weather',
     },
     {
-      id: 'soil',
-      title: 'Soil\nHealth',
-      icon: 'sprout',
-      color: '#16A34A',
-      bgColor: '#F0FDF4',
-      route: '/crop-health',
-    },
-    {
-      id: 'advisory',
-      title: 'Crop\nAdvisory',
+      id: 'crop-recommend',
+      title: 'Crop\nRecommendation',
       icon: 'leaf',
       color: '#15803D',
       bgColor: '#DCFCE7',
       route: '/crop-recommend',
+    },
+    {
+      id: 'agro-ai',
+      title: 'Agro AI\nPlanner',
+      icon: 'calendar-check',
+      color: '#136B36',
+      bgColor: '#E8F5EC',
+      route: '/agro-ai',
     },
     {
       id: 'market',
@@ -200,20 +221,47 @@ export default function HomeDashboard() {
       bgColor: '#CCFBF1',
       route: '/(tabs)/equipment',
     },
+    {
+      id: 'crop-doctor',
+      title: 'Crop Doctor\nAI Disease',
+      icon: 'shield-check',
+      color: '#059669',
+      bgColor: '#D1FAE5',
+      route: '/crop-health/analysis',
+    },
+    {
+      id: 'digital-twin',
+      title: 'Digital\nTwin',
+      icon: 'cube-scan',
+      color: '#7C3AED',
+      bgColor: '#F5F3FF',
+      route: '/digital-twin',
+    },
   ];
 
   const primaryField = MockFields[0];
-  const nextIrrigation = MockIrrigationPlans[0];
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
-        {/* Top Header Bar matching Mockup Screen 3 */}
+      <ScrollView
+        contentContainerStyle={styles.scroll}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Top Header Bar */}
         <View style={styles.header}>
           <View style={styles.userInfo}>
-            <View style={styles.avatar}>
-              <MaterialCommunityIcons name="account" size={26} color="#FFFFFF" />
-            </View>
+            <TouchableOpacity
+              style={styles.avatar}
+              activeOpacity={0.8}
+              onPress={() => router.push('/(tabs)/profile')}
+              accessibilityLabel="View Profile"
+            >
+              {userAvatar ? (
+                <Image source={{ uri: userAvatar }} style={styles.avatarImg} />
+              ) : (
+                <MaterialCommunityIcons name="account" size={26} color="#FFFFFF" />
+              )}
+            </TouchableOpacity>
             <View style={styles.userText}>
               <Text style={styles.userName}>Hello, {userName}</Text>
               <Text style={styles.userSub}>Welcome to Kisan Saathi</Text>
@@ -266,8 +314,8 @@ export default function HomeDashboard() {
                 liveWeather.condition === 'Rainy'
                   ? 'weather-rainy'
                   : liveWeather.condition === 'Clear Sky'
-                  ? 'weather-sunny'
-                  : 'weather-partly-cloudy'
+                    ? 'weather-sunny'
+                    : 'weather-partly-cloudy'
               }
               size={36}
               color="#FDE047"
@@ -317,12 +365,12 @@ export default function HomeDashboard() {
           </TouchableOpacity>
         </View>
 
-        {/* 6-Grid Quick Actions matching Mockup Screen 3 */}
+        {/* 8-Grid Quick Actions (2 Even Rows of 4) */}
         <View style={styles.gridSection}>
           {QUICK_ACTIONS.map((action) => (
             <TouchableOpacity
               key={action.id}
-              style={[styles.gridCard, { width: GRID_ITEM_WIDTH }]}
+              style={styles.gridCard}
               activeOpacity={0.8}
               onPress={() => router.push(action.route as any)}
             >
@@ -338,27 +386,107 @@ export default function HomeDashboard() {
           ))}
         </View>
 
-        {/* Promo / Advisory Banner: "Healthy Soil Better Yield" */}
-        <TouchableOpacity
-          style={styles.promoBanner}
-          activeOpacity={0.9}
-          onPress={() => router.push('/(tabs)/crop-health')}
-        >
-          <View style={styles.promoLeft}>
-            <Text style={styles.promoTitle}>Healthy Soil</Text>
-            <Text style={styles.promoSubTitle}>Better Yield</Text>
-            <Text style={styles.promoDesc}>
-              Get soil health reports and expert advice.
+        {/* JalTwin Smart Irrigation Advisor Card (Upgraded from Irrigation Guide) */}
+        <View style={styles.sectionHeaderRow}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+            <Text style={styles.sectionTitle}>
+              {language === 'hi' ? 'जलट्विन™ सिंचाई सलाहकार' : 'JalTwin™ Irrigation Advisor'}
             </Text>
-            <View style={styles.promoPill}>
-              <Text style={styles.promoPillText}>View Details →</Text>
+            <View style={{ backgroundColor: '#E0F2FE', paddingHorizontal: 6, paddingVertical: 2, borderRadius: 6 }}>
+              <Text style={{ fontSize: 10, fontWeight: '700', color: '#0369A1' }}>FAO-56</Text>
             </View>
           </View>
-          <View style={styles.promoRight}>
-            <View style={styles.sproutBadgeLarge}>
-              <MaterialCommunityIcons name="sprout" size={44} color="#15803D" />
+          <TouchableOpacity onPress={() => router.push('/(tabs)/irrigation')}>
+            <Text style={styles.seeAllText}>
+              {language === 'hi' ? 'विस्तार से →' : 'Planner →'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity activeOpacity={0.9} onPress={() => router.push('/(tabs)/irrigation')}>
+          <Card style={styles.summaryCard}>
+            <View style={styles.irrigationRow}>
+              <View style={[
+                styles.irrigationIconCircle,
+                latestIrrigation?.decision === 'aaj_paani' ? { backgroundColor: '#FEE2E2' } :
+                latestIrrigation?.decision === 'abhi_ruko' ? { backgroundColor: '#EFF6FF' } :
+                { backgroundColor: '#ECFDF5' }
+              ]}>
+                <MaterialCommunityIcons
+                  name={
+                    latestIrrigation?.decision === 'aaj_paani' ? 'water-alert' :
+                    latestIrrigation?.decision === 'abhi_ruko' ? 'weather-rainy' :
+                    latestIrrigation?.decision === 'khet_check' ? 'check-circle-outline' :
+                    'water'
+                  }
+                  size={24}
+                  color={
+                    latestIrrigation?.decision === 'aaj_paani' ? '#DC2626' :
+                    latestIrrigation?.decision === 'abhi_ruko' ? '#2563EB' :
+                    latestIrrigation?.decision === 'khet_check' ? '#059669' :
+                    '#0284C7'
+                  }
+                />
+              </View>
+              <View style={{ flex: 1, marginLeft: 12 }}>
+                <Text style={styles.summaryTitle}>
+                  {latestIrrigation?.field || (language === 'hi' ? 'उत्तराखंड खेत • गेहूं / धान' : 'Uttarakhand Field • Wheat / Rice')}
+                </Text>
+                <Text style={styles.summarySub}>
+                  {language === 'hi' ? 'समय: ' : 'Window: '}<Text style={styles.highlight}>{latestIrrigation?.window || (language === 'hi' ? 'आज शाम 5:00 - 7:30 बजे' : 'Today, 5:00 PM - 7:30 PM')}</Text>
+                </Text>
+              </View>
+              <StatusBadge
+                status={
+                  latestIrrigation?.decision === 'aaj_paani' ? 'error' :
+                  latestIrrigation?.decision === 'abhi_ruko' ? 'info' :
+                  latestIrrigation?.decision === 'khet_check' ? 'success' :
+                  'success'
+                }
+                label={
+                  latestIrrigation?.decision === 'aaj_paani' ? (language === 'hi' ? '💧 आज पानी दें' : '💧 Irrigate Today') :
+                  latestIrrigation?.decision === 'abhi_ruko' ? (language === 'hi' ? '🌧️ अभी रुकें' : '🌧️ Hold (Rain)') :
+                  latestIrrigation?.decision === 'khet_check' ? (language === 'hi' ? '🌱 खेत चेक करें' : '🌱 Check Field') :
+                  (latestIrrigation?.urgency || (language === 'hi' ? 'सक्रिय' : 'Active'))
+                }
+              />
             </View>
-          </View>
+
+            {/* Metrics: Depth (mm), Volume (L), and Runtime */}
+            <View style={styles.irrigationMetrics}>
+              <Text style={styles.metricText}>
+                {language === 'hi' ? 'जल स्तर: ' : 'Depth: '}
+                <Text style={{ fontWeight: '700', color: '#0369A1' }}>
+                  {latestIrrigation?.waterDepthMm !== undefined ? `${latestIrrigation.waterDepthMm} mm` : '24.5 mm'}
+                </Text>
+              </Text>
+              <Text style={styles.metricText}>
+                {language === 'hi' ? 'मात्रा: ' : 'Volume: '}
+                <Text style={{ fontWeight: '700', color: '#0369A1' }}>
+                  {latestIrrigation?.water || latestIrrigation?.waterReq || '99,148 L'}
+                </Text>
+              </Text>
+              <Text style={styles.metricText}>
+                {language === 'hi' ? 'अवधि: ' : 'Time: '}
+                <Text style={{ fontWeight: '700', color: '#0369A1' }}>
+                  {latestIrrigation?.duration || '3.8 Hours'}
+                </Text>
+              </Text>
+            </View>
+
+            {/* Scientific Explanation / Scenario Snippet */}
+            <View style={{ marginTop: 8, paddingTop: 8, borderTopWidth: 1, borderTopColor: '#F1F5F9', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Text style={{ fontSize: 11, color: '#64748B', flex: 1, marginRight: 8 }} numberOfLines={1}>
+                {latestIrrigation?.advice || (language === 'hi' ? 'FAO-56 वाष्पोत्सर्जन एवं 7-दिवसीय मौसम पूर्वानुमान' : 'FAO-56 soil water balance & 7-day rain forecast')}
+              </Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                <MaterialCommunityIcons name="layers-triple-outline" size={12} color="#0369A1" />
+                <Text style={{ fontSize: 10, fontWeight: '600', color: '#0369A1' }}>
+                  {language === 'hi' ? '3 परिदृश्य' : '3 Scenarios'}
+                </Text>
+              </View>
+            </View>
+          </Card>
         </TouchableOpacity>
 
         {/* Market Prices Live Section */}
@@ -391,42 +519,6 @@ export default function HomeDashboard() {
             </Card>
           ))}
         </ScrollView>
-
-        {/* Smart Irrigation Planner Card */}
-        <View style={styles.sectionHeaderRow}>
-          <Text style={styles.sectionTitle}>Irrigation Guide</Text>
-          <TouchableOpacity onPress={() => router.push('/(tabs)/irrigation')}>
-            <Text style={styles.seeAllText}>Planner →</Text>
-          </TouchableOpacity>
-        </View>
-
-        <Card style={styles.summaryCard}>
-          <View style={styles.irrigationRow}>
-            <View style={styles.irrigationIconCircle}>
-              <MaterialCommunityIcons name="water" size={24} color="#0284C7" />
-            </View>
-            <View style={{ flex: 1, marginLeft: 12 }}>
-              <Text style={styles.summaryTitle}>
-                {latestIrrigation ? latestIrrigation.field : `${nextIrrigation.crop} Field`}
-              </Text>
-              <Text style={styles.summarySub}>
-                Next Window: <Text style={styles.highlight}>{latestIrrigation ? latestIrrigation.window : nextIrrigation.recommendedDate}</Text>
-              </Text>
-            </View>
-            <StatusBadge
-              status="success"
-              label={latestIrrigation ? latestIrrigation.urgency || 'Optimal' : 'Optimal'}
-            />
-          </View>
-          <View style={styles.irrigationMetrics}>
-            <Text style={styles.metricText}>
-              Water: <Text style={{ fontWeight: '700', color: '#0369A1' }}>{latestIrrigation ? latestIrrigation.water : '12,500 L/acre'}</Text>
-            </Text>
-            <Text style={styles.metricText}>
-              Duration: <Text style={{ fontWeight: '700', color: '#0369A1' }}>{latestIrrigation ? latestIrrigation.duration : '45 mins'}</Text>
-            </Text>
-          </View>
-        </Card>
 
         {/* AI & Sustainability Shortcuts */}
         <View style={styles.sectionHeaderRow}>
@@ -485,8 +577,9 @@ const styles = StyleSheet.create({
   },
   scroll: {
     paddingHorizontal: 20,
-    paddingTop: Platform.OS === 'android' ? 12 : 6,
-    paddingBottom: 30,
+    paddingTop: Platform.OS === 'android' ? 12 : 8,
+    paddingBottom: 95,
+    width: '100%',
   },
   header: {
     flexDirection: 'row',
@@ -510,6 +603,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 3,
+    overflow: 'hidden',
+  },
+  avatarImg: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
   },
   userText: {
     marginLeft: 10,
@@ -650,10 +749,10 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#15803D',
   },
-  // Floating Action Button
+  // Floating Action Button (Cleanly floating above tab bar)
   floatingVoiceBtn: {
     position: 'absolute',
-    bottom: Platform.OS === 'web' ? 24 : 16,
+    bottom: Platform.OS === 'web' ? 76 : 84,
     right: 18,
     zIndex: 9999,
   },
@@ -742,22 +841,26 @@ const styles = StyleSheet.create({
     marginTop: 1,
   },
 
-  // 6-Grid Section
+  // 8-Grid Section (2 rows of 4)
   gridSection: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 12,
+    gap: 8,
+    justifyContent: 'space-between',
     marginBottom: 20,
+    width: '100%',
   },
   gridCard: {
     backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    paddingVertical: 14,
-    paddingHorizontal: 8,
+    borderRadius: 14,
+    paddingVertical: 12,
+    paddingHorizontal: 2,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: '#E2E8F0',
+    width: '23%',
+    marginBottom: 8,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.04,
@@ -861,9 +964,7 @@ const styles = StyleSheet.create({
 
   // Mandi Scroll
   mandiScroll: {
-    marginHorizontal: -20,
-    paddingHorizontal: 20,
-    marginBottom: 22,
+    marginBottom: 20,
   },
   mandiCard: {
     width: 154,

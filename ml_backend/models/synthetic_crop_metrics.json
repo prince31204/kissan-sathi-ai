@@ -1,0 +1,14 @@
+{
+  "total_records": 159,
+  "num_crops": 15,
+  "num_varieties": 53,
+  "crop_accuracy": 100.0,
+  "variety_accuracy": 100.0,
+  "feature_cols": [
+    "Temperature_C",
+    "Rainfall_mm",
+    "Soil_Moisture_pct",
+    "Season_enc"
+  ],
+  "source_file": "datasets/synthetic-crop/synthetic_crop_varieties.csv"
+}

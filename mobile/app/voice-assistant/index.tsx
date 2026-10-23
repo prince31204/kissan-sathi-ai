@@ -218,7 +218,7 @@ export default function VoiceAssistantScreen() {
     <SafeAreaView style={styles.container}>
       {/* Top Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
+        <TouchableOpacity onPress={() => (router.canGoBack() ? router.back() : router.replace('/(tabs)'))} style={styles.backBtn}>
           <MaterialCommunityIcons name="arrow-left" size={24} color="#111827" />
         </TouchableOpacity>
         <View style={{ alignItems: 'center' }}>
@@ -502,7 +502,10 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 16,
-    paddingBottom: 40,
+    paddingBottom: 85,
+    width: '100%',
+    maxWidth: 720,
+    alignSelf: 'center',
     alignItems: 'center',
   },
   statusArea: {

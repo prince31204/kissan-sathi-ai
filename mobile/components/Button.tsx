@@ -62,7 +62,7 @@ export const Button: React.FC<ButtonProps> = ({
         <ActivityIndicator color={getTextColor()} />
       ) : (
         <View style={styles.content}>
-          {icon && <View style={styles.iconContainer}>{icon}</View>}
+          {icon ? <View style={styles.iconContainer}>{icon}</View> : null}
           <Text style={[styles.text, { color: getTextColor() }]}>{title}</Text>
         </View>
       )}

@@ -40,9 +40,32 @@ export default function LoginScreen() {
       });
       const data = await res.json();
       if (res.ok) {
+        if (data.access_token) {
+          await AsyncStorage.setItem('userToken', data.access_token);
+        }
         if (data.name) {
           await AsyncStorage.setItem('userName', data.name);
         }
+        const userEmailKey = (data.email || email).trim().toLowerCase();
+        const cachedEmailAvatar = await AsyncStorage.getItem(`@user_avatar_${userEmailKey}`);
+        const cachedGlobalAvatar = await AsyncStorage.getItem('@user_avatar');
+        const finalAvatar = data.avatar || data.user?.avatar || cachedEmailAvatar || cachedGlobalAvatar || '';
+
+        const profileObj = {
+          name: data.name || data.fullName || 'Farmer',
+          email: data.email || email.trim(),
+          phone: data.phone || data.mobile || '+91 98765 43210',
+          village: data.village || data.user?.village || 'Rampur',
+          district: data.district || data.user?.district || 'Dehradun',
+          state: data.state || data.user?.state || 'Uttarakhand',
+          avatar: finalAvatar,
+        };
+        await AsyncStorage.setItem('userProfile', JSON.stringify(profileObj));
+        if (finalAvatar) {
+          await AsyncStorage.setItem('@user_avatar', finalAvatar);
+          await AsyncStorage.setItem(`@user_avatar_${userEmailKey}`, finalAvatar);
+        }
+
         if (data.role === 'admin') {
           await AsyncStorage.setItem('userRole', 'admin');
           router.replace('/admin');
@@ -61,8 +84,35 @@ export default function LoginScreen() {
   };
 
   const handleDemoLogin = async () => {
-    await AsyncStorage.setItem('userName', 'Ramesh Singh');
+    const demoEmail = 'ramesh.farmer@kisansaathi.in';
+    const cachedDemoAvatar = await AsyncStorage.getItem(`@user_avatar_${demoEmail}`);
+    const cachedGlobalAvatar = await AsyncStorage.getItem('@user_avatar');
+    
+    let existingAvatar = '';
+    try {
+      const stored = await AsyncStorage.getItem('userProfile');
+      if (stored) {
+        const p = JSON.parse(stored);
+        if (p.avatar) existingAvatar = p.avatar;
+      }
+    } catch (e) {}
+
+    const finalAvatar = cachedDemoAvatar || cachedGlobalAvatar || existingAvatar || 'https://images.unsplash.com/photo-1595956553066-fe24a8c33395?auto=format&fit=crop&w=300&q=80';
+
+    const demoProfile = {
+      name: 'Ramesh Singh',
+      email: demoEmail,
+      phone: '+91 98765 43210',
+      village: 'Rampur',
+      district: 'Dehradun',
+      state: 'Uttarakhand',
+      avatar: finalAvatar,
+    };
+    await AsyncStorage.setItem('userName', demoProfile.name);
     await AsyncStorage.setItem('userRole', 'user');
+    await AsyncStorage.setItem('userProfile', JSON.stringify(demoProfile));
+    await AsyncStorage.setItem('@user_avatar', finalAvatar);
+    await AsyncStorage.setItem(`@user_avatar_${demoEmail}`, finalAvatar);
     router.replace('/(tabs)');
   };
 
@@ -221,6 +271,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingBottom: 28,
     justifyContent: 'center',
+    maxWidth: 440,
+    width: '100%',
+    alignSelf: 'center',
   },
   topBar: {
     paddingVertical: 12,

@@ -18,6 +18,12 @@ import * as Location from 'expo-location';
 import { useLanguage } from '../../context/LanguageContext';
 import { LanguageSwitchButton } from '../../components/LanguageSwitchButton';
 
+import { getUnifiedWeather, UnifiedWeatherData } from '../../services/weatherService';
+import {
+  getSyntheticCropAdvisory,
+  SyntheticCropRecommendation,
+} from '../../services/syntheticCropService';
+
 export default function WeatherScreen() {
   const { t } = useLanguage();
   const [weather, setWeather] = useState(MockWeather);
@@ -25,6 +31,15 @@ export default function WeatherScreen() {
   const [city, setCity] = useState('Uttarakhand');
   const [highTemp, setHighTemp] = useState(22);
   const [lowTemp, setLowTemp] = useState(12);
+  const [weatherSource, setWeatherSource] = useState('OpenWeatherMap (Official API Key)');
+  const [isLive, setIsLive] = useState(true);
+  const [currentCoords, setCurrentCoords] = useState({ lat: 30.3165, lon: 78.0322 });
+
+  // Synthetic Crop State
+  const [syntheticCrops, setSyntheticCrops] = useState<SyntheticCropRecommendation[]>([]);
+  const [loadingCrops, setLoadingCrops] = useState(false);
+  const [selectedSeason, setSelectedSeason] = useState<'Rabi' | 'Kharif'>('Rabi');
+  const [activeCropIndex, setActiveCropIndex] = useState(0);
 
   const handleBack = () => {
     if (router.canGoBack()) {
@@ -38,81 +53,94 @@ export default function WeatherScreen() {
     fetchWeather();
   }, []);
 
+  const loadSyntheticCrops = async (
+    lat: number,
+    lon: number,
+    temp?: number,
+    rain?: number,
+    season = selectedSeason
+  ) => {
+    setLoadingCrops(true);
+    try {
+      const res = await getSyntheticCropAdvisory(lat, lon, temp, rain, season);
+      if (res && res.recommendations && res.recommendations.length > 0) {
+        setSyntheticCrops(res.recommendations);
+        setActiveCropIndex(0);
+      }
+    } catch (e) {
+      console.warn('Failed to load synthetic crops:', e);
+    } finally {
+      setLoadingCrops(false);
+    }
+  };
+
+  const handleSeasonChange = (season: 'Rabi' | 'Kharif') => {
+    setSelectedSeason(season);
+    loadSyntheticCrops(
+      currentCoords.lat,
+      currentCoords.lon,
+      weather.current.temp,
+      undefined,
+      season
+    );
+  };
+
   const fetchWeather = async () => {
     try {
-      let { status } = await Location.requestForegroundPermissionsAsync();
       let lat = 30.3165;
       let lon = 78.0322;
 
-      if (status === 'granted') {
-        let location = await Location.getCurrentPositionAsync({});
-        lat = location.coords.latitude;
-        lon = location.coords.longitude;
+      try {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status === 'granted') {
+          let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
+          lat = location.coords.latitude;
+          lon = location.coords.longitude;
 
-        try {
-          const geoRes = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`,
-            { headers: { 'User-Agent': 'KisanSaathi/1.0' } }
-          );
-          const geoData = await geoRes.json();
-          const cityObj =
-            geoData.address?.city ||
-            geoData.address?.town ||
-            geoData.address?.village ||
-            geoData.address?.state;
-          if (cityObj) setCity(cityObj);
-        } catch (e) {}
+          try {
+            const geoRes = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`,
+              { headers: { 'User-Agent': 'KisanSaathi/1.0' } }
+            );
+            const geoData = await geoRes.json();
+            const cityObj =
+              geoData.address?.city ||
+              geoData.address?.town ||
+              geoData.address?.village ||
+              geoData.address?.state;
+            if (cityObj) setCity(cityObj);
+          } catch (e) {}
+        }
+      } catch (locErr) {
+        console.warn('Location permission / fetch warning:', locErr);
       }
 
-      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`;
-      const res = await fetch(url);
+      // Fetch live verified weather using OpenWeatherMap API Key
+      const liveData = await getUnifiedWeather(lat, lon);
 
-      if (res.ok) {
-        const data = await res.json();
-
-        const getWeatherCondition = (code: number) => {
-          if (code === 0) return 'Clear Sky';
-          if ([1, 2, 3].includes(code)) return 'Partly Cloudy';
-          if ([45, 48].includes(code)) return 'Foggy';
-          if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) return 'Rainy';
-          if ([71, 73, 75, 85, 86].includes(code)) return 'Snowy';
-          if ([95, 96, 99].includes(code)) return 'Storm';
-          return 'Partly Cloudy';
-        };
-
-        const dailyForecasts = (data.daily?.time || []).slice(0, 5).map((timeStr: string, index: number) => {
-          const date = new Date(timeStr);
-          const day = index === 0 ? 'Today' : date.toLocaleDateString('en-US', { weekday: 'short' });
-          const max = Math.round(data.daily.temperature_2m_max[index] ?? 20);
-          const min = Math.round(data.daily.temperature_2m_min[index] ?? 12);
-          const code = data.daily.weather_code[index] ?? 1;
-          return {
-            day,
-            max,
-            min,
-            condition: getWeatherCondition(code),
-          };
-        });
-
-        const currentTemp = Math.round(data.current?.temperature_2m ?? 18);
-        const currentWind = Math.round(data.current?.wind_speed_10m ?? 12);
-        const rainProb = data.daily?.precipitation_probability_max?.[0] ?? 20;
-        const currentConditionStr = getWeatherCondition(data.current?.weather_code ?? 1);
-
-        setHighTemp(Math.round(data.daily?.temperature_2m_max?.[0] ?? currentTemp + 4));
-        setLowTemp(Math.round(data.daily?.temperature_2m_min?.[0] ?? currentTemp - 6));
+      if (liveData) {
+        if (liveData.cityName && liveData.cityName !== 'Uttarakhand') {
+          setCity(liveData.cityName);
+        }
+        setHighTemp(liveData.tempMax);
+        setLowTemp(liveData.tempMin);
+        setWeatherSource(liveData.source);
+        setIsLive(liveData.isLive);
 
         setWeather({
           current: {
-            temp: currentTemp,
-            condition: currentConditionStr,
-            humidity: data.current?.relative_humidity_2m ?? 68,
-            wind: `${currentWind} km/h`,
-            rainProb: rainProb,
+            temp: liveData.temperature,
+            condition: liveData.condition,
+            humidity: liveData.humidity,
+            wind: liveData.windText,
+            rainProb: liveData.rainProbability,
           },
           alerts: [],
-          forecast: dailyForecasts,
+          forecast: liveData.forecast.length ? liveData.forecast : MockWeather.forecast,
         });
+
+        setCurrentCoords({ lat, lon });
+        loadSyntheticCrops(lat, lon, liveData.temperature, liveData.precipitationMm, selectedSeason);
       }
     } catch (error) {
       console.warn('Weather fetch error:', error);
@@ -123,15 +151,17 @@ export default function WeatherScreen() {
 
   const getWeatherIcon = (cond: string) => {
     if (cond === 'Clear Sky' || cond === 'Sunny') return 'weather-sunny';
-    if (cond.includes('Rain')) return 'weather-rainy';
+    if (cond.includes('Rain') || cond.includes('Drizzle')) return 'weather-rainy';
     if (cond.includes('Cloud')) return 'weather-partly-cloudy';
-    if (cond.includes('Fog')) return 'weather-fog';
+    if (cond.includes('Fog') || cond.includes('Mist')) return 'weather-fog';
+    if (cond.includes('Storm')) return 'weather-lightning';
     return 'weather-partly-cloudy';
   };
 
   const getWeatherIconColor = (cond: string) => {
     if (cond === 'Clear Sky' || cond === 'Sunny') return '#F59E0B';
-    if (cond.includes('Rain')) return '#3B82F6';
+    if (cond.includes('Rain') || cond.includes('Drizzle')) return '#3B82F6';
+    if (cond.includes('Storm')) return '#8B5CF6';
     return '#F59E0B';
   };
 
@@ -159,7 +189,12 @@ export default function WeatherScreen() {
               <MaterialCommunityIcons name="map-marker" size={20} color={Theme.Colors.primary} />
               <Text style={styles.locationText}>{city}</Text>
             </View>
-            <MaterialCommunityIcons name="chevron-down" size={20} color="#64748B" />
+            <View style={styles.verifiedBadgeContainer}>
+              <View style={styles.verifiedDot} />
+              <Text style={styles.verifiedBadgeText}>
+                {weatherSource.includes('OpenWeatherMap') ? 'OWM Verified' : 'Live Data'}
+              </Text>
+            </View>
           </View>
 
           {/* Big Hero Weather Card matching Screen 4 */}
@@ -176,6 +211,7 @@ export default function WeatherScreen() {
             <Text style={styles.heroHighLow}>
               H: {highTemp}°  L: {lowTemp}°
             </Text>
+            <Text style={styles.heroSourceText}>Source: {weatherSource}</Text>
           </Card>
 
           {/* 3 Stat Pill Cards matching Screen 4 */}
@@ -225,6 +261,165 @@ export default function WeatherScreen() {
               </View>
             ))}
           </Card>
+
+          {/* 🌾 Synthetic Crop & Variety Prediction Section */}
+          <View style={styles.syntheticSection}>
+            <View style={styles.syntheticSectionHeader}>
+              <View style={{ flex: 1 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+                  <MaterialCommunityIcons name="sprout" size={22} color="#15803D" />
+                  <Text style={styles.syntheticTitle}>Weather Synthetic Crop Advisory</Text>
+                </View>
+                <Text style={styles.syntheticSubtitle}>
+                  Trained on synthetic_crop_varieties.csv based on {weather.current.temp}°C
+                </Text>
+              </View>
+              <View style={styles.mlBadge}>
+                <Text style={styles.mlBadgeText}>ML Model</Text>
+              </View>
+            </View>
+
+            {/* Season Filter Selector */}
+            <View style={styles.seasonRow}>
+              {(['Rabi', 'Kharif'] as const).map((s) => (
+                <TouchableOpacity
+                  key={s}
+                  style={[styles.seasonChip, selectedSeason === s && styles.seasonChipActive]}
+                  onPress={() => handleSeasonChange(s)}
+                >
+                  <MaterialCommunityIcons
+                    name={s === 'Rabi' ? 'snowflake' : 'weather-rainy'}
+                    size={15}
+                    color={selectedSeason === s ? '#FFFFFF' : '#475569'}
+                  />
+                  <Text style={[styles.seasonChipText, selectedSeason === s && styles.seasonChipTextActive]}>
+                    {s === 'Rabi' ? 'Rabi / Winter (सर्दियां)' : 'Kharif / Monsoon (मानसून)'}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+
+            {/* Synthetic Crop Cards */}
+            {loadingCrops ? (
+              <View style={styles.cropsLoading}>
+                <ActivityIndicator size="small" color="#15803D" />
+                <Text style={styles.cropsLoadingText}>Predicting optimal crop & variety...</Text>
+              </View>
+            ) : syntheticCrops.length > 0 ? (
+              <>
+                {/* Primary Recommended Card */}
+                {syntheticCrops[activeCropIndex] && (
+                  <Card style={styles.heroCropCard}>
+                    <View style={styles.heroCropHeader}>
+                      <View style={[styles.cropIconBox, { backgroundColor: `${syntheticCrops[activeCropIndex].color}18` }]}>
+                        <MaterialCommunityIcons
+                          name={syntheticCrops[activeCropIndex].icon as any}
+                          size={28}
+                          color={syntheticCrops[activeCropIndex].color}
+                        />
+                      </View>
+                      <View style={{ flex: 1, marginLeft: 12 }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                          <Text style={styles.heroCropName}>
+                            {syntheticCrops[activeCropIndex].crop} ({syntheticCrops[activeCropIndex].hindi_name})
+                          </Text>
+                          <View style={styles.confidenceBadge}>
+                            <Text style={styles.confidenceText}>
+                              {syntheticCrops[activeCropIndex].confidence}% Match
+                            </Text>
+                          </View>
+                        </View>
+                        <Text style={styles.heroCropSeason}>
+                          {syntheticCrops[activeCropIndex].season} Season · {syntheticCrops[activeCropIndex].growth_stage.split('(')[0]}
+                        </Text>
+                      </View>
+                    </View>
+
+                    {/* Highlighted Variety Banner */}
+                    <View style={styles.varietyBanner}>
+                      <MaterialCommunityIcons name="star-circle" size={22} color="#D97706" />
+                      <View style={{ marginLeft: 8, flex: 1 }}>
+                        <Text style={styles.varietyLabel}>Predicted Optimal Variety (अनुशंसित किस्म):</Text>
+                        <Text style={styles.varietyValue}>{syntheticCrops[activeCropIndex].variety}</Text>
+                      </View>
+                      <View style={styles.varietyBadge}>
+                        <Text style={styles.varietyBadgeText}>Top Pick</Text>
+                      </View>
+                    </View>
+
+                    {/* Weather Match Reason */}
+                    <Text style={styles.cropReasonText}>
+                      💡 {syntheticCrops[activeCropIndex].weather_reason}
+                    </Text>
+
+                    {/* Ideal Conditions Grid */}
+                    <View style={styles.conditionsRow}>
+                      <View style={styles.conditionItem}>
+                        <Text style={styles.conditionItemLabel}>Ideal Temp</Text>
+                        <Text style={styles.conditionItemVal}>
+                          {syntheticCrops[activeCropIndex].temp_range[0]}° - {syntheticCrops[activeCropIndex].temp_range[1]}°C
+                        </Text>
+                      </View>
+                      <View style={styles.conditionDivider} />
+                      <View style={styles.conditionItem}>
+                        <Text style={styles.conditionItemLabel}>Ideal Rain</Text>
+                        <Text style={styles.conditionItemVal}>
+                          {syntheticCrops[activeCropIndex].rainfall_range[0]} - {syntheticCrops[activeCropIndex].rainfall_range[1]} mm
+                        </Text>
+                      </View>
+                      <View style={styles.conditionDivider} />
+                      <View style={styles.conditionItem}>
+                        <Text style={styles.conditionItemLabel}>Soil Moisture</Text>
+                        <Text style={styles.conditionItemVal}>
+                          {syntheticCrops[activeCropIndex].soil_moisture_range[0]}% - {syntheticCrops[activeCropIndex].soil_moisture_range[1]}%
+                        </Text>
+                      </View>
+                    </View>
+
+                    {/* Alternative Varieties */}
+                    {syntheticCrops[activeCropIndex].alternative_varieties?.length > 0 && (
+                      <View style={styles.altVarietiesSection}>
+                        <Text style={styles.altVarietiesTitle}>Other Suitable Varieties (अन्य किस्में):</Text>
+                        <View style={styles.altVarietiesChips}>
+                          {syntheticCrops[activeCropIndex].alternative_varieties.map((v, idx) => (
+                            <View key={idx} style={styles.altChip}>
+                              <Text style={styles.altChipText}>{v}</Text>
+                            </View>
+                          ))}
+                        </View>
+                      </View>
+                    )}
+                  </Card>
+                )}
+
+                {/* Horizontal Selector Cards for Other Synthetic Crops */}
+                <Text style={styles.otherCropsTitle}>Other Compatible Crops for this Weather:</Text>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.cropSelectorScroll}>
+                  {syntheticCrops.map((c, idx) => (
+                    <TouchableOpacity
+                      key={idx}
+                      style={[styles.cropMiniCard, activeCropIndex === idx && styles.cropMiniCardActive]}
+                      onPress={() => setActiveCropIndex(idx)}
+                      activeOpacity={0.8}
+                    >
+                      <MaterialCommunityIcons
+                        name={c.icon as any}
+                        size={24}
+                        color={activeCropIndex === idx ? '#15803D' : c.color}
+                      />
+                      <Text style={[styles.cropMiniName, activeCropIndex === idx && styles.cropMiniNameActive]} numberOfLines={1}>
+                        {c.crop}
+                      </Text>
+                      <Text style={styles.cropMiniVariety} numberOfLines={1}>{c.variety}</Text>
+                      <View style={styles.miniMatchBadge}>
+                        <Text style={styles.miniMatchText}>{c.confidence}% Match</Text>
+                      </View>
+                    </TouchableOpacity>
+                  ))}
+                </ScrollView>
+              </>
+            ) : null}
+          </View>
         </ScrollView>
       )}
     </SafeAreaView>
@@ -260,7 +455,8 @@ const styles = StyleSheet.create({
   },
   scroll: {
     paddingHorizontal: 20,
-    paddingBottom: 30,
+    paddingBottom: 85,
+    width: '100%',
   },
   centerContainer: {
     flex: 1,
@@ -384,5 +580,303 @@ const styles = StyleSheet.create({
     color: '#111827',
     width: 75,
     textAlign: 'right',
+  },
+  verifiedBadgeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#ECFDF5',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#A7F3D0',
+  },
+  verifiedDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#059669',
+    marginRight: 6,
+  },
+  verifiedBadgeText: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: '#065F46',
+  },
+  heroSourceText: {
+    fontSize: 11,
+    color: '#64748B',
+    marginTop: 8,
+    fontWeight: '500',
+  },
+  // ── Synthetic Crop Styles ──────────────────────────────────────────
+  syntheticSection: {
+    marginTop: 24,
+    marginBottom: 16,
+  },
+  syntheticSectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 12,
+  },
+  syntheticTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#111827',
+  },
+  syntheticSubtitle: {
+    fontSize: 12,
+    color: '#64748B',
+    marginTop: 2,
+  },
+  mlBadge: {
+    backgroundColor: '#DCFCE7',
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#86EFAC',
+  },
+  mlBadgeText: {
+    fontSize: 10,
+    fontWeight: '700',
+    color: '#166534',
+  },
+  seasonRow: {
+    flexDirection: 'row',
+    gap: 8,
+    marginBottom: 14,
+  },
+  seasonChip: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    paddingVertical: 9,
+    paddingHorizontal: 12,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
+  },
+  seasonChipActive: {
+    backgroundColor: '#15803D',
+    borderColor: '#15803D',
+  },
+  seasonChipText: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#475569',
+  },
+  seasonChipTextActive: {
+    color: '#FFFFFF',
+    fontWeight: '700',
+  },
+  cropsLoading: {
+    paddingVertical: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  cropsLoadingText: {
+    fontSize: 13,
+    color: '#64748B',
+    marginTop: 8,
+  },
+  heroCropCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 18,
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
+    padding: 18,
+    marginBottom: 14,
+  },
+  heroCropHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 14,
+  },
+  cropIconBox: {
+    width: 48,
+    height: 48,
+    borderRadius: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  heroCropName: {
+    fontSize: 17,
+    fontWeight: '800',
+    color: '#111827',
+  },
+  heroCropSeason: {
+    fontSize: 12,
+    color: '#64748B',
+    marginTop: 2,
+  },
+  confidenceBadge: {
+    backgroundColor: '#ECFDF5',
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#A7F3D0',
+  },
+  confidenceText: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: '#047857',
+  },
+  varietyBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FEF3C7',
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#FDE68A',
+    marginBottom: 12,
+  },
+  varietyLabel: {
+    fontSize: 11,
+    color: '#92400E',
+    fontWeight: '600',
+  },
+  varietyValue: {
+    fontSize: 15,
+    fontWeight: '800',
+    color: '#78350F',
+    marginTop: 1,
+  },
+  varietyBadge: {
+    backgroundColor: '#F59E0B',
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 6,
+  },
+  varietyBadgeText: {
+    fontSize: 9,
+    fontWeight: '800',
+    color: '#FFFFFF',
+  },
+  cropReasonText: {
+    fontSize: 13,
+    lineHeight: 18,
+    color: '#334155',
+    marginBottom: 14,
+    fontWeight: '500',
+  },
+  conditionsRow: {
+    flexDirection: 'row',
+    backgroundColor: '#F8FAFC',
+    borderRadius: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 8,
+    marginBottom: 14,
+    borderWidth: 1,
+    borderColor: '#F1F5F9',
+  },
+  conditionItem: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  conditionItemLabel: {
+    fontSize: 10,
+    color: '#64748B',
+    fontWeight: '500',
+  },
+  conditionItemVal: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: '#111827',
+    marginTop: 2,
+  },
+  conditionDivider: {
+    width: 1,
+    backgroundColor: '#E2E8F0',
+    marginVertical: 2,
+  },
+  altVarietiesSection: {
+    borderTopWidth: 1,
+    borderTopColor: '#F1F5F9',
+    paddingTop: 10,
+  },
+  altVarietiesTitle: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: '#64748B',
+    marginBottom: 6,
+  },
+  altVarietiesChips: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 6,
+  },
+  altChip: {
+    backgroundColor: '#F1F5F9',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 8,
+  },
+  altChipText: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: '#334155',
+  },
+  otherCropsTitle: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#334155',
+    marginBottom: 10,
+    marginTop: 4,
+  },
+  cropSelectorScroll: {
+    marginBottom: 16,
+  },
+  cropMiniCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
+    paddingVertical: 12,
+    paddingHorizontal: 14,
+    marginRight: 10,
+    alignItems: 'center',
+    width: 115,
+  },
+  cropMiniCardActive: {
+    borderColor: '#15803D',
+    borderWidth: 2,
+    backgroundColor: '#F0FDF4',
+  },
+  cropMiniName: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#111827',
+    marginTop: 6,
+    textAlign: 'center',
+  },
+  cropMiniNameActive: {
+    color: '#15803D',
+  },
+  cropMiniVariety: {
+    fontSize: 11,
+    color: '#64748B',
+    marginTop: 2,
+    textAlign: 'center',
+    fontWeight: '500',
+  },
+  miniMatchBadge: {
+    backgroundColor: '#ECFDF5',
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 6,
+    marginTop: 6,
+  },
+  miniMatchText: {
+    fontSize: 10,
+    fontWeight: '700',
+    color: '#059669',
   },
 });

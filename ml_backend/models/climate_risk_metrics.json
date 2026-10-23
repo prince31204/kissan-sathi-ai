@@ -1,0 +1,278 @@
+{
+  "model_name": "Uttarakhand Climate-Risk & Rainfall Predictor",
+  "dataset": "rainfall_tel_hr_uttarakhand_uk_2026_2030.csv",
+  "total_samples": 11105,
+  "features": [
+    "District_Enc",
+    "Latitude",
+    "Longitude",
+    "Month",
+    "Hour",
+    "Slope_Factor",
+    "Elevation_m",
+    "Rainfall_Hourly",
+    "Rainfall_24h_Est"
+  ],
+  "classes": [
+    "High",
+    "Low",
+    "Moderate",
+    "Severe"
+  ],
+  "classifier_accuracy": 99.86,
+  "regressor_r2": 0.999,
+  "regressor_mae": 0.16,
+  "district_stats": {
+    "Almora": {
+      "total_readings": 629,
+      "stations": [
+        "Almora_1",
+        "Kosi_1",
+        "Lamgara"
+      ],
+      "station_count": 3,
+      "mean_hourly_rainfall_mm": 3.93,
+      "median_hourly_rainfall_mm": 1.5,
+      "max_peak_rainfall_mm": 257.0,
+      "avg_lat": 29.5781,
+      "avg_lon": 79.6858,
+      "elevation_m": 1638,
+      "terrain_type": "Mid-Hill Ridge",
+      "slope_factor": 1.8,
+      "region_type": "Hill"
+    },
+    "Bageshwar": {
+      "total_readings": 1055,
+      "stations": [
+        "Baijnath (Gomti)",
+        "Kapkot (Saryu)",
+        "Khati_1"
+      ],
+      "station_count": 3,
+      "mean_hourly_rainfall_mm": 5.05,
+      "median_hourly_rainfall_mm": 2.0,
+      "max_peak_rainfall_mm": 341.5,
+      "avg_lat": 29.9604,
+      "avg_lon": 79.7916,
+      "elevation_m": 1004,
+      "terrain_type": "River Confluence Valley",
+      "slope_factor": 2.0,
+      "region_type": "Hill"
+    },
+    "Chamoli": {
+      "total_readings": 748,
+      "stations": [
+        "Badrinath_1",
+        "Gairsain (Ramganga)",
+        "Nandprayag (Nandakini)"
+      ],
+      "station_count": 3,
+      "mean_hourly_rainfall_mm": 2.25,
+      "median_hourly_rainfall_mm": 1.0,
+      "max_peak_rainfall_mm": 33.5,
+      "avg_lat": 30.2066,
+      "avg_lon": 79.3003,
+      "elevation_m": 1550,
+      "terrain_type": "High Mountain Alpine",
+      "slope_factor": 2.5,
+      "region_type": "Hill"
+    },
+    "Champawat": {
+      "total_readings": 629,
+      "stations": [
+        "Champawat_1",
+        "Danda_1",
+        "Rithakhal",
+        "Tanakpur_1"
+      ],
+      "station_count": 4,
+      "mean_hourly_rainfall_mm": 2.91,
+      "median_hourly_rainfall_mm": 1.0,
+      "max_peak_rainfall_mm": 39.5,
+      "avg_lat": 29.2016,
+      "avg_lon": 80.0736,
+      "elevation_m": 1610,
+      "terrain_type": "Sub-Himalayan Forest",
+      "slope_factor": 1.8,
+      "region_type": "Hill"
+    },
+    "Dehradun": {
+      "total_readings": 1053,
+      "stations": [
+        "Dakpathar",
+        "Doiwala (Bhogpur)",
+        "Yamuna Colony"
+      ],
+      "station_count": 3,
+      "mean_hourly_rainfall_mm": 106.31,
+      "median_hourly_rainfall_mm": 8.0,
+      "max_peak_rainfall_mm": 385.5,
+      "avg_lat": 30.2847,
+      "avg_lon": 78.1261,
+      "elevation_m": 640,
+      "terrain_type": "Doon Valley Basin",
+      "slope_factor": 1.3,
+      "region_type": "Valley"
+    },
+    "Haridwar": {
+      "total_readings": 1142,
+      "stations": [
+        "Bahadarabad",
+        "Manglaur_1",
+        "Roorkee_2"
+      ],
+      "station_count": 3,
+      "mean_hourly_rainfall_mm": 279.4,
+      "median_hourly_rainfall_mm": 324.0,
+      "max_peak_rainfall_mm": 511.5,
+      "avg_lat": 29.8675,
+      "avg_lon": 77.8847,
+      "elevation_m": 314,
+      "terrain_type": "Gangetic Plain / Terai",
+      "slope_factor": 1.0,
+      "region_type": "Plains"
+    },
+    "Nainital": {
+      "total_readings": 889,
+      "stations": [
+        "Gola_1",
+        "Haldwani_1",
+        "Mukteshwar_1"
+      ],
+      "station_count": 3,
+      "mean_hourly_rainfall_mm": 3.16,
+      "median_hourly_rainfall_mm": 0.5,
+      "max_peak_rainfall_mm": 312.0,
+      "avg_lat": 29.3435,
+      "avg_lon": 79.5872,
+      "elevation_m": 2084,
+      "terrain_type": "Lake Basin & Hills",
+      "slope_factor": 1.7,
+      "region_type": "Hill"
+    },
+    "Pauri Garhwal": {
+      "total_readings": 1186,
+      "stations": [
+        "Dugadda (Khoh)",
+        "Srinagar_2",
+        "Virbhadra",
+        "Yamkeshwar"
+      ],
+      "station_count": 4,
+      "mean_hourly_rainfall_mm": 367.02,
+      "median_hourly_rainfall_mm": 511.5,
+      "max_peak_rainfall_mm": 511.5,
+      "avg_lat": 30.1897,
+      "avg_lon": 78.7876,
+      "elevation_m": 1814,
+      "terrain_type": "Hill Slopes & Valleys",
+      "slope_factor": 1.9,
+      "region_type": "Hill"
+    },
+    "Pithoragarh": {
+      "total_readings": 886,
+      "stations": [
+        "Dharchula_1",
+        "Nachni",
+        "Pithoragarh"
+      ],
+      "station_count": 3,
+      "mean_hourly_rainfall_mm": 1.82,
+      "median_hourly_rainfall_mm": 0.5,
+      "max_peak_rainfall_mm": 30.0,
+      "avg_lat": 29.8146,
+      "avg_lon": 80.1788,
+      "elevation_m": 1627,
+      "terrain_type": "Eastern Mountain Ridge",
+      "slope_factor": 2.3,
+      "region_type": "Hill"
+    },
+    "Rudraprayag": {
+      "total_readings": 1469,
+      "stations": [
+        "Basukedar",
+        "Chandranagar_1",
+        "Guptkashi_1",
+        "Sonprayag_1"
+      ],
+      "station_count": 4,
+      "mean_hourly_rainfall_mm": 3.56,
+      "median_hourly_rainfall_mm": 1.5,
+      "max_peak_rainfall_mm": 156.0,
+      "avg_lat": 30.4725,
+      "avg_lon": 79.0555,
+      "elevation_m": 895,
+      "terrain_type": "Steep River Gorge",
+      "slope_factor": 2.3,
+      "region_type": "Hill"
+    },
+    "Tehri Garhwal": {
+      "total_readings": 233,
+      "stations": [
+        "Kempty"
+      ],
+      "station_count": 1,
+      "mean_hourly_rainfall_mm": 17.58,
+      "median_hourly_rainfall_mm": 1.0,
+      "max_peak_rainfall_mm": 483.0,
+      "avg_lat": 30.4907,
+      "avg_lon": 78.0474,
+      "elevation_m": 1750,
+      "terrain_type": "Mid-Himalayan Terrace",
+      "slope_factor": 2.2,
+      "region_type": "Hill"
+    },
+    "Udham Singh Nagar": {
+      "total_readings": 927,
+      "stations": [
+        "Gadarpur",
+        "Haripura_2",
+        "Sitarganj_1",
+        "Tumaria"
+      ],
+      "station_count": 4,
+      "mean_hourly_rainfall_mm": 4.98,
+      "median_hourly_rainfall_mm": 1.5,
+      "max_peak_rainfall_mm": 144.0,
+      "avg_lat": 29.0489,
+      "avg_lon": 79.3628,
+      "elevation_m": 298,
+      "terrain_type": "Tarai Alluvial Plain",
+      "slope_factor": 1.0,
+      "region_type": "Plains"
+    },
+    "Uttarkashi": {
+      "total_readings": 259,
+      "stations": [
+        "Jhala_1",
+        "Joshiyara",
+        "Purola_1"
+      ],
+      "station_count": 3,
+      "mean_hourly_rainfall_mm": 6.22,
+      "median_hourly_rainfall_mm": 1.0,
+      "max_peak_rainfall_mm": 371.0,
+      "avg_lat": 31.0092,
+      "avg_lon": 78.6865,
+      "elevation_m": 1158,
+      "terrain_type": "Upper Himalayan Valley",
+      "slope_factor": 2.4,
+      "region_type": "Hill"
+    }
+  },
+  "districts": [
+    "Almora",
+    "Bageshwar",
+    "Chamoli",
+    "Champawat",
+    "Dehradun",
+    "Haridwar",
+    "Nainital",
+    "Pauri Garhwal",
+    "Pithoragarh",
+    "Rudraprayag",
+    "Tehri Garhwal",
+    "Udham Singh Nagar",
+    "Uttarkashi"
+  ]
+}

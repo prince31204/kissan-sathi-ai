@@ -3,9 +3,13 @@ import { Theme } from '../../constants/Theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../../context/LanguageContext';
 import { Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function TabLayout() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const insets = useSafeAreaInsets();
+  const bottomInset = Math.max(insets.bottom, Platform.OS === 'ios' ? 20 : 6);
+  const tabHeight = 56 + bottomInset;
 
   return (
     <Tabs
@@ -14,7 +18,7 @@ export default function TabLayout() {
         tabBarActiveTintColor: Theme.Colors.primary,
         tabBarInactiveTintColor: '#94A3B8',
         tabBarLabelStyle: {
-          fontSize: 11,
+          fontSize: 10,
           fontWeight: '600',
           marginTop: -2,
         },
@@ -22,9 +26,9 @@ export default function TabLayout() {
           backgroundColor: '#FFFFFF',
           borderTopColor: '#E6EDE8',
           borderTopWidth: 1,
-          height: Platform.OS === 'ios' ? 84 : 64,
-          paddingBottom: Platform.OS === 'ios' ? 24 : 10,
-          paddingTop: 8,
+          height: tabHeight,
+          paddingBottom: bottomInset,
+          paddingTop: 6,
           shadowColor: '#000',
           shadowOffset: { width: 0, height: -2 },
           shadowOpacity: 0.04,
@@ -36,7 +40,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: t('nav.home', 'Home'),
+          title: language === 'hi' ? 'होम' : 'Home',
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcons
               name={focused ? 'home' : 'home-outline'}
@@ -49,7 +53,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="crop-health"
         options={{
-          title: t('nav.cropHealth', 'Advisory'),
+          title: language === 'hi' ? 'फसल' : 'Crops',
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcons
               name={focused ? 'shield-check' : 'shield-check-outline'}
@@ -62,7 +66,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="irrigation"
         options={{
-          title: t('nav.irrigation', 'Irrigation'),
+          title: language === 'hi' ? 'सिंचाई' : 'Water',
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcons
               name={focused ? 'water' : 'water-outline'}
@@ -75,7 +79,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="equipment"
         options={{
-          title: t('nav.equipment', 'Schemes'),
+          title: language === 'hi' ? 'योजनाएं' : 'Schemes',
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcons
               name={focused ? 'bank' : 'bank-outline'}
@@ -85,10 +89,11 @@ export default function TabLayout() {
           ),
         }}
       />
+
       <Tabs.Screen
         name="profile"
         options={{
-          title: t('nav.profile', 'Profile'),
+          title: language === 'hi' ? 'प्रोफ़ाइल' : 'Profile',
           tabBarIcon: ({ color, focused }) => (
             <MaterialCommunityIcons
               name={focused ? 'account' : 'account-outline'}

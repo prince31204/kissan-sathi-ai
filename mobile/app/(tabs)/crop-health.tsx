@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, ActivityIndicator, TouchableOpacity, ScrollView } from 'react-native';
 import { router } from 'expo-router';
 import { Theme } from '../../constants/Theme';
 import { Card } from '../../components/Card';
@@ -7,7 +7,6 @@ import { SectionHeader } from '../../components/SectionHeader';
 import { StatusBadge } from '../../components/StatusBadge';
 import { MockFields, MockDiseaseAnalysis } from '../../services/mockData';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
 import { useLanguage } from '../../context/LanguageContext';
 import { LanguageSwitchButton } from '../../components/LanguageSwitchButton';
 
@@ -16,7 +15,7 @@ export default function CropHealthDashboard() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scroll}>
+      <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: Theme.Spacing.md }}>
           <Text style={styles.pageTitle}>{t('cropHealth.pageTitle', 'Crop Health')}</Text>
           <LanguageSwitchButton />
@@ -67,7 +66,7 @@ export default function CropHealthDashboard() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Theme.Colors.background },
-  scroll: { padding: Theme.Spacing.lg },
+  scroll: { padding: Theme.Spacing.lg, paddingBottom: 95, width: '100%' },
   pageTitle: { ...Theme.Typography.h1, color: Theme.Colors.primary, marginBottom: Theme.Spacing.md },
   
   cropCard: { marginBottom: Theme.Spacing.md },

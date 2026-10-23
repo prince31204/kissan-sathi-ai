@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Alert, Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import { Theme } from '../../constants/Theme';
@@ -23,24 +23,31 @@ export default function IrrigationHistoryScreen() {
     setLoading(true);
     try {
       const stored = await AsyncStorage.getItem('@irrigation_history');
-      if (stored) {
+      if (stored !== null) {
         setHistory(JSON.parse(stored));
       } else {
-        // Fallback default history if newly opened
-        setHistory([
-          {
-            id: '1',
-            field: language === 'hi' ? 'गेहूं का खेत (5 बीघा)' : 'Wheat Field (5 Bigha)',
-            crop: 'Wheat',
-            date: language === 'hi' ? 'आज' : 'Today',
-            time: language === 'hi' ? 'प्रातः' : 'Morning',
-            duration: language === 'hi' ? '2.5 घंटे' : '2.5 Hours',
-            water: language === 'hi' ? '1,44,700 लीटर' : '1,44,700 Liters',
-            urgency: language === 'hi' ? 'योजनाबद्ध' : 'Scheduled',
-            window: language === 'hi' ? 'कल सुबह, 5:30 - 8:30 बजे' : 'Tomorrow, 5:30 AM - 8:30 AM',
-            location: 'Uttarakhand, India',
-          },
-        ]);
+        const initialized = await AsyncStorage.getItem('@irrigation_history_initialized');
+        if (!initialized) {
+          await AsyncStorage.setItem('@irrigation_history_initialized', 'true');
+          const initial = [
+            {
+              id: '1',
+              field: language === 'hi' ? 'गेहूं का खेत (5 बीघा)' : 'Wheat Field (5 Bigha)',
+              crop: 'Wheat',
+              date: language === 'hi' ? 'आज' : 'Today',
+              time: language === 'hi' ? 'प्रातः' : 'Morning',
+              duration: language === 'hi' ? '2.5 घंटे' : '2.5 Hours',
+              water: language === 'hi' ? '1,44,700 लीटर' : '1,44,700 Liters',
+              urgency: language === 'hi' ? 'योजनाबद्ध' : 'Scheduled',
+              window: language === 'hi' ? 'कल सुबह, 5:30 - 8:30 बजे' : 'Tomorrow, 5:30 AM - 8:30 AM',
+              location: 'Uttarakhand, India',
+            },
+          ];
+          await AsyncStorage.setItem('@irrigation_history', JSON.stringify(initial));
+          setHistory(initial);
+        } else {
+          setHistory([]);
+        }
       }
     } catch (e) {
       console.warn('Failed to load history', e);
@@ -50,19 +57,63 @@ export default function IrrigationHistoryScreen() {
   };
 
   const handleClear = async () => {
+    const doClear = async () => {
+      await AsyncStorage.setItem('@irrigation_history', JSON.stringify([]));
+      await AsyncStorage.setItem('@irrigation_history_initialized', 'true');
+      setHistory([]);
+    };
+
+    if (Platform.OS === 'web') {
+      const confirmed = typeof window !== 'undefined' && window.confirm
+        ? window.confirm(
+            language === 'hi'
+              ? 'क्या आप सभी सिंचाई इतिहास रिकॉर्ड हटाना चाहते हैं?'
+              : 'Are you sure you want to clear your irrigation history records?'
+          )
+        : true;
+      if (confirmed) await doClear();
+      return;
+    }
+
     Alert.alert(
       language === 'hi' ? 'इतिहास हटाएं' : 'Clear History',
-      language === 'hi' ? 'क्या आप सभी सिंचाई इतिहास रिकॉर्ड हटाना चाहते हैं?' : 'Are you sure you want to clear your irrigation history records?',
+      language === 'hi'
+        ? 'क्या आप सभी सिंचाई इतिहास रिकॉर्ड हटाना चाहते हैं?'
+        : 'Are you sure you want to clear your irrigation history records?',
       [
         { text: t('common.cancel', 'Cancel'), style: 'cancel' },
         {
           text: language === 'hi' ? 'सभी हटाएं' : 'Clear All',
           style: 'destructive',
-          onPress: async () => {
-            await AsyncStorage.removeItem('@irrigation_history');
-            setHistory([]);
-          },
+          onPress: doClear,
         },
+      ]
+    );
+  };
+
+  const handleDeleteItem = async (id: string) => {
+    const doDelete = async () => {
+      const updated = history.filter((item, idx) => (item.id || idx.toString()) !== id);
+      setHistory(updated);
+      await AsyncStorage.setItem('@irrigation_history', JSON.stringify(updated));
+    };
+
+    if (Platform.OS === 'web') {
+      const confirmed = typeof window !== 'undefined' && window.confirm
+        ? window.confirm(
+            language === 'hi' ? 'क्या आप इस सिंचाई रिकॉर्ड को हटाना चाहते हैं?' : 'Delete this irrigation record?'
+          )
+        : true;
+      if (confirmed) await doDelete();
+      return;
+    }
+
+    Alert.alert(
+      language === 'hi' ? 'रिकॉर्ड हटाएं' : 'Delete Record',
+      language === 'hi' ? 'क्या आप इस सिंचाई रिकॉर्ड को हटाना चाहते हैं?' : 'Delete this irrigation record?',
+      [
+        { text: t('common.cancel', 'Cancel'), style: 'cancel' },
+        { text: language === 'hi' ? 'हटाएं' : 'Delete', style: 'destructive', onPress: doDelete },
       ]
     );
   };
@@ -70,7 +121,7 @@ export default function IrrigationHistoryScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
+        <TouchableOpacity onPress={() => (router.canGoBack() ? router.back() : router.replace('/(tabs)/irrigation'))} style={styles.backBtn}>
           <MaterialCommunityIcons name="arrow-left" size={24} color={Theme.Colors.text} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>{language === 'hi' ? 'सिंचाई इतिहास' : 'Irrigation History'}</Text>
@@ -94,27 +145,36 @@ export default function IrrigationHistoryScreen() {
             </Text>
           </View>
         ) : (
-          history.map((item) => (
-            <Card key={item.id} style={styles.card}>
+          history.map((item, idx) => (
+            <Card key={item.id || idx} style={styles.card}>
               <View style={styles.cardHeader}>
-                <View>
+                <View style={{ flex: 1, paddingRight: 8 }}>
                   <Text style={styles.fieldTitle}>{item.field}</Text>
                   <Text style={styles.date}>
                     {item.date} {item.time ? `• ${item.time}` : ''}
                   </Text>
                 </View>
-                {item.urgency ? (
-                  <StatusBadge
-                    status={
-                      item.urgency.toLowerCase().includes('critical') || item.urgency.toLowerCase().includes('high')
-                        ? 'error'
-                        : item.urgency.toLowerCase().includes('postpone')
-                        ? 'warning'
-                        : 'info'
-                    }
-                    label={item.urgency}
-                  />
-                ) : null}
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+                  {item.urgency ? (
+                    <StatusBadge
+                      status={
+                        item.urgency.toLowerCase().includes('critical') || item.urgency.toLowerCase().includes('high')
+                          ? 'error'
+                          : item.urgency.toLowerCase().includes('postpone')
+                          ? 'warning'
+                          : 'info'
+                      }
+                      label={item.urgency}
+                    />
+                  ) : null}
+                  <TouchableOpacity
+                    onPress={() => handleDeleteItem(item.id || idx.toString())}
+                    style={{ padding: 6, borderRadius: 8, backgroundColor: '#FEF2F2' }}
+                    hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+                  >
+                    <MaterialCommunityIcons name="trash-can-outline" size={17} color="#EF4444" />
+                  </TouchableOpacity>
+                </View>
               </View>
 
               <View style={styles.divider} />

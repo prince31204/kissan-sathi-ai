@@ -23,7 +23,7 @@ export const Input: React.FC<InputProps> = ({
 
   return (
     <View style={styles.container}>
-      {label && <Text style={styles.label}>{label}</Text>}
+      {label ? <Text style={styles.label}>{label}</Text> : null}
       <View
         style={[
           styles.inputContainer,
@@ -31,7 +31,7 @@ export const Input: React.FC<InputProps> = ({
           error ? styles.inputError : null,
         ]}
       >
-        {icon && <View style={styles.iconContainer}>{icon}</View>}
+        {icon ? <View style={styles.iconContainer}>{icon}</View> : null}
         <TextInput
           style={[styles.input, style]}
           placeholderTextColor="#94A3B8"
@@ -45,9 +45,9 @@ export const Input: React.FC<InputProps> = ({
           }}
           {...props}
         />
-        {rightIcon && <View style={styles.rightIconContainer}>{rightIcon}</View>}
+        {rightIcon ? <View style={styles.rightIconContainer}>{rightIcon}</View> : null}
       </View>
-      {error && <Text style={styles.errorText}>{error}</Text>}
+      {error ? <Text style={styles.errorText}>{error}</Text> : null}
     </View>
   );
 };

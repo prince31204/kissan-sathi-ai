@@ -23,7 +23,7 @@ export default function NotificationsScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
+        <TouchableOpacity onPress={() => (router.canGoBack() ? router.back() : router.replace('/(tabs)'))} style={styles.backBtn}>
           <MaterialCommunityIcons name="arrow-left" size={24} color={Theme.Colors.text} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>{t('common.notifications', 'Notifications')}</Text>

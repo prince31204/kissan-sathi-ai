@@ -12,11 +12,11 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({ title, actionLabel
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
-      {actionLabel && (
+      {actionLabel ? (
         <TouchableOpacity onPress={onActionPress}>
           <Text style={styles.action}>{actionLabel}</Text>
         </TouchableOpacity>
-      )}
+      ) : null}
     </View>
   );
 };

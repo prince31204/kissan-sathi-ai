@@ -1,0 +1,647 @@
+{
+  "model_name": "Uttarakhand Crop & Variety Recommendation Engine",
+  "trained_on": "Uttarakhand Agro-Climatic Zones & ICAR-VPKAS Variety Dataset",
+  "total_samples": 6000,
+  "top1_accuracy": 85.25,
+  "top2_accuracy": 95.67,
+  "top3_accuracy": 98.83,
+  "top5_accuracy": 100.0,
+  "crops": [
+    "Apple",
+    "Barnyard Millet (Jhangora)",
+    "Black Soybean (Bhatt)",
+    "Finger Millet (Mandua)",
+    "Ginger",
+    "Green Peas",
+    "Horse Gram (Gahat)",
+    "Litchi",
+    "Maize",
+    "Mustard",
+    "Paddy / Basmati Rice",
+    "Potato",
+    "Rajma (Kidney Beans)",
+    "Sugarcane",
+    "Wheat"
+  ],
+  "districts": [
+    "Almora",
+    "Bageshwar",
+    "Chamoli",
+    "Champawat",
+    "Dehradun",
+    "Haridwar",
+    "Nainital",
+    "Pauri Garhwal",
+    "Pithoragarh",
+    "Rudraprayag",
+    "Tehri Garhwal",
+    "Udham Singh Nagar",
+    "Uttarkashi"
+  ],
+  "pincodes": [
+    "244715",
+    "246001",
+    "246149",
+    "246155",
+    "246173",
+    "246174",
+    "246177",
+    "246401",
+    "246419",
+    "246439",
+    "246442",
+    "246443",
+    "246444",
+    "246469",
+    "246472",
+    "246475",
+    "247656",
+    "247661",
+    "247663",
+    "248001",
+    "248007",
+    "248123",
+    "248140",
+    "248142",
+    "248158",
+    "248179",
+    "248197",
+    "249001",
+    "249135",
+    "249141",
+    "249145",
+    "249151",
+    "249152",
+    "249161",
+    "249175",
+    "249185",
+    "249193",
+    "249199",
+    "249201",
+    "249401",
+    "249404",
+    "249408",
+    "252308",
+    "262308",
+    "262403",
+    "262501",
+    "262522",
+    "262523",
+    "262524",
+    "262551",
+    "262554",
+    "263001",
+    "263132",
+    "263135",
+    "263137",
+    "263138",
+    "263139",
+    "263148",
+    "263149",
+    "263152",
+    "263153",
+    "263160",
+    "263601",
+    "263620",
+    "263628",
+    "263634",
+    "263641",
+    "263642",
+    "263652",
+    "263656",
+    "263679"
+  ],
+  "seasons": [
+    "Kharif",
+    "Rabi",
+    "Summer",
+    "Whole Year"
+  ],
+  "soil_types": [
+    "Alluvial Soil",
+    "Brown Hill Soil",
+    "Clay Loam",
+    "Mountain / Gravelly Soil",
+    "Sandy Loam"
+  ],
+  "feature_importances": {
+    "District": 0.0292,
+    "PIN_Code": 0.0323,
+    "Agro_Zone": 0.0193,
+    "Season": 0.1232,
+    "Soil_Type": 0.0569,
+    "Elevation_m": 0.0994,
+    "N": 0.167,
+    "P": 0.0728,
+    "K": 0.1465,
+    "pH": 0.0336,
+    "Temperature": 0.1023,
+    "Rainfall": 0.1174
+  },
+  "pin_directory": {
+    "263153": {
+      "district": "Udham Singh Nagar",
+      "place": "Rudrapur",
+      "zone": "Tarai Alluvial Plain",
+      "elevation_m": 240,
+      "soil": "Alluvial Soil"
+    },
+    "263148": {
+      "district": "Udham Singh Nagar",
+      "place": "Kashipur",
+      "zone": "Tarai Alluvial Plain",
+      "elevation_m": 235,
+      "soil": "Alluvial Soil"
+    },
+    "263139": {
+      "district": "Nainital",
+      "place": "Haldwani",
+      "zone": "Bhabhar Foothill Plain",
+      "elevation_m": 424,
+      "soil": "Alluvial Soil"
+    },
+    "252308": {
+      "district": "Udham Singh Nagar",
+      "place": "Kichha",
+      "zone": "Tarai Alluvial Plain",
+      "elevation_m": 220,
+      "soil": "Alluvial Soil"
+    },
+    "262403": {
+      "district": "Udham Singh Nagar",
+      "place": "Sitarganj",
+      "zone": "Tarai Alluvial Plain",
+      "elevation_m": 225,
+      "soil": "Alluvial Soil"
+    },
+    "262308": {
+      "district": "Udham Singh Nagar",
+      "place": "Khatima",
+      "zone": "Tarai Alluvial Plain",
+      "elevation_m": 210,
+      "soil": "Alluvial Soil"
+    },
+    "263160": {
+      "district": "Udham Singh Nagar",
+      "place": "Pantnagar",
+      "zone": "Tarai Alluvial Plain",
+      "elevation_m": 243,
+      "soil": "Alluvial Soil"
+    },
+    "263149": {
+      "district": "Udham Singh Nagar",
+      "place": "Jaspur",
+      "zone": "Tarai Alluvial Plain",
+      "elevation_m": 240,
+      "soil": "Alluvial Soil"
+    },
+    "263152": {
+      "district": "Udham Singh Nagar",
+      "place": "Gadarpur",
+      "zone": "Tarai Alluvial Plain",
+      "elevation_m": 238,
+      "soil": "Alluvial Soil"
+    },
+    "249401": {
+      "district": "Haridwar",
+      "place": "Haridwar",
+      "zone": "Gangetic Plain / Terai",
+      "elevation_m": 314,
+      "soil": "Alluvial Soil"
+    },
+    "249408": {
+      "district": "Haridwar",
+      "place": "Laksar",
+      "zone": "Gangetic Plain / Terai",
+      "elevation_m": 270,
+      "soil": "Alluvial Soil"
+    },
+    "247663": {
+      "district": "Haridwar",
+      "place": "Roorkee",
+      "zone": "Gangetic Plain / Terai",
+      "elevation_m": 268,
+      "soil": "Alluvial Soil"
+    },
+    "249404": {
+      "district": "Haridwar",
+      "place": "Gurukul Kangri",
+      "zone": "Gangetic Plain / Terai",
+      "elevation_m": 290,
+      "soil": "Alluvial Soil"
+    },
+    "247661": {
+      "district": "Haridwar",
+      "place": "Bhagwanpur",
+      "zone": "Gangetic Plain / Terai",
+      "elevation_m": 275,
+      "soil": "Alluvial Soil"
+    },
+    "247656": {
+      "district": "Haridwar",
+      "place": "Manglaur",
+      "zone": "Gangetic Plain / Terai",
+      "elevation_m": 265,
+      "soil": "Alluvial Soil"
+    },
+    "248001": {
+      "district": "Dehradun",
+      "place": "Dehradun Central",
+      "zone": "Doon Valley Basin",
+      "elevation_m": 640,
+      "soil": "Sandy Loam"
+    },
+    "248142": {
+      "district": "Dehradun",
+      "place": "Vikasnagar",
+      "zone": "Doon Valley Basin",
+      "elevation_m": 580,
+      "soil": "Sandy Loam"
+    },
+    "248158": {
+      "district": "Dehradun",
+      "place": "Kalsi",
+      "zone": "Sub-Himalayan Foothills",
+      "elevation_m": 720,
+      "soil": "Brown Hill Soil"
+    },
+    "248123": {
+      "district": "Dehradun",
+      "place": "Chakrata",
+      "zone": "Mid-Himalayan Terrace",
+      "elevation_m": 2118,
+      "soil": "Mountain / Gravelly Soil"
+    },
+    "248197": {
+      "district": "Dehradun",
+      "place": "Sahaspur",
+      "zone": "Doon Valley Basin",
+      "elevation_m": 590,
+      "soil": "Sandy Loam"
+    },
+    "248007": {
+      "district": "Dehradun",
+      "place": "Premnagar",
+      "zone": "Doon Valley Basin",
+      "elevation_m": 610,
+      "soil": "Sandy Loam"
+    },
+    "249201": {
+      "district": "Dehradun",
+      "place": "Rishikesh",
+      "zone": "Doon Foothills",
+      "elevation_m": 372,
+      "soil": "Alluvial Soil"
+    },
+    "248179": {
+      "district": "Dehradun",
+      "place": "Mussoorie",
+      "zone": "High Mountain Ridge",
+      "elevation_m": 2005,
+      "soil": "Mountain / Gravelly Soil"
+    },
+    "248140": {
+      "district": "Dehradun",
+      "place": "Doiwala",
+      "zone": "Doon Valley Basin",
+      "elevation_m": 500,
+      "soil": "Sandy Loam"
+    },
+    "263601": {
+      "district": "Almora",
+      "place": "Almora",
+      "zone": "Mid-Hill Ridge",
+      "elevation_m": 1638,
+      "soil": "Brown Hill Soil"
+    },
+    "263642": {
+      "district": "Bageshwar",
+      "place": "Bageshwar",
+      "zone": "River Confluence Valley",
+      "elevation_m": 1004,
+      "soil": "Brown Hill Soil"
+    },
+    "263620": {
+      "district": "Almora",
+      "place": "Dwarahat",
+      "zone": "Mid-Hill Terraces",
+      "elevation_m": 1510,
+      "soil": "Brown Hill Soil"
+    },
+    "263656": {
+      "district": "Almora",
+      "place": "Bhikiyasain",
+      "zone": "River Valley Hills",
+      "elevation_m": 1050,
+      "soil": "Sandy Loam"
+    },
+    "263628": {
+      "district": "Almora",
+      "place": "Someshwar",
+      "zone": "Mid-Hill Valley",
+      "elevation_m": 1400,
+      "soil": "Brown Hill Soil"
+    },
+    "263652": {
+      "district": "Almora",
+      "place": "Chaukhutiya",
+      "zone": "Ramganga River Valley",
+      "elevation_m": 1150,
+      "soil": "Brown Hill Soil"
+    },
+    "246001": {
+      "district": "Pauri Garhwal",
+      "place": "Pauri",
+      "zone": "Hill Slopes & Valleys",
+      "elevation_m": 1814,
+      "soil": "Brown Hill Soil"
+    },
+    "246149": {
+      "district": "Pauri Garhwal",
+      "place": "Kotdwar",
+      "zone": "Sub-Himalayan Foot",
+      "elevation_m": 454,
+      "soil": "Sandy Loam"
+    },
+    "246174": {
+      "district": "Pauri Garhwal",
+      "place": "Srinagar Garhwal",
+      "zone": "Alaknanda Valley Basin",
+      "elevation_m": 560,
+      "soil": "Alluvial Soil"
+    },
+    "246155": {
+      "district": "Pauri Garhwal",
+      "place": "Lansdowne",
+      "zone": "High Pine Ridge",
+      "elevation_m": 1706,
+      "soil": "Brown Hill Soil"
+    },
+    "246173": {
+      "district": "Pauri Garhwal",
+      "place": "Satpuli",
+      "zone": "Garhwal Valley Basin",
+      "elevation_m": 650,
+      "soil": "Sandy Loam"
+    },
+    "246177": {
+      "district": "Pauri Garhwal",
+      "place": "Thalisain",
+      "zone": "Upper Hill Terraces",
+      "elevation_m": 1650,
+      "soil": "Brown Hill Soil"
+    },
+    "249001": {
+      "district": "Tehri Garhwal",
+      "place": "New Tehri",
+      "zone": "Mid-Himalayan Terrace",
+      "elevation_m": 1750,
+      "soil": "Brown Hill Soil"
+    },
+    "249175": {
+      "district": "Tehri Garhwal",
+      "place": "Narendra Nagar",
+      "zone": "Lower Hill Ridges",
+      "elevation_m": 1326,
+      "soil": "Brown Hill Soil"
+    },
+    "249145": {
+      "district": "Tehri Garhwal",
+      "place": "Chamba",
+      "zone": "Mid-Himalayan Terrace",
+      "elevation_m": 1524,
+      "soil": "Brown Hill Soil"
+    },
+    "249161": {
+      "district": "Tehri Garhwal",
+      "place": "Devprayag",
+      "zone": "River Confluence Valley",
+      "elevation_m": 830,
+      "soil": "Sandy Loam"
+    },
+    "249199": {
+      "district": "Tehri Garhwal",
+      "place": "Ghansali",
+      "zone": "Bhilangana River Valley",
+      "elevation_m": 980,
+      "soil": "Brown Hill Soil"
+    },
+    "246401": {
+      "district": "Chamoli",
+      "place": "Gopeshwar",
+      "zone": "High Mountain Alpine",
+      "elevation_m": 1550,
+      "soil": "Mountain / Gravelly Soil"
+    },
+    "246443": {
+      "district": "Chamoli",
+      "place": "Joshimath",
+      "zone": "Upper Himalayan Valley",
+      "elevation_m": 1890,
+      "soil": "Mountain / Gravelly Soil"
+    },
+    "246444": {
+      "district": "Chamoli",
+      "place": "Karnaprayag",
+      "zone": "Pindar Confluence Valley",
+      "elevation_m": 860,
+      "soil": "Brown Hill Soil"
+    },
+    "246442": {
+      "district": "Chamoli",
+      "place": "Gauchar",
+      "zone": "Valley River Basin",
+      "elevation_m": 800,
+      "soil": "Sandy Loam"
+    },
+    "246472": {
+      "district": "Chamoli",
+      "place": "Pokhari",
+      "zone": "Terraced Mountain Slope",
+      "elevation_m": 1900,
+      "soil": "Mountain / Gravelly Soil"
+    },
+    "249193": {
+      "district": "Uttarkashi",
+      "place": "Uttarkashi Central",
+      "zone": "Upper Himalayan Valley",
+      "elevation_m": 1158,
+      "soil": "Brown Hill Soil"
+    },
+    "249141": {
+      "district": "Uttarkashi",
+      "place": "Barkot",
+      "zone": "Yamuna Valley Terraces",
+      "elevation_m": 1220,
+      "soil": "Brown Hill Soil"
+    },
+    "249135": {
+      "district": "Uttarkashi",
+      "place": "Harsil",
+      "zone": "High Alpine Apple Belt",
+      "elevation_m": 2745,
+      "soil": "Mountain / Gravelly Soil"
+    },
+    "249151": {
+      "district": "Uttarkashi",
+      "place": "Mori",
+      "zone": "Tons Valley Apple Zone",
+      "elevation_m": 1400,
+      "soil": "Mountain / Gravelly Soil"
+    },
+    "249185": {
+      "district": "Uttarkashi",
+      "place": "Purola",
+      "zone": "Kamal River Valley",
+      "elevation_m": 1524,
+      "soil": "Sandy Loam"
+    },
+    "249152": {
+      "district": "Uttarkashi",
+      "place": "Naugaon",
+      "zone": "Yamuna Valley Terraces",
+      "elevation_m": 1100,
+      "soil": "Brown Hill Soil"
+    },
+    "246475": {
+      "district": "Rudraprayag",
+      "place": "Rudraprayag",
+      "zone": "Steep River Gorge",
+      "elevation_m": 895,
+      "soil": "Brown Hill Soil"
+    },
+    "246439": {
+      "district": "Rudraprayag",
+      "place": "Guptkashi",
+      "zone": "Mandakini Valley Terrace",
+      "elevation_m": 1319,
+      "soil": "Brown Hill Soil"
+    },
+    "246469": {
+      "district": "Rudraprayag",
+      "place": "Ukhimath",
+      "zone": "Upper Mandakini Slope",
+      "elevation_m": 1311,
+      "soil": "Mountain / Gravelly Soil"
+    },
+    "246419": {
+      "district": "Rudraprayag",
+      "place": "Agastyamuni",
+      "zone": "River Valley Terraces",
+      "elevation_m": 820,
+      "soil": "Sandy Loam"
+    },
+    "263001": {
+      "district": "Nainital",
+      "place": "Nainital",
+      "zone": "Lake Basin & Hills",
+      "elevation_m": 2084,
+      "soil": "Brown Hill Soil"
+    },
+    "244715": {
+      "district": "Nainital",
+      "place": "Ramnagar",
+      "zone": "Kosi River Valley / Terai",
+      "elevation_m": 345,
+      "soil": "Alluvial Soil"
+    },
+    "263132": {
+      "district": "Nainital",
+      "place": "Bhowali",
+      "zone": "Mid-Hills Fruit Belt",
+      "elevation_m": 1706,
+      "soil": "Brown Hill Soil"
+    },
+    "263135": {
+      "district": "Nainital",
+      "place": "Ramgarh",
+      "zone": "Fruit Bowl of Kumaon",
+      "elevation_m": 1789,
+      "soil": "Brown Hill Soil"
+    },
+    "263137": {
+      "district": "Nainital",
+      "place": "Mukteshwar",
+      "zone": "High Mountain Ridge",
+      "elevation_m": 2171,
+      "soil": "Mountain / Gravelly Soil"
+    },
+    "263138": {
+      "district": "Nainital",
+      "place": "Bhimtal",
+      "zone": "Mid-Hills Lake Basin",
+      "elevation_m": 1370,
+      "soil": "Brown Hill Soil"
+    },
+    "262501": {
+      "district": "Pithoragarh",
+      "place": "Pithoragarh Central",
+      "zone": "Eastern Mountain Ridge",
+      "elevation_m": 1627,
+      "soil": "Brown Hill Soil"
+    },
+    "262554": {
+      "district": "Pithoragarh",
+      "place": "Munsyari",
+      "zone": "High Alpine Johar Valley",
+      "elevation_m": 2200,
+      "soil": "Mountain / Gravelly Soil"
+    },
+    "262551": {
+      "district": "Pithoragarh",
+      "place": "Dharchula",
+      "zone": "Kali River Gorge",
+      "elevation_m": 940,
+      "soil": "Brown Hill Soil"
+    },
+    "262522": {
+      "district": "Pithoragarh",
+      "place": "Didihat",
+      "zone": "Mid-Hills Ridge",
+      "elevation_m": 1725,
+      "soil": "Brown Hill Soil"
+    },
+    "262523": {
+      "district": "Champawat",
+      "place": "Champawat",
+      "zone": "Sub-Himalayan Forest",
+      "elevation_m": 1610,
+      "soil": "Brown Hill Soil"
+    },
+    "263641": {
+      "district": "Bageshwar",
+      "place": "Baijnath",
+      "zone": "Garur Valley Basin",
+      "elevation_m": 1125,
+      "soil": "Alluvial Soil"
+    },
+    "263634": {
+      "district": "Bageshwar",
+      "place": "Garur",
+      "zone": "Valley Basin Terraces",
+      "elevation_m": 1100,
+      "soil": "Brown Hill Soil"
+    },
+    "263679": {
+      "district": "Bageshwar",
+      "place": "Kapkot",
+      "zone": "Saryu Valley Foothills",
+      "elevation_m": 1250,
+      "soil": "Brown Hill Soil"
+    },
+    "262524": {
+      "district": "Champawat",
+      "place": "Lohaghat",
+      "zone": "Kumaon Pine Terraces",
+      "elevation_m": 1754,
+      "soil": "Brown Hill Soil"
+    },
+    "262309": {
+      "district": "Champawat",
+      "place": "Tanakpur",
+      "zone": "Sharda River Terai Border",
+      "elevation_m": 255,
+      "soil": "Alluvial Soil"
+    }
+  }
+}

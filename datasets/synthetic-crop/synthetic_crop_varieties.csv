@@ -1,0 +1,160 @@
+Record_ID,Crop,Variety_Name,Season,Growth_Stage,Temperature_C,Rainfall_mm,Soil_Moisture_pct,Data_Status
+SYN001,Wheat,HD 2967,Rabi,Vegetative,21.0,0.3,29.1,Synthetic demo
+SYN002,Wheat,HD 2967,Rabi,Flowering,15.1,7.4,35.2,Synthetic demo
+SYN003,Wheat,HD 2967,Rabi,Maturity,24.5,0.9,31.3,Synthetic demo
+SYN004,Wheat,DBW 187,Rabi,Vegetative,12.4,2.2,32.6,Synthetic demo
+SYN005,Wheat,DBW 187,Rabi,Flowering,12.4,2.0,34.7,Synthetic demo
+SYN006,Wheat,DBW 187,Rabi,Maturity,19.6,2.2,33.8,Synthetic demo
+SYN007,Wheat,PBW 343,Rabi,Vegetative,23.3,0.1,37.1,Synthetic demo
+SYN008,Wheat,PBW 343,Rabi,Flowering,21.8,3.4,27.3,Synthetic demo
+SYN009,Wheat,PBW 343,Rabi,Maturity,25.4,3.4,26.4,Synthetic demo
+SYN010,Wheat,UP 2572,Rabi,Vegetative,13.4,8.5,34.1,Synthetic demo
+SYN011,Wheat,UP 2572,Rabi,Flowering,23.3,7.3,33.0,Synthetic demo
+SYN012,Wheat,UP 2572,Rabi,Maturity,25.6,3.8,33.3,Synthetic demo
+SYN013,Wheat,HD 3086,Rabi,Vegetative,23.6,6.2,37.9,Synthetic demo
+SYN014,Wheat,HD 3086,Rabi,Flowering,20.1,7.0,25.7,Synthetic demo
+SYN015,Wheat,HD 3086,Rabi,Maturity,15.2,2.9,26.2,Synthetic demo
+SYN016,Rice,Pusa Basmati 1121,Kharif,Vegetative,27.1,8.5,50.6,Synthetic demo
+SYN017,Rice,Pusa Basmati 1121,Kharif,Flowering,30.7,17.8,52.4,Synthetic demo
+SYN018,Rice,Pusa Basmati 1121,Kharif,Maturity,26.9,14.3,63.7,Synthetic demo
+SYN019,Rice,PR 126,Kharif,Vegetative,30.8,26.3,48.4,Synthetic demo
+SYN020,Rice,PR 126,Kharif,Flowering,31.6,10.7,52.6,Synthetic demo
+SYN021,Rice,PR 126,Kharif,Maturity,33.9,27.4,56.1,Synthetic demo
+SYN022,Rice,Pant Dhan 12,Kharif,Vegetative,31.2,34.5,60.5,Synthetic demo
+SYN023,Rice,Pant Dhan 12,Kharif,Flowering,27.1,6.1,51.3,Synthetic demo
+SYN024,Rice,Pant Dhan 12,Kharif,Maturity,27.4,12.4,63.9,Synthetic demo
+SYN025,Rice,Swarna,Kharif,Vegetative,32.9,16.0,58.1,Synthetic demo
+SYN026,Rice,Swarna,Kharif,Flowering,28.6,37.0,54.2,Synthetic demo
+SYN027,Rice,Swarna,Kharif,Maturity,27.4,13.6,56.2,Synthetic demo
+SYN028,Rice,MTU 1010,Kharif,Vegetative,27.4,25.5,63.0,Synthetic demo
+SYN029,Rice,MTU 1010,Kharif,Flowering,28.6,12.7,65.0,Synthetic demo
+SYN030,Rice,MTU 1010,Kharif,Maturity,29.6,8.2,45.9,Synthetic demo
+SYN031,Maize,HQPM-1,Kharif,Vegetative,23.1,16.4,45.8,Synthetic demo
+SYN032,Maize,HQPM-1,Kharif,Flowering,26.2,3.5,37.6,Synthetic demo
+SYN033,Maize,HQPM-1,Kharif,Maturity,32.0,14.2,49.4,Synthetic demo
+SYN034,Maize,Pant Sankar Makka 1,Kharif,Vegetative,30.6,2.3,44.4,Synthetic demo
+SYN035,Maize,Pant Sankar Makka 1,Kharif,Flowering,28.8,14.4,35.3,Synthetic demo
+SYN036,Maize,Pant Sankar Makka 1,Kharif,Maturity,28.4,4.6,38.7,Synthetic demo
+SYN037,Maize,DHM 117,Kharif,Vegetative,26.5,23.9,47.5,Synthetic demo
+SYN038,Maize,DHM 117,Kharif,Flowering,24.6,13.5,33.6,Synthetic demo
+SYN039,Maize,DHM 117,Kharif,Maturity,31.1,22.0,36.0,Synthetic demo
+SYN040,Maize,Ganga 5,Kharif,Vegetative,28.4,16.0,33.1,Synthetic demo
+SYN041,Maize,Ganga 5,Kharif,Flowering,29.6,14.4,45.6,Synthetic demo
+SYN042,Maize,Ganga 5,Kharif,Maturity,27.3,2.0,36.5,Synthetic demo
+SYN043,Onion,N-53,Rabi,Vegetative,14.3,7.4,38.5,Synthetic demo
+SYN044,Onion,N-53,Rabi,Flowering,25.6,2.5,28.7,Synthetic demo
+SYN045,Onion,N-53,Rabi,Maturity,26.3,7.6,29.0,Synthetic demo
+SYN046,Onion,Agrifound Dark Red,Rabi,Vegetative,20.8,0.6,37.1,Synthetic demo
+SYN047,Onion,Agrifound Dark Red,Rabi,Flowering,24.7,1.0,33.7,Synthetic demo
+SYN048,Onion,Agrifound Dark Red,Rabi,Maturity,21.7,2.1,38.5,Synthetic demo
+SYN049,Onion,Pusa Red,Rabi,Vegetative,19.9,1.7,34.5,Synthetic demo
+SYN050,Onion,Pusa Red,Rabi,Flowering,24.2,1.6,31.7,Synthetic demo
+SYN051,Onion,Pusa Red,Rabi,Maturity,27.9,5.2,33.3,Synthetic demo
+SYN052,Onion,Agrifound Light Red,Rabi,Vegetative,21.2,1.0,30.7,Synthetic demo
+SYN053,Onion,Agrifound Light Red,Rabi,Flowering,18.7,4.7,30.8,Synthetic demo
+SYN054,Onion,Agrifound Light Red,Rabi,Maturity,17.1,0.6,35.6,Synthetic demo
+SYN055,Tomato,Pusa Ruby,Season varies,Vegetative,20.7,13.6,43.2,Synthetic demo
+SYN056,Tomato,Pusa Ruby,Season varies,Flowering,18.9,3.6,40.7,Synthetic demo
+SYN057,Tomato,Pusa Ruby,Season varies,Maturity,20.6,2.0,44.2,Synthetic demo
+SYN058,Tomato,Arka Rakshak,Season varies,Vegetative,24.9,7.1,42.2,Synthetic demo
+SYN059,Tomato,Arka Rakshak,Season varies,Flowering,27.7,2.9,33.3,Synthetic demo
+SYN060,Tomato,Arka Rakshak,Season varies,Maturity,23.2,6.4,38.1,Synthetic demo
+SYN061,Tomato,Pant Bahar,Season varies,Vegetative,26.7,10.1,44.8,Synthetic demo
+SYN062,Tomato,Pant Bahar,Season varies,Flowering,19.2,6.0,36.4,Synthetic demo
+SYN063,Tomato,Pant Bahar,Season varies,Maturity,28.3,3.7,34.5,Synthetic demo
+SYN064,Tomato,Arka Vikas,Season varies,Vegetative,23.4,6.3,35.6,Synthetic demo
+SYN065,Tomato,Arka Vikas,Season varies,Flowering,21.0,13.8,37.8,Synthetic demo
+SYN066,Tomato,Arka Vikas,Season varies,Maturity,28.3,8.3,32.7,Synthetic demo
+SYN067,Potato,Kufri Jyoti,Rabi,Vegetative,24.0,6.7,41.6,Synthetic demo
+SYN068,Potato,Kufri Jyoti,Rabi,Flowering,23.1,6.8,32.0,Synthetic demo
+SYN069,Potato,Kufri Jyoti,Rabi,Maturity,17.8,1.7,34.8,Synthetic demo
+SYN070,Potato,Kufri Bahar,Rabi,Vegetative,12.7,3.0,41.8,Synthetic demo
+SYN071,Potato,Kufri Bahar,Rabi,Flowering,15.2,6.3,35.5,Synthetic demo
+SYN072,Potato,Kufri Bahar,Rabi,Maturity,17.1,7.7,41.9,Synthetic demo
+SYN073,Potato,Kufri Giriraj,Rabi,Vegetative,18.7,5.7,31.9,Synthetic demo
+SYN074,Potato,Kufri Giriraj,Rabi,Flowering,15.6,7.7,37.0,Synthetic demo
+SYN075,Potato,Kufri Giriraj,Rabi,Maturity,18.5,6.0,30.7,Synthetic demo
+SYN076,Potato,Kufri Pukhraj,Rabi,Vegetative,19.0,4.0,40.2,Synthetic demo
+SYN077,Potato,Kufri Pukhraj,Rabi,Flowering,13.9,7.7,31.0,Synthetic demo
+SYN078,Potato,Kufri Pukhraj,Rabi,Maturity,14.2,4.8,38.1,Synthetic demo
+SYN079,Potato,Kufri Chipsona-1,Rabi,Vegetative,14.8,1.0,40.7,Synthetic demo
+SYN080,Potato,Kufri Chipsona-1,Rabi,Flowering,15.0,4.8,37.4,Synthetic demo
+SYN081,Potato,Kufri Chipsona-1,Rabi,Maturity,17.0,4.7,36.3,Synthetic demo
+SYN082,Mustard,Pusa Bold,Rabi,Vegetative,24.0,1.2,31.3,Synthetic demo
+SYN083,Mustard,Pusa Bold,Rabi,Flowering,13.6,2.4,30.7,Synthetic demo
+SYN084,Mustard,Pusa Bold,Rabi,Maturity,14.5,1.9,31.8,Synthetic demo
+SYN085,Mustard,Pusa Mustard 27,Rabi,Vegetative,11.1,2.7,35.0,Synthetic demo
+SYN086,Mustard,Pusa Mustard 27,Rabi,Flowering,24.9,0.4,24.8,Synthetic demo
+SYN087,Mustard,Pusa Mustard 27,Rabi,Maturity,14.0,5.6,33.5,Synthetic demo
+SYN088,Mustard,Varuna,Rabi,Vegetative,23.2,2.2,24.1,Synthetic demo
+SYN089,Mustard,Varuna,Rabi,Flowering,22.5,4.2,30.0,Synthetic demo
+SYN090,Mustard,Varuna,Rabi,Maturity,24.8,3.9,22.1,Synthetic demo
+SYN091,Mustard,RH 749,Rabi,Vegetative,22.3,1.8,30.6,Synthetic demo
+SYN092,Mustard,RH 749,Rabi,Flowering,24.1,0.8,23.5,Synthetic demo
+SYN093,Mustard,RH 749,Rabi,Maturity,11.6,3.3,25.5,Synthetic demo
+SYN094,Chickpea (Gram),Pusa 256,Rabi,Vegetative,21.1,4.3,22.4,Synthetic demo
+SYN095,Chickpea (Gram),Pusa 256,Rabi,Flowering,21.5,1.6,25.9,Synthetic demo
+SYN096,Chickpea (Gram),Pusa 256,Rabi,Maturity,25.6,5.1,21.1,Synthetic demo
+SYN097,Chickpea (Gram),Pant G 186,Rabi,Vegetative,18.4,1.7,20.0,Synthetic demo
+SYN098,Chickpea (Gram),Pant G 186,Rabi,Flowering,23.6,3.8,23.1,Synthetic demo
+SYN099,Chickpea (Gram),Pant G 186,Rabi,Maturity,23.1,3.3,25.1,Synthetic demo
+SYN100,Chickpea (Gram),JG 11,Rabi,Vegetative,12.1,0.5,30.6,Synthetic demo
+SYN101,Chickpea (Gram),JG 11,Rabi,Flowering,25.6,3.3,30.0,Synthetic demo
+SYN102,Chickpea (Gram),JG 11,Rabi,Maturity,20.7,0.9,21.5,Synthetic demo
+SYN103,Chickpea (Gram),Pusa 372,Rabi,Vegetative,16.6,5.4,29.6,Synthetic demo
+SYN104,Chickpea (Gram),Pusa 372,Rabi,Flowering,24.9,5.4,22.5,Synthetic demo
+SYN105,Chickpea (Gram),Pusa 372,Rabi,Maturity,15.7,0.6,29.4,Synthetic demo
+SYN106,Lentil,Pant L 639,Rabi,Vegetative,23.3,2.4,27.4,Synthetic demo
+SYN107,Lentil,Pant L 639,Rabi,Flowering,12.3,5.6,30.4,Synthetic demo
+SYN108,Lentil,Pant L 639,Rabi,Maturity,24.6,4.9,30.6,Synthetic demo
+SYN109,Lentil,Pant L 4,Rabi,Vegetative,10.4,4.4,24.0,Synthetic demo
+SYN110,Lentil,Pant L 4,Rabi,Flowering,24.0,4.8,30.4,Synthetic demo
+SYN111,Lentil,Pant L 4,Rabi,Maturity,22.2,1.6,29.4,Synthetic demo
+SYN112,Lentil,VL Masoor 126,Rabi,Vegetative,11.6,5.2,30.3,Synthetic demo
+SYN113,Lentil,VL Masoor 126,Rabi,Flowering,13.3,4.9,25.5,Synthetic demo
+SYN114,Lentil,VL Masoor 126,Rabi,Maturity,14.6,4.8,22.7,Synthetic demo
+SYN115,Pea,Pant Matar 42,Rabi,Vegetative,10.3,1.5,31.9,Synthetic demo
+SYN116,Pea,Pant Matar 42,Rabi,Flowering,20.4,7.7,31.3,Synthetic demo
+SYN117,Pea,Pant Matar 42,Rabi,Maturity,17.7,3.2,39.8,Synthetic demo
+SYN118,Pea,VL Matar 42,Rabi,Vegetative,16.4,7.5,29.4,Synthetic demo
+SYN119,Pea,VL Matar 42,Rabi,Flowering,21.6,1.4,39.6,Synthetic demo
+SYN120,Pea,VL Matar 42,Rabi,Maturity,13.2,0.9,33.2,Synthetic demo
+SYN121,Pea,Azad P-1,Rabi,Vegetative,18.7,2.5,35.3,Synthetic demo
+SYN122,Pea,Azad P-1,Rabi,Flowering,16.1,3.1,34.9,Synthetic demo
+SYN123,Pea,Azad P-1,Rabi,Maturity,13.1,5.7,28.0,Synthetic demo
+SYN124,Pea,Arkel,Rabi,Vegetative,21.1,4.3,36.6,Synthetic demo
+SYN125,Pea,Arkel,Rabi,Flowering,18.9,5.4,32.4,Synthetic demo
+SYN126,Pea,Arkel,Rabi,Maturity,10.8,5.3,32.0,Synthetic demo
+SYN127,Finger Millet (Mandua),VL Mandua 347,Kharif,Vegetative,23.1,26.2,35.8,Synthetic demo
+SYN128,Finger Millet (Mandua),VL Mandua 347,Kharif,Flowering,23.0,12.7,31.1,Synthetic demo
+SYN129,Finger Millet (Mandua),VL Mandua 347,Kharif,Maturity,24.0,12.4,26.9,Synthetic demo
+SYN130,Finger Millet (Mandua),PRM 1,Kharif,Vegetative,24.2,28.5,35.2,Synthetic demo
+SYN131,Finger Millet (Mandua),PRM 1,Kharif,Flowering,29.0,20.4,29.5,Synthetic demo
+SYN132,Finger Millet (Mandua),PRM 1,Kharif,Maturity,25.5,5.0,29.3,Synthetic demo
+SYN133,Soybean,Pant Soybean 1347,Kharif,Vegetative,27.4,22.4,44.8,Synthetic demo
+SYN134,Soybean,Pant Soybean 1347,Kharif,Flowering,27.7,18.3,38.2,Synthetic demo
+SYN135,Soybean,Pant Soybean 1347,Kharif,Maturity,27.8,32.0,46.9,Synthetic demo
+SYN136,Soybean,JS 335,Kharif,Vegetative,25.4,7.5,42.7,Synthetic demo
+SYN137,Soybean,JS 335,Kharif,Flowering,29.1,15.1,47.3,Synthetic demo
+SYN138,Soybean,JS 335,Kharif,Maturity,30.0,25.2,38.4,Synthetic demo
+SYN139,Soybean,Pant Soybean 1092,Kharif,Vegetative,25.6,5.7,38.7,Synthetic demo
+SYN140,Soybean,Pant Soybean 1092,Kharif,Flowering,27.8,30.5,36.1,Synthetic demo
+SYN141,Soybean,Pant Soybean 1092,Kharif,Maturity,27.3,23.9,37.9,Synthetic demo
+SYN142,Cauliflower,Pusa Snowball K-1,Rabi,Vegetative,20.4,4.0,35.2,Synthetic demo
+SYN143,Cauliflower,Pusa Snowball K-1,Rabi,Flowering,19.9,0.0,41.8,Synthetic demo
+SYN144,Cauliflower,Pusa Snowball K-1,Rabi,Maturity,21.2,0.9,37.5,Synthetic demo
+SYN145,Cauliflower,Pusa Shubhra,Rabi,Vegetative,14.1,7.7,38.7,Synthetic demo
+SYN146,Cauliflower,Pusa Shubhra,Rabi,Flowering,12.6,2.0,43.0,Synthetic demo
+SYN147,Cauliflower,Pusa Shubhra,Rabi,Maturity,17.5,6.4,40.7,Synthetic demo
+SYN148,Capsicum,California Wonder,Season varies,Vegetative,29.9,7.1,44.4,Synthetic demo
+SYN149,Capsicum,California Wonder,Season varies,Flowering,28.7,7.4,41.4,Synthetic demo
+SYN150,Capsicum,California Wonder,Season varies,Maturity,24.1,10.0,39.1,Synthetic demo
+SYN151,Capsicum,VL Shimla Mirch 2,Season varies,Vegetative,28.8,8.9,38.2,Synthetic demo
+SYN152,Capsicum,VL Shimla Mirch 2,Season varies,Flowering,21.1,3.0,40.3,Synthetic demo
+SYN153,Capsicum,VL Shimla Mirch 2,Season varies,Maturity,27.2,6.3,40.1,Synthetic demo
+SYN154,Sugarcane,Co 0238,Annual,Vegetative,25.3,7.3,39.9,Synthetic demo
+SYN155,Sugarcane,Co 0238,Annual,Flowering,25.3,14.6,44.2,Synthetic demo
+SYN156,Sugarcane,Co 0238,Annual,Maturity,23.7,11.9,46.8,Synthetic demo
+SYN157,Sugarcane,CoPant 97222,Annual,Vegetative,30.5,6.9,41.9,Synthetic demo
+SYN158,Sugarcane,CoPant 97222,Annual,Flowering,28.5,17.5,38.5,Synthetic demo
+SYN159,Sugarcane,CoPant 97222,Annual,Maturity,27.0,32.1,44.9,Synthetic demo
