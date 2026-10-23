@@ -5,8 +5,10 @@
  * Predicts the optimal crop and variety matching live weather (temperature, rainfall, soil moisture, season).
  */
 
-const BACKEND_BASE = 'http://localhost:8000';
-const ML_BASE = 'http://127.0.0.1:5000';
+import { BACKEND_URL, ML_URL } from '../config/api';
+
+const BACKEND_BASE = BACKEND_URL;
+const ML_BASE = ML_URL;
 
 export interface SyntheticCropRecommendation {
   crop: string;

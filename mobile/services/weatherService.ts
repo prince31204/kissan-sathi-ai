@@ -7,8 +7,10 @@
  * Priority 3: Open-Meteo Fallback
  */
 
-export const OPENWEATHERMAP_API_KEY = process.env.EXPO_PUBLIC_WEATHER_API_KEY || '';
-const BACKEND_BASE = 'http://localhost:8000';
+import { BACKEND_URL, WEATHER_API_KEY } from '../config/api';
+
+export const OPENWEATHERMAP_API_KEY = WEATHER_API_KEY;
+const BACKEND_BASE = BACKEND_URL;
 
 export interface UnifiedDailyForecast {
   day: string;
