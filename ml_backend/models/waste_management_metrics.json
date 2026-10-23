@@ -1,9 +1,9 @@
 {
-  "waste_r2_score": 0.9996,
-  "waste_mae_tonnes": 0.16,
-  "burning_r2_score": 0.9996,
-  "burning_mae_kg": 263.9,
-  "wealth_r2_score": 0.9997,
+  "waste_r2_score": 0.9989,
+  "waste_mae_tonnes": 0.32,
+  "burning_r2_score": 0.9987,
+  "burning_mae_kg": 571.7,
+  "wealth_r2_score": 0.9989,
   "crops": [
     "Cotton",
     "Groundnut",

@@ -1,7 +1,7 @@
 {
-  "classifier_accuracy": 99.83,
-  "water_r2_score": 0.9944,
-  "duration_r2_score": 0.987,
+  "classifier_accuracy": 99.48,
+  "water_r2_score": 0.9912,
+  "duration_r2_score": 0.9823,
   "features": [
     "Crop_Enc",
     "Soil_Enc",

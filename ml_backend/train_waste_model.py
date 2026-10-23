@@ -187,33 +187,33 @@ def train_waste_models():
         X, y_waste, y_co2, y_pm25, y_wealth, test_size=0.2, random_state=42
     )
     
-    # 1. Waste Generation Regressor
-    reg_waste = RandomForestRegressor(n_estimators=100, max_depth=16, random_state=42, n_jobs=-1)
+    # 1. Waste Generation Regressor (Memory-optimized for <512MB RAM constraints)
+    reg_waste = RandomForestRegressor(n_estimators=35, max_depth=10, random_state=42, n_jobs=-1)
     reg_waste.fit(X_tr, y_w_tr)
     r2_waste = r2_score(y_w_te, reg_waste.predict(X_te))
     mae_waste = mean_absolute_error(y_w_te, reg_waste.predict(X_te))
     print(f"Waste Generation Regressor R2: {r2_waste:.4f} | MAE: {mae_waste:.2f} Tonnes")
     
     # 2. Burn Emission Regressor
-    reg_burn = RandomForestRegressor(n_estimators=100, max_depth=16, random_state=42, n_jobs=-1)
+    reg_burn = RandomForestRegressor(n_estimators=35, max_depth=10, random_state=42, n_jobs=-1)
     reg_burn.fit(X_tr, y_c_tr)
     r2_burn = r2_score(y_c_te, reg_burn.predict(X_te))
     mae_burn = mean_absolute_error(y_c_te, reg_burn.predict(X_te))
     print(f"Burning CO2e Regressor R2: {r2_burn:.4f} | MAE: {mae_burn:.1f} kg")
     
     # 3. Wealth & Economics Regressor
-    reg_wealth = RandomForestRegressor(n_estimators=100, max_depth=16, random_state=42, n_jobs=-1)
+    reg_wealth = RandomForestRegressor(n_estimators=35, max_depth=10, random_state=42, n_jobs=-1)
     reg_wealth.fit(X_tr, y_wl_tr)
     r2_wealth = r2_score(y_wl_te, reg_wealth.predict(X_te))
     print(f"Wealth Potential Regressor R2: {r2_wealth:.4f}")
     
-    # Save artifacts
-    joblib.dump(reg_waste, os.path.join(MODEL_DIR, 'waste_generation_regressor.joblib'))
-    joblib.dump(reg_burn, os.path.join(MODEL_DIR, 'waste_burning_regressor.joblib'))
-    joblib.dump(reg_wealth, os.path.join(MODEL_DIR, 'waste_wealth_regressor.joblib'))
-    joblib.dump(crop_encoder, os.path.join(MODEL_DIR, 'waste_crop_encoder.joblib'))
-    joblib.dump(season_encoder, os.path.join(MODEL_DIR, 'waste_season_encoder.joblib'))
-    joblib.dump(state_encoder, os.path.join(MODEL_DIR, 'waste_state_encoder.joblib'))
+    # Save artifacts with compression to save disk and memory footprint
+    joblib.dump(reg_waste, os.path.join(MODEL_DIR, 'waste_generation_regressor.joblib'), compress=3)
+    joblib.dump(reg_burn, os.path.join(MODEL_DIR, 'waste_burning_regressor.joblib'), compress=3)
+    joblib.dump(reg_wealth, os.path.join(MODEL_DIR, 'waste_wealth_regressor.joblib'), compress=3)
+    joblib.dump(crop_encoder, os.path.join(MODEL_DIR, 'waste_crop_encoder.joblib'), compress=3)
+    joblib.dump(season_encoder, os.path.join(MODEL_DIR, 'waste_season_encoder.joblib'), compress=3)
+    joblib.dump(state_encoder, os.path.join(MODEL_DIR, 'waste_state_encoder.joblib'), compress=3)
     
     metrics = {
         'waste_r2_score': round(r2_waste, 4),

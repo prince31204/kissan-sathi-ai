@@ -1,7 +1,7 @@
 {
-  "total_r2_score": 0.9978,
-  "total_mae_kg": 155.03,
-  "eco_accuracy": 89.53,
+  "total_r2_score": 0.9964,
+  "total_mae_kg": 209.23,
+  "eco_accuracy": 83.8,
   "crops": [
     "Cotton",
     "Maize",

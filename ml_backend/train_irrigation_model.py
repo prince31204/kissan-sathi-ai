@@ -182,7 +182,7 @@ def train_models():
     # 1. Classification Model: Irrigation Needed (Yes/No)
     X_train_c, X_test_c, y_train_c, y_test_c = train_test_split(X, y_clf, test_size=0.2, random_state=42, stratify=y_clf)
     
-    clf = RandomForestClassifier(n_estimators=100, max_depth=16, random_state=42, n_jobs=-1)
+    clf = RandomForestClassifier(n_estimators=35, max_depth=10, random_state=42, n_jobs=-1)
     clf.fit(X_train_c, y_train_c)
     
     y_pred_c = clf.predict(X_test_c)
@@ -202,26 +202,26 @@ def train_models():
         X_reg, y_liters, y_duration, test_size=0.2, random_state=42
     )
     
-    reg_liters = RandomForestRegressor(n_estimators=100, max_depth=16, random_state=42, n_jobs=-1)
+    reg_liters = RandomForestRegressor(n_estimators=35, max_depth=10, random_state=42, n_jobs=-1)
     reg_liters.fit(X_train_r, y_train_l)
     
     r2_liters = r2_score(y_test_l, reg_liters.predict(X_test_r))
     mae_liters = mean_absolute_error(y_test_l, reg_liters.predict(X_test_r))
     print(f"\nWater Liters Regressor R2: {r2_liters:.4f}, MAE: {mae_liters:.1f} L")
     
-    reg_duration = RandomForestRegressor(n_estimators=100, max_depth=16, random_state=42, n_jobs=-1)
+    reg_duration = RandomForestRegressor(n_estimators=35, max_depth=10, random_state=42, n_jobs=-1)
     reg_duration.fit(X_train_r, y_train_d)
     
     r2_dur = r2_score(y_test_d, reg_duration.predict(X_test_r))
     mae_dur = mean_absolute_error(y_test_d, reg_duration.predict(X_test_r))
     print(f"Duration Regressor R2: {r2_dur:.4f}, MAE: {mae_dur:.2f} Hours")
     
-    # Save models and encoders
-    joblib.dump(clf, os.path.join(MODEL_DIR, 'irrigation_classifier.joblib'))
-    joblib.dump(reg_liters, os.path.join(MODEL_DIR, 'water_liters_regressor.joblib'))
-    joblib.dump(reg_duration, os.path.join(MODEL_DIR, 'duration_regressor.joblib'))
-    joblib.dump(crop_encoder, os.path.join(MODEL_DIR, 'crop_encoder.joblib'))
-    joblib.dump(soil_encoder, os.path.join(MODEL_DIR, 'soil_encoder.joblib'))
+    # Save models and encoders with compression
+    joblib.dump(clf, os.path.join(MODEL_DIR, 'irrigation_classifier.joblib'), compress=3)
+    joblib.dump(reg_liters, os.path.join(MODEL_DIR, 'water_liters_regressor.joblib'), compress=3)
+    joblib.dump(reg_duration, os.path.join(MODEL_DIR, 'duration_regressor.joblib'), compress=3)
+    joblib.dump(crop_encoder, os.path.join(MODEL_DIR, 'crop_encoder.joblib'), compress=3)
+    joblib.dump(soil_encoder, os.path.join(MODEL_DIR, 'soil_encoder.joblib'), compress=3)
     
     # Save metadata
     metrics = {

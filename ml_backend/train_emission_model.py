@@ -265,7 +265,7 @@ def train_emission_models():
         X, y_total, y_diesel, y_fertilizer, y_soil, y_mitigation, y_eco, test_size=0.2, random_state=42
     )
     
-    reg_total = RandomForestRegressor(n_estimators=100, max_depth=16, random_state=42, n_jobs=-1)
+    reg_total = RandomForestRegressor(n_estimators=35, max_depth=10, random_state=42, n_jobs=-1)
     reg_total.fit(X_train, y_tot_tr)
     r2_tot = r2_score(y_tot_te, reg_total.predict(X_test))
     mae_tot = mean_absolute_error(y_tot_te, reg_total.predict(X_test))
@@ -274,18 +274,18 @@ def train_emission_models():
     print(f"==========================================")
     
     # 2. Eco Rating Classifier
-    clf_eco = RandomForestClassifier(n_estimators=80, max_depth=12, random_state=42, n_jobs=-1)
+    clf_eco = RandomForestClassifier(n_estimators=30, max_depth=8, random_state=42, n_jobs=-1)
     clf_eco.fit(X_train, y_eco_tr)
     acc_eco = accuracy_score(y_eco_te, clf_eco.predict(X_test))
     print(f"Eco-Rating Classifier Accuracy: {acc_eco * 100:.2f}%")
     
-    # Save model artifacts
-    joblib.dump(reg_total, os.path.join(MODEL_DIR, 'carbon_emission_regressor.joblib'))
-    joblib.dump(clf_eco, os.path.join(MODEL_DIR, 'eco_rating_classifier.joblib'))
-    joblib.dump(crop_encoder, os.path.join(MODEL_DIR, 'emission_crop_encoder.joblib'))
-    joblib.dump(residue_encoder, os.path.join(MODEL_DIR, 'emission_residue_encoder.joblib'))
-    joblib.dump(irrigation_encoder, os.path.join(MODEL_DIR, 'emission_irrigation_encoder.joblib'))
-    joblib.dump(eco_encoder, os.path.join(MODEL_DIR, 'eco_rating_encoder.joblib'))
+    # Save model artifacts with compression
+    joblib.dump(reg_total, os.path.join(MODEL_DIR, 'carbon_emission_regressor.joblib'), compress=3)
+    joblib.dump(clf_eco, os.path.join(MODEL_DIR, 'eco_rating_classifier.joblib'), compress=3)
+    joblib.dump(crop_encoder, os.path.join(MODEL_DIR, 'emission_crop_encoder.joblib'), compress=3)
+    joblib.dump(residue_encoder, os.path.join(MODEL_DIR, 'emission_residue_encoder.joblib'), compress=3)
+    joblib.dump(irrigation_encoder, os.path.join(MODEL_DIR, 'emission_irrigation_encoder.joblib'), compress=3)
+    joblib.dump(eco_encoder, os.path.join(MODEL_DIR, 'eco_rating_encoder.joblib'), compress=3)
     
     metrics = {
         'total_r2_score': round(r2_tot, 4),

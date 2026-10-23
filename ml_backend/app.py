@@ -1,4 +1,17 @@
 import os
+import gc
+
+# ---------------------------------------------------------------------------
+# Strict low-memory settings for Render (512MB RAM free tier constraint)
+# Prevent glibc arena explosion and OpenMP/MKL thread pools from exhausting RAM
+# ---------------------------------------------------------------------------
+os.environ["MALLOC_ARENA_MAX"] = "2"
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+os.environ["NUMEXPR_NUM_THREADS"] = "1"
+
 import json
 import urllib.request
 import numpy as np
@@ -13,161 +26,236 @@ CORS(app)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_DIR = os.path.join(BASE_DIR, 'models')
 
-# Load trained models & encoders
-print("Loading Smart Irrigation & Carbon Emission ML models...")
-try:
-    clf = joblib.load(os.path.join(MODEL_DIR, 'irrigation_classifier.joblib'))
-    reg_liters = joblib.load(os.path.join(MODEL_DIR, 'water_liters_regressor.joblib'))
-    reg_duration = joblib.load(os.path.join(MODEL_DIR, 'duration_regressor.joblib'))
-    crop_encoder = joblib.load(os.path.join(MODEL_DIR, 'crop_encoder.joblib'))
-    soil_encoder = joblib.load(os.path.join(MODEL_DIR, 'soil_encoder.joblib'))
-    with open(os.path.join(MODEL_DIR, 'model_metrics.json'), 'r') as f:
-        metrics = json.load(f)
-    print("Irrigation ML models loaded successfully.")
-except Exception as e:
-    print(f"Warning: Could not load some irrigation model files: {e}")
-    clf, reg_liters, reg_duration, crop_encoder, soil_encoder = None, None, None, None, None
-    metrics = {
-        'features': ['Crop_Enc', 'Soil_Enc', 'SoilMoisture_pct', 'Temperature_C', 'Humidity_pct', 'Rainfall_mm', 'ET0_mm', 'DaysSinceLastIrrigation', 'FieldSize_Acres', 'Pump_HP'],
-        'crops': ['Wheat', 'Rice', 'Maize', 'Mustard', 'Potato', 'Sugarcane', 'Tomato', 'Pulses'],
-        'soils': ['Clay', 'Clay Loam', 'Loam', 'Sandy', 'Sandy Loam'],
-        'classifier_accuracy': 99.83
-    }
+# Models & Encoders (Lazy-loaded on first request to minimize RAM footprint on Render < 512MiB)
+clf = None
+reg_liters = None
+reg_duration = None
+crop_encoder = None
+soil_encoder = None
+metrics = {
+    'features': ['Crop_Enc', 'Soil_Enc', 'SoilMoisture_pct', 'Temperature_C', 'Humidity_pct', 'Rainfall_mm', 'ET0_mm', 'DaysSinceLastIrrigation', 'FieldSize_Acres', 'Pump_HP'],
+    'crops': ['Wheat', 'Rice', 'Maize', 'Mustard', 'Potato', 'Sugarcane', 'Tomato', 'Pulses'],
+    'soils': ['Clay', 'Clay Loam', 'Loam', 'Sandy', 'Sandy Loam'],
+    'classifier_accuracy': 99.83
+}
 
-# Load Carbon Footprint Models
-try:
-    reg_emission = joblib.load(os.path.join(MODEL_DIR, 'carbon_emission_regressor.joblib'))
-    clf_eco = joblib.load(os.path.join(MODEL_DIR, 'eco_rating_classifier.joblib'))
-    emission_crop_encoder = joblib.load(os.path.join(MODEL_DIR, 'emission_crop_encoder.joblib'))
-    emission_residue_encoder = joblib.load(os.path.join(MODEL_DIR, 'emission_residue_encoder.joblib'))
-    emission_irrigation_encoder = joblib.load(os.path.join(MODEL_DIR, 'emission_irrigation_encoder.joblib'))
-    eco_rating_encoder = joblib.load(os.path.join(MODEL_DIR, 'eco_rating_encoder.joblib'))
-    with open(os.path.join(MODEL_DIR, 'carbon_emission_metrics.json'), 'r') as f:
-        emission_metrics = json.load(f)
-    print("Carbon Emission ML models loaded successfully.")
-except Exception as e:
-    print(f"Warning: Could not load carbon emission models: {e}")
-    reg_emission, clf_eco = None, None
-    emission_crop_encoder, emission_residue_encoder, emission_irrigation_encoder, eco_rating_encoder = None, None, None, None
-    emission_metrics = {
-        'crops': ['Cotton', 'Maize', 'Mustard', 'Potato', 'Pulses', 'Rice', 'Sugarcane', 'Wheat'],
-        'residue_options': ['Burned (Stubble Burning)', 'Incorporated into Soil', 'Mulched / Happy Seeder (Zero Till)', 'Removed from Field'],
-        'irrigation_options': ['Canal (Gravity)', 'Diesel Engine Pump', 'Electric Tube Well', 'Solar Pump'],
-        'total_r2_score': 0.9978
-    }
+reg_emission = None
+clf_eco = None
+emission_crop_encoder = None
+emission_residue_encoder = None
+emission_irrigation_encoder = None
+eco_rating_encoder = None
+emission_metrics = {
+    'crops': ['Cotton', 'Maize', 'Mustard', 'Potato', 'Pulses', 'Rice', 'Sugarcane', 'Wheat'],
+    'residue_options': ['Burned (Stubble Burning)', 'Incorporated into Soil', 'Mulched / Happy Seeder (Zero Till)', 'Removed from Field'],
+    'irrigation_options': ['Canal (Gravity)', 'Diesel Engine Pump', 'Electric Tube Well', 'Solar Pump'],
+    'total_r2_score': 0.9978
+}
 
-# Load Agricultural Waste Management Models
-try:
-    reg_waste = joblib.load(os.path.join(MODEL_DIR, 'waste_generation_regressor.joblib'))
-    reg_burn = joblib.load(os.path.join(MODEL_DIR, 'waste_burning_regressor.joblib'))
-    reg_wealth = joblib.load(os.path.join(MODEL_DIR, 'waste_wealth_regressor.joblib'))
-    waste_crop_encoder = joblib.load(os.path.join(MODEL_DIR, 'waste_crop_encoder.joblib'))
-    waste_season_encoder = joblib.load(os.path.join(MODEL_DIR, 'waste_season_encoder.joblib'))
-    waste_state_encoder = joblib.load(os.path.join(MODEL_DIR, 'waste_state_encoder.joblib'))
-    with open(os.path.join(MODEL_DIR, 'waste_management_metrics.json'), 'r') as f:
-        waste_metrics = json.load(f)
-    print("Waste Management ML models loaded successfully.")
-except Exception as e:
-    print(f"Warning: Could not load waste models: {e}")
-    reg_waste, reg_burn, reg_wealth = None, None, None
-    waste_crop_encoder, waste_season_encoder, waste_state_encoder = None, None, None
-    waste_metrics = {
-        'crops': ['Cotton', 'Groundnut', 'Maize', 'Mustard', 'Rice (Paddy)', 'Sugarcane', 'Wheat'],
-        'seasons': ['Kharif (Monsoon)', 'Rabi (Winter)', 'Zaid / Summer'],
-        'states': ['Bihar', 'Gujarat', 'Haryana', 'Madhya Pradesh', 'Maharashtra', 'Punjab', 'Rajasthan', 'Uttar Pradesh', 'Uttarakhand'],
-        'waste_r2_score': 0.9996
-    }
+reg_waste = None
+reg_burn = None
+reg_wealth = None
+waste_crop_encoder = None
+waste_season_encoder = None
+waste_state_encoder = None
+waste_metrics = {
+    'crops': ['Cotton', 'Groundnut', 'Maize', 'Mustard', 'Rice (Paddy)', 'Sugarcane', 'Wheat'],
+    'seasons': ['Kharif (Monsoon)', 'Rabi (Winter)', 'Zaid / Summer'],
+    'states': ['Bihar', 'Gujarat', 'Haryana', 'Madhya Pradesh', 'Maharashtra', 'Punjab', 'Rajasthan', 'Uttar Pradesh', 'Uttarakhand'],
+    'waste_r2_score': 0.9996
+}
 
-# Load Uttarakhand Climate-Risk & Rainfall Models (Trained on 11,105 Telemetry Data points)
-try:
-    clf_climate = joblib.load(os.path.join(MODEL_DIR, 'climate_risk_classifier.joblib'))
-    reg_climate_vuln = joblib.load(os.path.join(MODEL_DIR, 'climate_vulnerability_regressor.joblib'))
-    climate_district_encoder = joblib.load(os.path.join(MODEL_DIR, 'climate_district_encoder.joblib'))
-    with open(os.path.join(MODEL_DIR, 'climate_risk_metrics.json'), 'r') as f:
-        climate_metrics = json.load(f)
-    print("Uttarakhand Climate-Risk ML models loaded successfully.")
-except Exception as e:
-    print(f"Warning: Could not load climate models: {e}")
-    clf_climate, reg_climate_vuln, climate_district_encoder, climate_metrics = None, None, None, None
+clf_climate = None
+reg_climate_vuln = None
+climate_district_encoder = None
+climate_metrics = None
 
-# Load Crop Region Model (Trained on 5,373 Region-Season-Crop observations from datasets/crop-region)
-try:
-    crop_region_model = joblib.load(os.path.join(MODEL_DIR, 'crop_region_model.joblib'))
-    crop_region_encoders = joblib.load(os.path.join(MODEL_DIR, 'crop_region_encoders.joblib'))
-    with open(os.path.join(MODEL_DIR, 'crop_region_metrics.json'), 'r', encoding='utf-8') as f:
-        crop_region_metrics = json.load(f)
-    print("Crop Region & Season ML model loaded successfully.")
-except Exception as e:
-    print(f"Warning: Could not load crop region model: {e}")
-    crop_region_model, crop_region_encoders, crop_region_metrics = None, None, None
+crop_region_model = None
+crop_region_encoders = None
+crop_region_metrics = None
 
-# Load Uttarakhand Crop & Variety Recommendation Model (Trained on Uttarakhand datasets & ICAR-VPKAS)
-try:
-    uk_crop_model = joblib.load(os.path.join(MODEL_DIR, 'uttarakhand_crop_model.joblib'))
-    uk_crop_encoders = joblib.load(os.path.join(MODEL_DIR, 'uttarakhand_crop_encoders.joblib'))
-    with open(os.path.join(MODEL_DIR, 'uttarakhand_crop_metrics.json'), 'r', encoding='utf-8') as f:
-        uk_crop_metrics = json.load(f)
-    with open(os.path.join(MODEL_DIR, 'uttarakhand_crop_knowledge.json'), 'r', encoding='utf-8') as f:
-        uk_crop_knowledge = json.load(f)
-    print("Uttarakhand Crop & Variety ML model loaded successfully.")
-except Exception as e:
-    print(f"Warning: Could not load Uttarakhand crop model: {e}")
-    uk_crop_model, uk_crop_encoders, uk_crop_metrics, uk_crop_knowledge = None, None, None, None
+uk_crop_model = None
+uk_crop_encoders = None
+uk_crop_metrics = None
+uk_crop_knowledge = None
 
-# Load Synthetic Crop & Variety Recommendation Model (Trained on datasets/synthetic-crop/synthetic_crop_varieties.csv)
-try:
-    syn_crop_model = joblib.load(os.path.join(MODEL_DIR, 'synthetic_crop_model.joblib'))
-    syn_variety_model = joblib.load(os.path.join(MODEL_DIR, 'synthetic_variety_model.joblib'))
-    syn_crop_encoders = joblib.load(os.path.join(MODEL_DIR, 'synthetic_crop_encoders.joblib'))
-    with open(os.path.join(MODEL_DIR, 'synthetic_crop_metrics.json'), 'r', encoding='utf-8') as f:
-        syn_crop_metrics = json.load(f)
-    with open(os.path.join(MODEL_DIR, 'synthetic_crop_knowledge.json'), 'r', encoding='utf-8') as f:
-        syn_crop_knowledge = json.load(f)
-    print("Synthetic Crop & Variety ML models loaded successfully.")
-except Exception as e:
-    print(f"Warning: Could not load synthetic crop models: {e}")
-    syn_crop_model, syn_variety_model, syn_crop_encoders, syn_crop_metrics, syn_crop_knowledge = None, None, None, None, None
+syn_crop_model = None
+syn_variety_model = None
+syn_crop_encoders = None
+syn_crop_metrics = None
+syn_crop_knowledge = None
 
-# Load Crop Disease Detection Deep Learning Model (MobileNetV3 PyTorch)
 crop_disease_model = None
 crop_disease_knowledge = None
 crop_disease_classes = []
 crop_disease_transform = None
 
-try:
-    disease_model_path = os.path.join(MODEL_DIR, 'crop_disease_mobilenet.pth')
-    disease_knowledge_path = os.path.join(MODEL_DIR, 'crop_disease_knowledge.json')
-    if os.path.exists(disease_model_path) and os.path.exists(disease_knowledge_path):
-        import torch
-        import torch.nn as nn
-        from torchvision import transforms, models
-        from PIL import Image
+def ensure_irrigation_models():
+    global clf, reg_liters, reg_duration, crop_encoder, soil_encoder, metrics
+    if clf is not None:
+        return
+    try:
+        clf = joblib.load(os.path.join(MODEL_DIR, 'irrigation_classifier.joblib'))
+        reg_liters = joblib.load(os.path.join(MODEL_DIR, 'water_liters_regressor.joblib'))
+        reg_duration = joblib.load(os.path.join(MODEL_DIR, 'duration_regressor.joblib'))
+        crop_encoder = joblib.load(os.path.join(MODEL_DIR, 'crop_encoder.joblib'))
+        soil_encoder = joblib.load(os.path.join(MODEL_DIR, 'soil_encoder.joblib'))
+        metrics_path = os.path.join(MODEL_DIR, 'model_metrics.json')
+        if os.path.exists(metrics_path):
+            with open(metrics_path, 'r') as f:
+                metrics = json.load(f)
+        print("[LazyLoad] Irrigation models loaded.")
+    except Exception as e:
+        print(f"Warning: Could not load irrigation models: {e}")
 
-        ckpt = torch.load(disease_model_path, map_location='cpu')
-        crop_disease_classes = ckpt.get('class_names', [])
+def ensure_emission_models():
+    global reg_emission, clf_eco, emission_crop_encoder, emission_residue_encoder, emission_irrigation_encoder, eco_rating_encoder, emission_metrics
+    if reg_emission is not None:
+        return
+    try:
+        reg_emission = joblib.load(os.path.join(MODEL_DIR, 'carbon_emission_regressor.joblib'))
+        clf_eco = joblib.load(os.path.join(MODEL_DIR, 'eco_rating_classifier.joblib'))
+        emission_crop_encoder = joblib.load(os.path.join(MODEL_DIR, 'emission_crop_encoder.joblib'))
+        emission_residue_encoder = joblib.load(os.path.join(MODEL_DIR, 'emission_residue_encoder.joblib'))
+        emission_irrigation_encoder = joblib.load(os.path.join(MODEL_DIR, 'emission_irrigation_encoder.joblib'))
+        eco_rating_encoder = joblib.load(os.path.join(MODEL_DIR, 'eco_rating_encoder.joblib'))
+        metrics_path = os.path.join(MODEL_DIR, 'carbon_emission_metrics.json')
+        if os.path.exists(metrics_path):
+            with open(metrics_path, 'r') as f:
+                emission_metrics = json.load(f)
+        print("[LazyLoad] Carbon emission models loaded.")
+    except Exception as e:
+        print(f"Warning: Could not load carbon emission models: {e}")
 
-        crop_disease_model = models.mobilenet_v3_small(weights=None)
-        in_feat = crop_disease_model.classifier[0].in_features
-        crop_disease_model.classifier = nn.Sequential(
-            nn.Linear(in_feat, 256),
-            nn.Hardswish(),
-            nn.Dropout(p=0.25),
-            nn.Linear(256, len(crop_disease_classes))
-        )
-        crop_disease_model.load_state_dict(ckpt['model_state_dict'])
-        crop_disease_model.eval()
+def ensure_waste_models():
+    global reg_waste, reg_burn, reg_wealth, waste_crop_encoder, waste_season_encoder, waste_state_encoder, waste_metrics
+    if reg_waste is not None:
+        return
+    try:
+        reg_waste = joblib.load(os.path.join(MODEL_DIR, 'waste_generation_regressor.joblib'))
+        reg_burn = joblib.load(os.path.join(MODEL_DIR, 'waste_burning_regressor.joblib'))
+        reg_wealth = joblib.load(os.path.join(MODEL_DIR, 'waste_wealth_regressor.joblib'))
+        waste_crop_encoder = joblib.load(os.path.join(MODEL_DIR, 'waste_crop_encoder.joblib'))
+        waste_season_encoder = joblib.load(os.path.join(MODEL_DIR, 'waste_season_encoder.joblib'))
+        waste_state_encoder = joblib.load(os.path.join(MODEL_DIR, 'waste_state_encoder.joblib'))
+        metrics_path = os.path.join(MODEL_DIR, 'waste_management_metrics.json')
+        if os.path.exists(metrics_path):
+            with open(metrics_path, 'r') as f:
+                waste_metrics = json.load(f)
+        print("[LazyLoad] Waste management models loaded.")
+    except Exception as e:
+        print(f"Warning: Could not load waste models: {e}")
 
-        with open(disease_knowledge_path, 'r', encoding='utf-8') as f:
-            crop_disease_knowledge = json.load(f).get('diseases', {})
+def ensure_climate_models():
+    global clf_climate, reg_climate_vuln, climate_district_encoder, climate_metrics
+    if clf_climate is not None:
+        return
+    try:
+        clf_climate = joblib.load(os.path.join(MODEL_DIR, 'climate_risk_classifier.joblib'))
+        reg_climate_vuln = joblib.load(os.path.join(MODEL_DIR, 'climate_vulnerability_regressor.joblib'))
+        climate_district_encoder = joblib.load(os.path.join(MODEL_DIR, 'climate_district_encoder.joblib'))
+        metrics_path = os.path.join(MODEL_DIR, 'climate_risk_metrics.json')
+        if os.path.exists(metrics_path):
+            with open(metrics_path, 'r') as f:
+                climate_metrics = json.load(f)
+        print("[LazyLoad] Climate risk models loaded.")
+    except Exception as e:
+        print(f"Warning: Could not load climate models: {e}")
 
-        crop_disease_transform = transforms.Compose([
-            transforms.Resize((224, 224)),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-        ])
-        print(f"Crop Disease MobileNetV3 model loaded successfully ({len(crop_disease_classes)} classes, Acc: {ckpt.get('test_acc', 0):.2f}%).")
-except Exception as e:
-    print(f"Warning: Could not load crop disease model: {e}")
+def ensure_crop_region_models():
+    global crop_region_model, crop_region_encoders, crop_region_metrics
+    if crop_region_model is not None:
+        return
+    try:
+        crop_region_model = joblib.load(os.path.join(MODEL_DIR, 'crop_region_model.joblib'))
+        crop_region_encoders = joblib.load(os.path.join(MODEL_DIR, 'crop_region_encoders.joblib'))
+        metrics_path = os.path.join(MODEL_DIR, 'crop_region_metrics.json')
+        if os.path.exists(metrics_path):
+            with open(metrics_path, 'r', encoding='utf-8') as f:
+                crop_region_metrics = json.load(f)
+        print("[LazyLoad] Crop region models loaded.")
+    except Exception as e:
+        print(f"Warning: Could not load crop region model: {e}")
+
+def ensure_uttarakhand_crop_models():
+    global uk_crop_model, uk_crop_encoders, uk_crop_metrics, uk_crop_knowledge
+    if uk_crop_model is not None:
+        return
+    try:
+        uk_crop_model = joblib.load(os.path.join(MODEL_DIR, 'uttarakhand_crop_model.joblib'))
+        uk_crop_encoders = joblib.load(os.path.join(MODEL_DIR, 'uttarakhand_crop_encoders.joblib'))
+        metrics_path = os.path.join(MODEL_DIR, 'uttarakhand_crop_metrics.json')
+        if os.path.exists(metrics_path):
+            with open(metrics_path, 'r', encoding='utf-8') as f:
+                uk_crop_metrics = json.load(f)
+        know_path = os.path.join(MODEL_DIR, 'uttarakhand_crop_knowledge.json')
+        if os.path.exists(know_path):
+            with open(know_path, 'r', encoding='utf-8') as f:
+                uk_crop_knowledge = json.load(f)
+        print("[LazyLoad] Uttarakhand crop models loaded.")
+    except Exception as e:
+        print(f"Warning: Could not load Uttarakhand crop model: {e}")
+
+def ensure_synthetic_crop_models():
+    global syn_crop_model, syn_variety_model, syn_crop_encoders, syn_crop_metrics, syn_crop_knowledge
+    if syn_crop_model is not None:
+        return
+    try:
+        syn_crop_model = joblib.load(os.path.join(MODEL_DIR, 'synthetic_crop_model.joblib'))
+        syn_variety_model = joblib.load(os.path.join(MODEL_DIR, 'synthetic_variety_model.joblib'))
+        syn_crop_encoders = joblib.load(os.path.join(MODEL_DIR, 'synthetic_crop_encoders.joblib'))
+        metrics_path = os.path.join(MODEL_DIR, 'synthetic_crop_metrics.json')
+        if os.path.exists(metrics_path):
+            with open(metrics_path, 'r', encoding='utf-8') as f:
+                syn_crop_metrics = json.load(f)
+        know_path = os.path.join(MODEL_DIR, 'synthetic_crop_knowledge.json')
+        if os.path.exists(know_path):
+            with open(know_path, 'r', encoding='utf-8') as f:
+                syn_crop_knowledge = json.load(f)
+        print("[LazyLoad] Synthetic crop models loaded.")
+    except Exception as e:
+        print(f"Warning: Could not load synthetic crop models: {e}")
+
+def ensure_crop_disease_model():
+    global crop_disease_model, crop_disease_knowledge, crop_disease_classes, crop_disease_transform
+    if crop_disease_model is not None:
+        return
+    try:
+        disease_model_path = os.path.join(MODEL_DIR, 'crop_disease_mobilenet.pth')
+        disease_knowledge_path = os.path.join(MODEL_DIR, 'crop_disease_knowledge.json')
+        if os.path.exists(disease_model_path) and os.path.exists(disease_knowledge_path):
+            import torch
+            import torch.nn as nn
+            from torchvision import transforms, models
+            # Low-memory settings for 512MB RAM constraints
+            torch.set_num_threads(1)
+            torch.set_grad_enabled(False)
+
+            ckpt = torch.load(disease_model_path, map_location='cpu')
+            crop_disease_classes = ckpt.get('class_names', [])
+
+            crop_disease_model = models.mobilenet_v3_small(weights=None)
+            in_feat = crop_disease_model.classifier[0].in_features
+            crop_disease_model.classifier = nn.Sequential(
+                nn.Linear(in_feat, 256),
+                nn.Hardswish(),
+                nn.Dropout(p=0.25),
+                nn.Linear(256, len(crop_disease_classes))
+            )
+            crop_disease_model.load_state_dict(ckpt['model_state_dict'])
+            crop_disease_model.eval()
+
+            with open(disease_knowledge_path, 'r', encoding='utf-8') as f:
+                crop_disease_knowledge = json.load(f).get('diseases', {})
+
+            crop_disease_transform = transforms.Compose([
+                transforms.Resize((224, 224)),
+                transforms.ToTensor(),
+                transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+            ])
+            print(f"[LazyLoad] Crop Disease MobileNetV3 model loaded ({len(crop_disease_classes)} classes).")
+    except Exception as e:
+        print(f"Warning: Could not load crop disease model: {e}")
 
 
 # Default District Coordinates for fallback
@@ -308,8 +396,9 @@ def index():
 def health():
     return jsonify({
         'status': 'healthy',
-        'models_loaded': clf is not None,
-        'metrics': metrics
+        'service': 'KisanSaathi ML Backend',
+        'memory_optimized': True,
+        'lazy_loaded': True
     })
 
 def analyze_motor_voltage(voltage_val, phase='1-Phase', base_duration=2.0, lang='hi'):
@@ -910,6 +999,7 @@ def predict_irrigation():
 def get_crop_recommendation_options():
     """Returns Uttarakhand districts, popular PIN codes, seasons, soil types, and crop catalog."""
     try:
+        ensure_uttarakhand_crop_models()
         metrics = uk_crop_metrics or {}
         knowledge = uk_crop_knowledge or {}
         pin_dir = metrics.get('pin_directory', {})
@@ -968,6 +1058,7 @@ def get_crop_recommendation_options():
 def lookup_pincode(pincode):
     """Lookup Uttarakhand district, agro-climatic zone, and top crops for a 6-digit PIN code."""
     try:
+        ensure_uttarakhand_crop_models()
         pincode_clean = str(pincode).strip()
         pin_dir = (uk_crop_metrics or {}).get('pin_directory', {})
         knowledge = uk_crop_knowledge or {}
@@ -1045,6 +1136,7 @@ def predict_crop():
     runner-up crops, and comprehensive agronomic package.
     """
     try:
+        ensure_uttarakhand_crop_models()
         data = request.get_json() or {}
         pincode_raw = str(data.get('pincode', '')).strip()
         pin_dir = (uk_crop_metrics or {}).get('pin_directory', {})
@@ -1235,6 +1327,7 @@ def predict_crop():
 
 @app.route('/api/emission/options', methods=['GET'])
 def get_emission_options():
+    ensure_emission_models()
     return jsonify({
         'crops': emission_metrics.get('crops', ['Cotton', 'Maize', 'Mustard', 'Potato', 'Pulses', 'Rice', 'Sugarcane', 'Wheat']),
         'residueOptions': emission_metrics.get('residue_options', [
@@ -1256,6 +1349,7 @@ def get_emission_options():
 @app.route('/api/predict-emission', methods=['POST'])
 def predict_emission():
     try:
+        ensure_emission_models()
         data = request.get_json() or {}
         
         crop_input = str(data.get('crop', 'Wheat')).strip().capitalize()
@@ -1479,6 +1573,7 @@ def predict_emission():
 
 @app.route('/api/waste/options', methods=['GET'])
 def get_waste_options():
+    ensure_waste_models()
     return jsonify({
         'crops': waste_metrics.get('crops', ['Cotton', 'Groundnut', 'Maize', 'Mustard', 'Rice (Paddy)', 'Sugarcane', 'Wheat']),
         'seasons': waste_metrics.get('seasons', ['Kharif (Monsoon)', 'Rabi (Winter)', 'Zaid / Summer']),
@@ -1490,6 +1585,7 @@ def get_waste_options():
 @app.route('/api/predict-waste', methods=['POST'])
 def predict_waste():
     try:
+        ensure_waste_models()
         data = request.get_json() or {}
         
         crop_input = str(data.get('crop', 'Rice (Paddy)')).strip()
@@ -1678,6 +1774,7 @@ def predict_waste():
 @app.route('/api/climate/districts', methods=['GET'])
 def get_climate_districts():
     """Return all 13 Uttarakhand districts with historical telemetry metrics."""
+    ensure_climate_models()
     if not climate_metrics:
         return jsonify({
             'success': False,
@@ -1698,6 +1795,7 @@ def get_climate_districts():
 def predict_climate_risk():
     """Predict real-time climate risk, landslide vulnerability, and hill advisories."""
     try:
+        ensure_climate_models()
         data = request.get_json() or {}
         raw_district = data.get('district', 'Chamoli').strip()
         rainfall_hourly = float(data.get('rainfall_hourly', 12.0))
@@ -1838,6 +1936,7 @@ def recommend_crop_region():
     soil type, temperature, and rainfall using model trained on datasets/crop-region/Crop_Data.csv.
     """
     try:
+        ensure_crop_region_models()
         data = request.get_json() or {}
         state = str(data.get('state', 'Uttarakhand')).strip()
         requested_season = data.get('season')
@@ -2030,6 +2129,7 @@ def detect_crop_disease():
                     'error': 'No image provided. Please upload an image file or provide a base64 image.'
                 }), 400
 
+        ensure_crop_disease_model()
         if crop_disease_model is None or crop_disease_transform is None:
             return jsonify({
                 'success': False,
@@ -2045,6 +2145,8 @@ def detect_crop_disease():
 
         top1_idx = top_indices[0].item()
         top1_prob = top_probs[0].item()
+        del tensor, outputs
+        gc.collect()
         predicted_class = crop_disease_classes[top1_idx]
 
         # Retrieve knowledge info
@@ -2150,6 +2252,7 @@ def predict_synthetic_crop():
     rainfall, soil moisture, and current season from synthetic_crop_varieties.csv dataset.
     """
     try:
+        ensure_synthetic_crop_models()
         data = request.get_json(silent=True) or {}
         lat = float(data.get('lat', 30.3165))
         lon = float(data.get('lon', 78.0322))

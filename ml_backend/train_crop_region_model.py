@@ -55,10 +55,10 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
 
-print("\nTraining RandomForestClassifier for Crop-Region-Season recommendation...")
+print("\nTraining RandomForestClassifier for Crop-Region-Season recommendation (Memory-optimized)...")
 model = RandomForestClassifier(
-    n_estimators=200,
-    max_depth=15,
+    n_estimators=40,
+    max_depth=10,
     min_samples_split=4,
     class_weight='balanced',
     random_state=42,
@@ -93,13 +93,13 @@ for state in df['State'].unique():
         crops_in_season = state_df[state_df['Season'] == season]['Crop'].value_counts().to_dict()
         region_season_mapping[state][season] = crops_in_season
 
-# Save artifacts
+# Save artifacts with compression
 model_path = os.path.join(MODEL_DIR, 'crop_region_model.joblib')
 encoders_path = os.path.join(MODEL_DIR, 'crop_region_encoders.joblib')
 metrics_path = os.path.join(MODEL_DIR, 'crop_region_metrics.json')
 
-joblib.dump(model, model_path)
-joblib.dump(encoders, encoders_path)
+joblib.dump(model, model_path, compress=3)
+joblib.dump(encoders, encoders_path, compress=3)
 
 metrics_data = {
     'features': CAT_COLS + NUM_COLS,

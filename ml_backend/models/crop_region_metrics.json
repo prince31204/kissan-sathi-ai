@@ -9,10 +9,10 @@
     "Pesticide Usage",
     "Rainfall"
   ],
-  "top1_accuracy": 45.21,
-  "top2_accuracy": 65.67,
-  "top3_accuracy": 78.98,
-  "top4_accuracy": 88.56,
+  "top1_accuracy": 45.49,
+  "top2_accuracy": 63.81,
+  "top3_accuracy": 77.67,
+  "top4_accuracy": 88.74,
   "crops": [
     "Banana",
     "Cotton(lint)",
@@ -76,14 +76,14 @@
     "Medium"
   ],
   "feature_importances": {
-    "State": 0.203,
-    "Season": 0.2201,
-    "Soil Type": 0.1214,
-    "Temperature": 0.0637,
-    "pH": 0.061,
-    "Fertilizer Usage": 0.0632,
-    "Pesticide Usage": 0.0365,
-    "Rainfall": 0.2311
+    "State": 0.164,
+    "Season": 0.3147,
+    "Soil Type": 0.1513,
+    "Temperature": 0.051,
+    "pH": 0.0522,
+    "Fertilizer Usage": 0.0523,
+    "Pesticide Usage": 0.0316,
+    "Rainfall": 0.1828
   },
   "region_season_mapping": {
     "Assam": {
