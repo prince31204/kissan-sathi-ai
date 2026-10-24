@@ -5,6 +5,7 @@ import { Theme } from '../../constants/Theme';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { BACKEND_URL } from '@/config/api';
 
 export default function AddEquipment() {
   const [form, setForm] = useState({
@@ -18,7 +19,7 @@ export default function AddEquipment() {
 
   const handleAdd = async () => {
     try {
-      const BASE_URL = 'http://localhost:8000';
+      const BASE_URL = BACKEND_URL;
       const res = await fetch(`${BASE_URL}/api/v1/equipment`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

@@ -20,6 +20,7 @@ import { Card } from '../components/Card';
 import { SectionHeader } from '../components/SectionHeader';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { StatusBadge } from '../components/StatusBadge';
+import { BACKEND_URL, ML_URL } from '@/config/api';
 
 const CROPS = ['Wheat', 'Rice', 'Maize', 'Mustard', 'Potato', 'Sugarcane', 'Cotton', 'Pulses'];
 const FIELD_UNITS = ['Bigha', 'Acre', 'Hectare'];
@@ -78,9 +79,9 @@ export default function CarbonEmissionScreen() {
 
     let emissionData = null;
 
-    // 1. Call Python ML Backend (Port 5000)
+    // 1. Call Python ML Backend
     try {
-      const res = await fetch('http://localhost:5000/api/predict-emission', {
+      const res = await fetch(`${ML_URL}/api/predict-emission`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -89,13 +90,13 @@ export default function CarbonEmissionScreen() {
         emissionData = await res.json();
       }
     } catch (e) {
-      console.log('Port 5000 ML backend unreachable, trying Node backend port 8000...');
+      console.log('ML backend direct call unreachable, trying Node backend...');
     }
 
-    // 2. Call Node Backend (Port 8000)
+    // 2. Call Node Backend
     if (!emissionData) {
       try {
-        const res = await fetch('http://localhost:8000/api/v1/emission/predict', {
+        const res = await fetch(`${BACKEND_URL}/api/v1/emission/predict`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),

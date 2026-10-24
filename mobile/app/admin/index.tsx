@@ -13,6 +13,7 @@ import { Theme } from '../../constants/Theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Card } from '../../components/Card';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { BACKEND_URL } from '@/config/api';
 
 export default function AdminDashboard() {
   const [users, setUsers] = useState<any[]>([]);
@@ -26,7 +27,7 @@ export default function AdminDashboard() {
   }, []);
 
   const fetchDashboardData = async () => {
-    const BASE_URL = 'http://localhost:8000';
+    const BASE_URL = BACKEND_URL;
     try {
       // 1. Fetch Users
       const resUsers = await fetch(`${BASE_URL}/api/v1/auth/all`);

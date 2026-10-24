@@ -2,42 +2,17 @@ const express = require('express');
 const router = express.Router();
 const http = require('http');
 
-// Helper to call ML Backend on port 5000
-const callMLBackend = (endpoint, payload) => {
-  return new Promise((resolve, reject) => {
-    const postData = JSON.stringify(payload);
-    const options = {
-      hostname: '127.0.0.1',
-      port: 5000,
-      path: endpoint,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(postData),
-      },
-      timeout: 5000,
-    };
-
-    const req = http.request(options, (res) => {
-      let data = '';
-      res.on('data', (chunk) => (data += chunk));
-      res.on('end', () => {
-        try {
-          resolve(JSON.parse(data));
-        } catch (e) {
-          reject(e);
-        }
-      });
-    });
-
-    req.on('error', (err) => reject(err));
-    req.on('timeout', () => {
-      req.destroy();
-      reject(new Error('ML Backend timeout'));
-    });
-    req.write(postData);
-    req.end();
+// Helper to call ML Backend
+const callMLBackend = async (endpoint, payload) => {
+  const mlBase = (process.env.ML_BACKEND_URL || 'https://kissan-sathi-ai-zgjs.onrender.com').replace(/\/$/, '');
+  const res = await fetch(`${mlBase}${endpoint}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+    signal: AbortSignal.timeout(10000),
   });
+  if (!res.ok) throw new Error(`ML backend error: ${res.status}`);
+  return await res.json();
 };
 
 // @route  POST /api/v1/waste/predict

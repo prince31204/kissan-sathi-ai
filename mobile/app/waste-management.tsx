@@ -20,6 +20,7 @@ import { Card } from '../components/Card';
 import { SectionHeader } from '../components/SectionHeader';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { StatusBadge } from '../components/StatusBadge';
+import { BACKEND_URL, ML_URL } from '@/config/api';
 
 const CROPS = ['Rice (Paddy)', 'Wheat', 'Sugarcane', 'Maize', 'Cotton', 'Groundnut', 'Mustard'];
 const SEASONS = ['Kharif (Monsoon)', 'Rabi (Winter)', 'Zaid / Summer'];
@@ -59,9 +60,9 @@ export default function WasteManagementScreen() {
 
     let wasteData = null;
 
-    // 1. Try ML Backend (Port 5000)
+    // 1. Try ML Backend
     try {
-      const res = await fetch('http://localhost:5000/api/predict-waste', {
+      const res = await fetch(`${ML_URL}/api/predict-waste`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -70,13 +71,13 @@ export default function WasteManagementScreen() {
         wasteData = await res.json();
       }
     } catch (e) {
-      console.log('Port 5000 ML backend unreachable, trying Node backend port 8000...');
+      console.log('ML backend direct call unreachable, trying Node backend...');
     }
 
-    // 2. Try Node Backend (Port 8000)
+    // 2. Try Node Backend
     if (!wasteData) {
       try {
-        const res = await fetch('http://localhost:8000/api/v1/waste/predict', {
+        const res = await fetch(`${BACKEND_URL}/api/v1/waste/predict`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),

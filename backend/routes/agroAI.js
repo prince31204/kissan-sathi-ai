@@ -128,7 +128,7 @@ router.all('/synthetic-crop-recommendation', optionalAuth, async (req, res) => {
       top_k: parseInt(top_k) || 4,
     };
 
-    const mlBase = process.env.ML_BACKEND_URL || 'http://localhost:5000';
+    const mlBase = (process.env.ML_BACKEND_URL || 'https://kissan-sathi-ai-zgjs.onrender.com').replace(/\/$/, '');
     const mlRes = await fetch(`${mlBase}/api/v1/ml/synthetic-crop-recommendation`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -151,7 +151,7 @@ router.all('/synthetic-crop-recommendation', optionalAuth, async (req, res) => {
 // Helper to invoke the trained Crop-Region ML model
 async function fetchRegionalCropMl(params) {
   try {
-    const mlBase = process.env.ML_BACKEND_URL || 'http://localhost:5000';
+    const mlBase = (process.env.ML_BACKEND_URL || 'https://kissan-sathi-ai-zgjs.onrender.com').replace(/\/$/, '');
     const res = await fetch(`${mlBase}/api/v1/ml/crop-region-recommendation`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

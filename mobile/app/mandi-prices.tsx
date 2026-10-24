@@ -15,6 +15,7 @@ import { Theme } from '../constants/Theme';
 import { Input } from '../components/Input';
 import { Card } from '../components/Card';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { BACKEND_URL } from '@/config/api';
 
 export default function MandiPrices() {
   const [selectedCategory, setSelectedCategory] = useState<'Crops' | 'Fruits' | 'Vegetables'>('Crops');
@@ -25,7 +26,7 @@ export default function MandiPrices() {
   const [refreshing, setRefreshing] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const BASE_URL = 'http://localhost:8000';
+  const BASE_URL = BACKEND_URL;
 
   useEffect(() => {
     checkAdmin();

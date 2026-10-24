@@ -19,6 +19,7 @@ import { Card } from '../../components/Card';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../../context/LanguageContext';
 import { LanguageSwitchButton } from '../../components/LanguageSwitchButton';
+import { BACKEND_URL } from '@/config/api';
 
 const INITIAL_SCHEMES = [
   {
@@ -78,7 +79,7 @@ export default function SchemesAndEquipment() {
   const [refreshing, setRefreshing] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const BASE_URL = 'http://localhost:8000';
+  const BASE_URL = BACKEND_URL;
 
   useEffect(() => {
     checkAdmin();

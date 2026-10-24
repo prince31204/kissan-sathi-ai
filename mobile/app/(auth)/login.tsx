@@ -13,6 +13,7 @@ import { router } from 'expo-router';
 import { Theme } from '../../constants/Theme';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
+import { BACKEND_URL } from '@/config/api';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -32,7 +33,7 @@ export default function LoginScreen() {
 
     setLoading(true);
     try {
-      const BASE_URL = 'http://localhost:8000';
+      const BASE_URL = BACKEND_URL;
       const res = await fetch(`${BASE_URL}/api/v1/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

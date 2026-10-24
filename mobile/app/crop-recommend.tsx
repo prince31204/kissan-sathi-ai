@@ -16,6 +16,7 @@ import { Theme } from '../constants/Theme';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { BACKEND_URL, ML_URL } from '@/config/api';
 
 // Uttarakhand 15 Core Crops Knowledge Base from datasets/uttarakhand-crop/Uttarakhand_Crops_with_Varieties.xlsx
 const UK_CROPS_DIRECTORY: Record<string, {
@@ -432,7 +433,7 @@ export default function CropRecommend() {
 
     // Try fetching live lookup from backend
     try {
-      const res = await fetch(`http://localhost:5000/api/crop-recommendation/lookup-pin/${cleanPin}`);
+      const res = await fetch(`${ML_URL}/api/crop-recommendation/lookup-pin/${cleanPin}`);
       if (res.ok) {
         const data = await res.json();
         if (data.success) {
@@ -475,8 +476,8 @@ export default function CropRecommend() {
     };
 
     try {
-      // 1. Try Python ML Backend (Port 5000)
-      const res = await fetch('http://localhost:5000/api/predict-crop', {
+      // 1. Try Python ML Backend
+      const res = await fetch(`${ML_URL}/api/predict-crop`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -490,11 +491,11 @@ export default function CropRecommend() {
         }
         return;
       }
-      throw new Error('Port 5000 failed');
+      throw new Error('ML Backend direct failed');
     } catch (err500) {
-      // 2. Try Node Backend (Port 8000)
+      // 2. Try Node Backend
       try {
-        const res8000 = await fetch('http://localhost:8000/api/v1/crop-recommendation/predict', {
+        const res8000 = await fetch(`${BACKEND_URL}/api/v1/crop-recommendation/predict`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),

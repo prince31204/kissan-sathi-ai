@@ -15,6 +15,7 @@ import {
 import { router } from 'expo-router';
 import { Theme } from '../constants/Theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { BACKEND_URL } from '@/config/api';
 
 interface Message {
   id: string;
@@ -44,7 +45,7 @@ export default function ChatScreen() {
   const [loading, setLoading] = useState(false);
   const flatListRef = useRef<FlatList>(null);
 
-  const BASE_URL = 'http://localhost:8000';
+  const BASE_URL = BACKEND_URL;
 
   const sendMessage = async (customText?: string) => {
     const textToSend = (customText || inputText).trim();

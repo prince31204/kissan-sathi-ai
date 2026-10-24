@@ -17,6 +17,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Button } from '../../components/Button';
 import { Card } from '../../components/Card';
 import { useLanguage } from '../../context/LanguageContext';
+import { ML_URL } from '@/config/api';
 
 interface SampleItem {
   id: string;
@@ -38,7 +39,7 @@ export default function CropAnalysisScreen() {
   // Fetch quick test demo samples on load
   useEffect(() => {
     let isMounted = true;
-    fetch('http://localhost:5000/api/crop-disease/samples')
+    fetch(`${ML_URL}/api/crop-disease/samples`)
       .then((res) => res.json())
       .then((data) => {
         if (isMounted && data.success && Array.isArray(data.samples)) {
@@ -98,7 +99,7 @@ export default function CropAnalysisScreen() {
 
     try {
       // Call trained MobileNetV3 Crop Disease API
-      const res = await fetch('http://localhost:5000/api/detect-disease', {
+      const res = await fetch(`${ML_URL}/api/detect-disease`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

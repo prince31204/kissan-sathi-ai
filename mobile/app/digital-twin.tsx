@@ -23,6 +23,7 @@ import { Card } from '../components/Card';
 import { StatusBadge } from '../components/StatusBadge';
 import { LanguageSwitchButton } from '../components/LanguageSwitchButton';
 import { useLanguage } from '../context/LanguageContext';
+import { BACKEND_URL } from '@/config/api';
 import {
   CROPS,
   SOILS,
@@ -344,7 +345,7 @@ export default function DigitalTwinScreen() {
 
       // Also attempt backend POST
       try {
-        await fetch('http://localhost:8000/api/v1/digital-twin/calculate', {
+        await fetch(`${BACKEND_URL}/api/v1/digital-twin/calculate`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

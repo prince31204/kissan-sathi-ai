@@ -18,6 +18,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useLanguage } from '../../context/LanguageContext';
 import { LanguageSwitchButton } from '../../components/LanguageSwitchButton';
 import { getUnifiedWeather } from '../../services/weatherService';
+import { BACKEND_URL } from '@/config/api';
 
 const UTTARAKHAND_DISTRICTS = [
   { name: 'Dehradun', hi: 'देहरादून', lat: 30.3165, lon: 78.0322 },
@@ -239,7 +240,7 @@ export default function IrrigationScreen() {
             : '5+ दिन पहले (Dry)',
       };
 
-      const res = await fetch('http://localhost:8000/api/v1/irrigation/send-rain-alert', {
+      const res = await fetch(`${BACKEND_URL}/api/v1/irrigation/send-rain-alert`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

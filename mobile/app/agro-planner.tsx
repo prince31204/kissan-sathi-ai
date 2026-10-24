@@ -11,6 +11,7 @@ import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { agroAPI, FarmProfile } from '../services/agroAI';
 import { useLanguage } from '../context/LanguageContext';
+import { BACKEND_URL } from '@/config/api';
 
 const C = Theme.Colors;
 
@@ -759,7 +760,7 @@ export default function AgroPlanner() {
         recentIrrigationStatus: fieldCondition === 'wet' ? 'खेत में पानी भरा है (Waterlogged)' : fieldCondition === 'moist' ? 'हाल ही में पानी दिया था' : 'सामान्य स्थिति',
       };
 
-      const res = await fetch('http://localhost:8000/api/v1/irrigation/send-rain-alert', {
+      const res = await fetch(`${BACKEND_URL}/api/v1/irrigation/send-rain-alert`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

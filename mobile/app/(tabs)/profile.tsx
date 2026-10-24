@@ -21,6 +21,7 @@ import { MockUser } from '../../services/mockData';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { useLanguage } from '../../context/LanguageContext';
+import { BACKEND_URL } from '@/config/api';
 
 const PRESET_AVATARS = [
   { id: '1', label: 'किसान भाई', uri: 'https://images.unsplash.com/photo-1595956553066-fe24a8c33395?auto=format&fit=crop&w=300&q=80' },
@@ -95,7 +96,7 @@ export default function ProfileScreen() {
       // Sync from backend if userToken exists
       const token = await AsyncStorage.getItem('userToken');
       if (token) {
-        const res = await fetch('http://localhost:8000/api/v1/auth/me', {
+        const res = await fetch(`${BACKEND_URL}/api/v1/auth/me`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (res.ok) {
@@ -236,7 +237,7 @@ export default function ProfileScreen() {
       };
 
       if (token) {
-        await fetch('http://localhost:8000/api/v1/auth/profile', {
+        await fetch(`${BACKEND_URL}/api/v1/auth/profile`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -246,7 +247,7 @@ export default function ProfileScreen() {
         }).catch(() => {});
       }
       if (updated.email) {
-        await fetch('http://localhost:8000/api/v1/auth/profile/update-by-email', {
+        await fetch(`${BACKEND_URL}/api/v1/auth/profile/update-by-email`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: updated.email, ...payload }),

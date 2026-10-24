@@ -14,6 +14,7 @@ import { router } from 'expo-router';
 import { Theme } from '../../constants/Theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Card } from '../../components/Card';
+import { BACKEND_URL } from '@/config/api';
 
 type VoiceState = 'idle' | 'listening' | 'processing' | 'response' | 'error';
 
@@ -46,7 +47,7 @@ export default function VoiceAssistantScreen() {
   const [showManualInput, setShowManualInput] = useState(false);
 
   const recognitionRef = useRef<any>(null);
-  const BASE_URL = 'http://localhost:8000';
+  const BASE_URL = BACKEND_URL;
 
   // Stop speech when unmounting
   useEffect(() => {

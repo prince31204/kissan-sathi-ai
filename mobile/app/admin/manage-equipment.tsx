@@ -15,12 +15,13 @@ import { router } from 'expo-router';
 import { Theme } from '../../constants/Theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Card } from '../../components/Card';
+import { BACKEND_URL } from '@/config/api';
 
 export default function ManageEquipment() {
   const [equipmentList, setEquipmentList] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
-  const BASE_URL = 'http://localhost:8000';
+  const BASE_URL = BACKEND_URL;
 
   useEffect(() => {
     fetchEquipment();

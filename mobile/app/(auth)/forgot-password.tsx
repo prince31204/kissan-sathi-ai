@@ -15,6 +15,7 @@ import { Theme } from '../../constants/Theme';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { BACKEND_URL } from '@/config/api';
 
 export default function ForgotPasswordScreen() {
   const [step, setStep] = useState<1 | 2 | 3>(1); // 1: Email, 2: OTP & New Pass, 3: Success
@@ -43,7 +44,7 @@ export default function ForgotPasswordScreen() {
     return () => clearInterval(interval);
   }, [step, timer]);
 
-  const BASE_URL = 'http://localhost:8000';
+  const BASE_URL = BACKEND_URL;
 
   // Step 1: Send OTP to Email
   const handleSendOtp = async () => {

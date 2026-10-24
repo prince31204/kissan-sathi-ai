@@ -15,6 +15,7 @@ import { Theme } from '../../constants/Theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Card } from '../../components/Card';
 import { Input } from '../../components/Input';
+import { BACKEND_URL } from '@/config/api';
 
 export default function ManageMandiPricesScreen() {
   const [prices, setPrices] = useState<any[]>([]);
@@ -22,7 +23,7 @@ export default function ManageMandiPricesScreen() {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
-  const BASE_URL = 'http://localhost:8000';
+  const BASE_URL = BACKEND_URL;
 
   useEffect(() => {
     fetchPrices();

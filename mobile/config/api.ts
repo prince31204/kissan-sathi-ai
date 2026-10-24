@@ -3,13 +3,13 @@
  * Supports Local Development & Production Vercel / Cloud Deployments
  */
 
-// Production Backend URL (Node.js API)
+// Production Backend URL (Node.js API on Render)
 export const BACKEND_URL =
-  (process.env.EXPO_PUBLIC_BACKEND_URL || 'http://localhost:8000').replace(/\/$/, '');
+  (process.env.EXPO_PUBLIC_BACKEND_URL || 'https://kisaansaathi-backend-2j2x.onrender.com').replace(/\/$/, '');
 
-// Production ML Backend URL (Python Flask API)
+// Production ML Backend URL (Python Flask API on Render)
 export const ML_URL =
-  (process.env.EXPO_PUBLIC_ML_URL || 'http://127.0.0.1:5000').replace(/\/$/, '');
+  (process.env.EXPO_PUBLIC_ML_URL || 'https://kissan-sathi-ai-zgjs.onrender.com').replace(/\/$/, '');
 
 // OpenWeatherMap API Key (from EXPO_PUBLIC_WEATHER_API_KEY)
 export const WEATHER_API_KEY =

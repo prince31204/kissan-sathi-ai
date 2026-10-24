@@ -23,6 +23,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Button } from '../../components/Button';
 import { useLanguage } from '../../context/LanguageContext';
 import { LanguageSwitchButton } from '../../components/LanguageSwitchButton';
+import { BACKEND_URL } from '@/config/api';
 
 import { getUnifiedWeather } from '../../services/weatherService';
 
@@ -135,7 +136,7 @@ export default function HomeDashboard() {
     // Fetch real mandi prices
     const fetchMandiPrices = async () => {
       try {
-        const res = await fetch('http://localhost:8000/api/mandi-prices?commodity=wheat');
+        const res = await fetch(`${BACKEND_URL}/api/mandi-prices?commodity=wheat`);
         if (res.ok) {
           const data = await res.json();
           const formatted = data.slice(0, 5).map((item: any, index: number) => ({
