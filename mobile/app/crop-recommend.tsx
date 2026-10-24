@@ -17,6 +17,7 @@ import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { BACKEND_URL, ML_URL } from '@/config/api';
+import { toast } from '../context/ToastContext';
 
 // Uttarakhand 15 Core Crops Knowledge Base from datasets/uttarakhand-crop/Uttarakhand_Crops_with_Varieties.xlsx
 const UK_CROPS_DIRECTORY: Record<string, {
@@ -454,7 +455,7 @@ export default function CropRecommend() {
 
   const handleRecommendCrops = async () => {
     if (!pincode || pincode.length !== 6) {
-      Alert.alert('PIN Code Required', 'Please enter a valid 6-digit Uttarakhand PIN code (e.g. 263153, 248001, 249193).');
+      toast.warning('PIN Code Required', 'Please enter a valid 6-digit Uttarakhand PIN code (e.g. 263153, 248001).');
       return;
     }
 

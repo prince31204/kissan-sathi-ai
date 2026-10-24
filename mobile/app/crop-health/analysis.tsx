@@ -17,6 +17,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Button } from '../../components/Button';
 import { Card } from '../../components/Card';
 import { useLanguage } from '../../context/LanguageContext';
+import { toast } from '../../context/ToastContext';
 import { ML_URL } from '@/config/api';
 
 interface SampleItem {
@@ -129,18 +130,18 @@ export default function CropAnalysisScreen() {
           },
         });
       } else {
-        Alert.alert(
+        toast.error(
           isHi ? 'त्रुटि' : 'Error',
           data.error || (isHi ? 'फसल जांच में समस्या आई' : 'Failed to analyze crop')
         );
       }
     } catch (e: any) {
-      console.error(e);
-      Alert.alert(
+      console.error('Disease detection error:', e);
+      toast.error(
         isHi ? 'कनेक्शन त्रुटि' : 'Connection Error',
         isHi
-          ? 'रोग पहचान AI सर्वर से संपर्क नहीं हो पाया। कृपया सुनिश्चित करें कि ML Backend चल रहा है।'
-          : 'Could not connect to disease detection API. Make sure ML backend is running.'
+          ? 'रोग पहचान AI सर्वर से संपर्क नहीं हो पाया। यदि सर्वर स्लीप मोड में है, तो 20-30 सेकंड बाद पुनः प्रयास करें।'
+          : 'Could not connect to disease detection API. If server is waking up, please retry in 20s.'
       );
     } finally {
       setLoading(false);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, ActivityIndicator, TouchableOpacityProps, View } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Theme } from '../constants/Theme';
 
 interface ButtonProps extends TouchableOpacityProps {
@@ -62,7 +63,15 @@ export const Button: React.FC<ButtonProps> = ({
         <ActivityIndicator color={getTextColor()} />
       ) : (
         <View style={styles.content}>
-          {icon ? <View style={styles.iconContainer}>{icon}</View> : null}
+          {icon ? (
+            <View style={styles.iconContainer}>
+              {typeof icon === 'string' ? (
+                <MaterialCommunityIcons name={icon as any} size={20} color={getTextColor()} />
+              ) : (
+                icon
+              )}
+            </View>
+          ) : null}
           <Text style={[styles.text, { color: getTextColor() }]}>{title}</Text>
         </View>
       )}

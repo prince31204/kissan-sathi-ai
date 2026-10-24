@@ -16,6 +16,7 @@ import { Input } from '../../components/Input';
 import { BACKEND_URL } from '@/config/api';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { toast } from '../../context/ToastContext';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -67,6 +68,9 @@ export default function LoginScreen() {
           await AsyncStorage.setItem(`@user_avatar_${userEmailKey}`, finalAvatar);
         }
 
+        const userName = data.name || data.fullName || 'Farmer';
+        toast.success(`Welcome, ${userName}!`, 'Logged in successfully to KisanSaathi AI.');
+
         if (data.role === 'admin') {
           await AsyncStorage.setItem('userRole', 'admin');
           router.replace('/admin');
@@ -75,10 +79,13 @@ export default function LoginScreen() {
           router.replace('/(tabs)');
         }
       } else {
-        setErrorMsg(data.detail || 'Login failed. Please check credentials.');
+        const msg = data.detail || 'Login failed. Please check credentials.';
+        setErrorMsg(msg);
+        toast.error('Login Failed', msg);
       }
     } catch (error) {
       setErrorMsg('Network error. Is the server running?');
+      toast.error('Network Error', 'Could not connect to server.');
     } finally {
       setLoading(false);
     }

@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 import { Stack } from 'expo-router';
 import { Theme } from '../constants/Theme';
 import { LanguageProvider } from '../context/LanguageContext';
+import { ToastProvider } from '../context/ToastContext';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function RootLayout() {
@@ -36,14 +37,16 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider>
-      <LanguageProvider>
-        <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: Theme.Colors.background } }}>
-          <Stack.Screen name="index" />
-          <Stack.Screen name="onboarding" />
-          <Stack.Screen name="(auth)" />
-          <Stack.Screen name="(tabs)" />
-        </Stack>
-      </LanguageProvider>
+      <ToastProvider>
+        <LanguageProvider>
+          <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: Theme.Colors.background } }}>
+            <Stack.Screen name="index" />
+            <Stack.Screen name="onboarding" />
+            <Stack.Screen name="(auth)" />
+            <Stack.Screen name="(tabs)" />
+          </Stack>
+        </LanguageProvider>
+      </ToastProvider>
     </SafeAreaProvider>
   );
 }

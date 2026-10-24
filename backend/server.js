@@ -29,6 +29,7 @@ app.use('/api/v1/chat', require('./routes/chat'));
 app.use('/api/chat', require('./routes/chat'));
 app.use('/api/v1/agro', require('./routes/agroAI'));
 app.use('/api/v1/crop-recommendation', require('./routes/cropRecommendation'));
+app.use('/api/v1/fertilizer', require('./routes/fertilizer'));
 app.use('/api/predict-crop', (req, res, next) => {
   req.url = '/predict';
   return require('./routes/cropRecommendation')(req, res, next);

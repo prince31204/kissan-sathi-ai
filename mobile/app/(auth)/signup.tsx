@@ -16,6 +16,7 @@ import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { BACKEND_URL } from '@/config/api';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { toast } from '../../context/ToastContext';
 
 export default function SignupScreen() {
   const [form, setForm] = useState({
@@ -56,14 +57,16 @@ export default function SignupScreen() {
       });
       const data = await res.json();
       if (res.ok) {
-        Alert.alert('Success', 'Account created successfully! Please login.', [
-          { text: 'OK', onPress: () => router.replace('/(auth)/login') },
-        ]);
+        toast.success('Account Created! 🎉', 'Welcome to KisanSaathi AI. Please log in.');
+        router.replace('/(auth)/login');
       } else {
-        setErrorMsg(data.detail || 'Registration failed.');
+        const msg = data.detail || 'Registration failed.';
+        setErrorMsg(msg);
+        toast.error('Registration Failed', msg);
       }
     } catch (error) {
       setErrorMsg('Network error. Is the server running?');
+      toast.error('Network Error', 'Could not connect to registration server.');
     } finally {
       setLoading(false);
     }

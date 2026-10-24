@@ -238,6 +238,14 @@ export default function HomeDashboard() {
       bgColor: '#F5F3FF',
       route: '/digital-twin',
     },
+    {
+      id: 'fertilizer-advisor',
+      title: language === 'hi' ? 'खाद एवं\nमृदा AI' : 'Fertilizer\nAdvisor',
+      icon: 'flask-round-bottom',
+      color: '#059669',
+      bgColor: '#ECFDF5',
+      route: '/fertilizer-advisor',
+    },
   ];
 
   const primaryField = MockFields[0];
@@ -520,6 +528,47 @@ export default function HomeDashboard() {
             </Card>
           ))}
         </ScrollView>
+
+        {/* Fertilizer & Soil AI Advisor Card */}
+        <View style={styles.sectionHeaderRow}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+            <Text style={styles.sectionTitle}>
+              {language === 'hi' ? 'खाद एवं मृदा सलाहकार AI' : 'Fertilizer & Soil AI Advisor'}
+            </Text>
+            <View style={{ backgroundColor: '#DCFCE7', paddingHorizontal: 6, paddingVertical: 2, borderRadius: 6 }}>
+              <Text style={{ fontSize: 10, fontWeight: '700', color: '#15803D' }}>99.5% ACCURACY</Text>
+            </View>
+          </View>
+          <TouchableOpacity onPress={() => router.push('/fertilizer-advisor')}>
+            <Text style={styles.seeAllText}>
+              {language === 'hi' ? 'सिफारिश देखें →' : 'Plan Dose →'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity
+          activeOpacity={0.9}
+          onPress={() => router.push('/fertilizer-advisor')}
+        >
+          <Card style={styles.fertilizerBannerCard}>
+            <View style={styles.fertilizerBannerRow}>
+              <View style={styles.fertilizerBannerIconCircle}>
+                <MaterialCommunityIcons name="flask-round-bottom" size={24} color="#FFFFFF" />
+              </View>
+              <View style={{ flex: 1, marginLeft: 12 }}>
+                <Text style={styles.fertilizerBannerTitle}>
+                  {language === 'hi' ? 'मृदा NPK व वर्षा आधारित फसल सिफारिश' : 'NPK & Live Rainfall Crop Prediction'}
+                </Text>
+                <Text style={styles.fertilizerBannerSub}>
+                  {language === 'hi'
+                    ? 'लाइव मौसम वर्षा व मिट्टी पोषक तत्वों के अनुसार सर्वोत्तम फसल एवं सटीक खाद खुराक'
+                    : 'Auto-factors local live rainfall & soil NPK to prescribe best crop & fertilizer doses'}
+                </Text>
+              </View>
+              <MaterialCommunityIcons name="chevron-right" size={22} color="#15803D" />
+            </View>
+          </Card>
+        </TouchableOpacity>
 
         {/* AI & Sustainability Shortcuts */}
         <View style={styles.sectionHeaderRow}>
@@ -1101,5 +1150,41 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: '#64748B',
     marginTop: 2,
+  },
+  // Fertilizer Banner Card
+  fertilizerBannerCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: '#BBF7D0',
+    marginBottom: 16,
+    ...Platform.select({
+      ios: { shadowColor: '#16A34A', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.08, shadowRadius: 4 },
+      android: { elevation: 2 },
+    }),
+  },
+  fertilizerBannerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  fertilizerBannerIconCircle: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#16A34A',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  fertilizerBannerTitle: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#0F172A',
+  },
+  fertilizerBannerSub: {
+    fontSize: 12,
+    color: '#64748B',
+    marginTop: 3,
+    lineHeight: 16,
   },
 });
