@@ -1,0 +1,35 @@
+{
+  "cli": {
+    "version": ">= 12.0.0"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_BACKEND_URL": "https://kisaansaathi-backend-2j2x.onrender.com",
+        "EXPO_PUBLIC_ML_URL": "https://kissan-sathi-ai-zgjs.onrender.com",
+        "EXPO_PUBLIC_WEATHER_API_KEY": "a975a7354a59813b6bc85e6eaa6426e6"
+      }
+    },
+    "production": {
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_BACKEND_URL": "https://kisaansaathi-backend-2j2x.onrender.com",
+        "EXPO_PUBLIC_ML_URL": "https://kissan-sathi-ai-zgjs.onrender.com",
+        "EXPO_PUBLIC_WEATHER_API_KEY": "a975a7354a59813b6bc85e6eaa6426e6"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
